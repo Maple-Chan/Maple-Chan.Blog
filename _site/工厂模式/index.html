@@ -1,0 +1,95 @@
+<!DOCTYPE html> <html> <head> <meta charset="utf-8"> <meta http-equiv="X-UA-Compatible" content="IE=edge"> <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"> <title>工厂设计模式 &#8211; Maple Story</title> <meta name="description" content="不断强化自己的开发技能"> <meta name="keywords" content="设计模式"> <!-- Twitter Cards --> <meta name="twitter:card" content="summary"> <meta name="twitter:image" content="halve.png"> <meta name="twitter:title" content="工厂设计模式"> <meta name="twitter:description" content="不断强化自己的开发技能"> <!-- Open Graph --> <meta property="og:locale" content="en_US"> <meta property="og:type" content="article"> <meta property="og:title" content="工厂设计模式"> <meta property="og:description" content="不断强化自己的开发技能"> <meta property="og:url" content="http://localhost:4000/%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/"> <meta property="og:site_name" content="Maple Story"> <meta property="og:image" content="http://localhost:4000/images/halve.png"> <link rel="canonical" href="http://localhost:4000/%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/"> <!-- Handheld --> <meta name="HandheldFriendly" content="True"> <meta name="MobileOptimized" content="320"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Feed --> <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="" /> <!-- Favicons --> <link rel="shortcut icon" type="image/png" href="http://localhost:4000/favicon.png" /> <link rel="shortcut icon" href="http://localhost:4000/favicon.ico" /> <!-- CSS --> <link rel="stylesheet" type="text/css" href="http://localhost:4000/assets/css/main.css"> <!-- Left Block Image for Posts --> <style type="text/css"> #posts.inner-post-page .block-left {background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(http://localhost:4000/images/unsplash-gallery-image-3.jpg) no-repeat;background-size: cover;} </style> <!-- Left Block Images for Home and Pages --> <style type="text/css"> #posts .block-left {background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(http://localhost:4000/images/unsplash-image-10.jpg) no-repeat;background-size: cover, cover;} .block-left {background: linear-gradient(rgba(44,45,51,0.9), rgba(44,45,51,0.9)), url(http://localhost:4000/images/home.jpg) no-repeat;background-size: cover;} </style> </head> <body id="posts" class="inner-post-page"> <div class="block-left"> <div class="content"> <a href="http://localhost:4000" class="logo"><img src="http://localhost:4000/images/halve.png"></a> <div class="post-title-section"> <div class="section-line">Posts <em>/</em></div> <h1 class="section-title">工厂设计模式 </h1> <ul class="tags"> <li><a href="http://localhost:4000/tags#设计模式">设计模式</a></li> </ul> <div class="section-line reverse"><a href="http://localhost:4000/posts">Back to posts</a> <em>/</em></div> </div> </div> </div> <div class="block-right"> <a href="../posts.html" title="posts" class="posts-menu-icon"></a> <a title="projects" class="projects-menu-icon"> <span></span> </a> <div class="inner-post content"> <div class="date-highlight">11 Aug 2020</div> <center><h2><b> 工厂设计模式 </b></h2></center> <p><br /></p> <h3 id="1-简单工厂模式静态工厂模式">1. 简单工厂模式（静态工厂模式）</h3> <p>简单工厂模式：定义一个工厂类，在该类的统一<strong>静态方法</strong>中根据不同的参数实例化不同的对象。</p> <p><strong>UML图：</strong></p> <p><img src="2020-08-11-工厂模式.assets/1597152170059.png" alt="1597152170059" /></p> <p><strong>手机抽象类，抽象不同的产品</strong></p> <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">AbstractPhone</span> <span class="o">{</span>
+    <span class="kt">void</span> <span class="nf">make</span><span class="o">();</span>
+<span class="o">}</span>
+</code></pre></div></div> <p><strong>手机实现类</strong></p> <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">HuaweiPhone</span> <span class="kd">implements</span> <span class="nc">AbstractPhone</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="nf">HuaweiPhone</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">make</span><span class="o">();</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">make</span><span class="o">()</span> <span class="o">{</span>
+        <span class="c1">// TODO Auto-generated method stub</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"制造华为手机"</span><span class="o">);</span>
+    <span class="o">}</span>
+    
+<span class="o">}</span>
+</code></pre></div></div> <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MiPhone</span> <span class="kd">implements</span> <span class="nc">AbstractPhone</span> <span class="o">{</span>
+
+    <span class="kd">public</span> <span class="nf">MiPhone</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">make</span><span class="o">();</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">make</span><span class="o">()</span> <span class="o">{</span>
+        <span class="c1">// TODO Auto-generated method stub</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"生产小米手机"</span><span class="o">);</span>
+    <span class="o">}</span>
+    
+<span class="o">}</span>
+</code></pre></div></div> <p><strong>简单工厂类</strong></p> <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">PhoneFactory</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="nc">AbstractPhone</span> <span class="nf">getPhone</span><span class="o">(</span><span class="nc">String</span> <span class="n">phoneType</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="s">"MiPhone"</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">phoneType</span><span class="o">))</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="k">new</span> <span class="nf">MiPhone</span><span class="o">();</span>
+        <span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="s">"HuaweiPhone"</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">phoneType</span><span class="o">))</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="k">new</span> <span class="nf">HuaweiPhone</span><span class="o">();</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div> <p><strong>测试类</strong></p> <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">FactoryPattern</span> <span class="o">{</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">AbstractPhone</span> <span class="n">miPhone</span> <span class="o">=</span> <span class="nc">PhoneFactory</span><span class="o">.</span><span class="na">getPhone</span><span class="o">(</span><span class="s">"MiPhone"</span><span class="o">);</span>
+        <span class="nc">AbstractPhone</span> <span class="n">huaweiPhone</span> <span class="o">=</span> <span class="nc">PhoneFactory</span><span class="o">.</span><span class="na">getPhone</span><span class="o">(</span><span class="s">"HuaweiPhone"</span><span class="o">);</span>
+    <span class="o">}</span>
+
+<span class="o">}</span>
+<span class="cm">/**
+生产小米手机
+制造华为手机
+*/</span>
+</code></pre></div></div> <h4 id="conspros">Cons&amp;Pros</h4> <ul> <li> <p>使用静态方法将实例的创建和使用分离开。只需要调用静态方法就能获得需要的对象。</p> </li> <li> <p>这种设计模式的问题在于，每添加一个新的产品就需要修改静态方法，不利于软件的维护。同时把所有的产品都放在一个当中将会导致该类十分臃肿。</p> </li> </ul> <h3 id="2-工厂方法模式">2. 工厂方法模式</h3> <p>工厂方法模式是对简单工厂模式的进一步解耦，因为在工厂模式中一个工厂子类对应一个产品子类。</p> <p><img src="2020-08-11-工厂模式.assets/1597325248862.png" alt="1597325248862" /></p> <p><strong>工厂接口和产品接口</strong></p> <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">javatest.pattern.factorymethod</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">interface</span> <span class="nc">AbstractFactory</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="nc">AbstractPhone</span> <span class="nf">createPhone</span><span class="o">();</span>
+<span class="o">}</span>
+</code></pre></div></div> <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">javatest.pattern.factorymethod</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">interface</span> <span class="nc">AbstractPhone</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">make</span><span class="o">();</span>
+<span class="o">}</span>
+</code></pre></div></div> <p><strong>具体工厂类</strong></p> <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">HuaweiFactory</span> <span class="kd">implements</span> <span class="nc">AbstractFactory</span><span class="o">{</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="nc">AbstractPhone</span> <span class="nf">createPhone</span><span class="o">()</span> <span class="o">{</span>
+        <span class="c1">// TODO Auto-generated method stub</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="nf">HuaweiPhone</span><span class="o">();</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div> <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MiFactory</span> <span class="kd">implements</span> <span class="nc">AbstractFactory</span> <span class="o">{</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="nc">AbstractPhone</span> <span class="nf">createPhone</span><span class="o">()</span> <span class="o">{</span>
+        <span class="c1">// TODO Auto-generated method stub</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="nf">MiPhone</span><span class="o">();</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div> <p><strong>具体产品类</strong></p> <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">HuaweiPhone</span> <span class="kd">implements</span> <span class="nc">AbstractPhone</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="nf">HuaweiPhone</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">make</span><span class="o">();</span>
+    <span class="o">}</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">make</span><span class="o">()</span> <span class="o">{</span>
+        <span class="c1">// TODO Auto-generated method stub</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"制造华为手机"</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div> <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MiPhone</span> <span class="kd">implements</span> <span class="nc">AbstractPhone</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="nf">MiPhone</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">make</span><span class="o">();</span>
+    <span class="o">}</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">make</span><span class="o">()</span> <span class="o">{</span>
+        <span class="c1">// TODO Auto-generated method stub</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"生产小米手机"</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div> <h4 id="conspros-1">Cons&amp;Pros</h4> <ul> <li> <p><strong>1-</strong> 工厂方法模式，在简单工厂模式的基础上进一步解耦，将各个产品的工厂单独继承一个抽象工厂类，把统一的工厂方法分解到了各个对应产品的工厂中。如此一来，如果需要添加一个产品只需要新继承一个类，用它类进行创建对象就可以。不需要修改其他代码。</p> <p><strong>2-</strong> 工厂方法模式，它克服了简单工厂模式违背开-闭原则，有保持了面向对象的封装性。</p> </li> <li> <p>工厂方法模式的缺点是每增加一个产品类，就需要增加一个对应的工厂类，增加了额外的开发量。</p> </li> </ul> <h3 id="3-抽象工厂模式">3. 抽象工厂模式</h3> <br> <nav class="pagination"> <a href="http://localhost:4000/Java%E7%BA%BF%E7%A8%8B%E4%B8%8D%E8%83%BD%E9%87%8D%E5%A4%8DStart/" class="pagination_pager" title="Java线程为什么不能重复调用start() ">previous</a> <a href="http://localhost:4000/MySQL%E5%AD%98%E5%82%A8byte-%E6%95%B0%E6%8D%AE/" class="pagination_pager" title="MySQL存储byte[]数据 ">next</a> </nav> </div> </div> <!-- JS --> <script src="http://localhost:4000/assets/js/main.min.js"></script> <div class="overlay"> <ul class="projects-menu"> <li style="background:url(http://localhost:4000/images/benjamin-deyoung-unsplash.jpg) center center no-repeat;"> <a href="https://github.com/Maple-Chan" target="_blank" rel="nofollow external"> <span> GitHub Home </span> </a> </li> </ul> </div> </body> </html>

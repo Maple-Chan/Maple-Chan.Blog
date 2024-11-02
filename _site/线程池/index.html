@@ -1,0 +1,334 @@
+<!DOCTYPE html> <html> <head> <meta charset="utf-8"> <meta http-equiv="X-UA-Compatible" content="IE=edge"> <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"> <title>线程池 &#8211; Maple Story</title> <meta name="description" content="Stick to note down what I’v learnt"> <meta name="keywords" content="Java"> <!-- Twitter Cards --> <meta name="twitter:card" content="summary"> <meta name="twitter:image" content="halve.png"> <meta name="twitter:title" content="线程池"> <meta name="twitter:description" content="Stick to note down what I’v learnt"> <!-- Open Graph --> <meta property="og:locale" content="en_US"> <meta property="og:type" content="article"> <meta property="og:title" content="线程池"> <meta property="og:description" content="Stick to note down what I’v learnt"> <meta property="og:url" content="http://localhost:4000/%E7%BA%BF%E7%A8%8B%E6%B1%A0/"> <meta property="og:site_name" content="Maple Story"> <meta property="og:image" content="http://localhost:4000/images/halve.png"> <link rel="canonical" href="http://localhost:4000/%E7%BA%BF%E7%A8%8B%E6%B1%A0/"> <!-- Handheld --> <meta name="HandheldFriendly" content="True"> <meta name="MobileOptimized" content="320"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Feed --> <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="" /> <!-- Favicons --> <link rel="shortcut icon" type="image/png" href="http://localhost:4000/favicon.png" /> <link rel="shortcut icon" href="http://localhost:4000/favicon.ico" /> <!-- CSS --> <link rel="stylesheet" type="text/css" href="http://localhost:4000/assets/css/main.css"> <!-- Left Block Image for Posts --> <style type="text/css"> #posts.inner-post-page .block-left {background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(http://localhost:4000/images/unsplash-gallery-image-3.jpg) no-repeat;background-size: cover;} </style> <!-- Left Block Images for Home and Pages --> <style type="text/css"> #posts .block-left {background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(http://localhost:4000/images/unsplash-image-10.jpg) no-repeat;background-size: cover, cover;} .block-left {background: linear-gradient(rgba(44,45,51,0.9), rgba(44,45,51,0.9)), url(http://localhost:4000/images/home.jpg) no-repeat;background-size: cover;} </style> </head> <body id="posts" class="inner-post-page"> <div class="block-left"> <div class="content"> <a href="http://localhost:4000" class="logo"><img src="http://localhost:4000/images/halve.png"></a> <div class="post-title-section"> <div class="section-line">Posts <em>/</em></div> <h1 class="section-title">线程池 </h1> <ul class="tags"> <li><a href="http://localhost:4000/tags#Java">Java</a></li> </ul> <div class="section-line reverse"><a href="http://localhost:4000/posts">Back to posts</a> <em>/</em></div> </div> </div> </div> <div class="block-right"> <a href="../posts.html" title="posts" class="posts-menu-icon"></a> <a title="projects" class="projects-menu-icon"> <span></span> </a> <div class="inner-post content"> <div class="date-highlight">16 Aug 2020</div> <center><h1><b>线程池</b></h1></center> <p><br /></p> <p>参考：</p> <blockquote> <p><a href="https://www.cnblogs.com/sachen/p/7401959.html">线程池的种类，区别和使用场景</a></p> <p><a href="https://www.jianshu.com/p/d1ba6a871df8">Java线程池类型介绍</a></p> <p><a href="https://www.cnblogs.com/dolphin0520/p/3932921.html">Java并发编程：线程池的使用</a></p> </blockquote> <h2 id="为什么要用线程池">为什么要用线程池</h2> <p>当我们需要的并发执行线程数量很多时，且每个线程执行很短的时间就结束了，这样，我们频繁的创建、销毁线程就大大降低了工作效率（创建和销毁线程需要时间、资源）。 java中的线程池可以达到这样的效果：一个线程执行完任务之后，继续去执行下一个任务，不被销毁，这样线程利用率提高了。</p> <h2 id="线程池种类">线程池种类</h2> <blockquote> <p>参考：</p> <p><a href="https://www.cnblogs.com/jiawen010/p/11855768.html">4种常用线程池介绍</a></p> </blockquote> <h3 id="1-newcachedthreadpool">1. newCachedThreadPool：</h3> <p>​ 可缓存线程池。</p> <p><strong>流程：</strong></p> <p>​ 先查看池中有没有以前建立的线程，如果有则直接使用。如果没有则新建一个线程加入线程池。</p> <p>​ 他根据需要创建线程，corePoolSize为0，当60s内没有任务时（可以通过自己创建线程池来设置该时间），将会回收存活的线程，60s内有任务时，他可以重用已有的线程。注意他的工作队列是SynchronousQueue，他的每一个put操作必须等待take操作，这意味着如果任务生产速度大于消费速度，那么他将不会创建新线程。该线程池适合执行大量小任务的场景。</p> <h4 id="可缓存线程池实现">可缓存线程池实现</h4> <p><img src="https://blog.maplestory.work/images/post_image/2020-07-27-线程池.assets/1597546156736.png" alt="1597546156736" /></p> <h4 id="可缓存线程池实践-1">可缓存线程池实践 1</h4> <p>可缓存线程池的复用情况。</p> <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">javatest.threadpool</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">java.util.Date</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.concurrent.ExecutorService</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.concurrent.Executors</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.concurrent.SynchronousQueue</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.concurrent.ThreadPoolExecutor</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.concurrent.TimeUnit</span><span class="o">;</span>
+
+<span class="cm">/**
+ * @description: 缓存线程池测试
+ * @modifyContent:
+ * @author: Maple Chan
+ * @date: 2020-07-28 21:21:29
+ * @version: 0.0.1
+ */</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">NewCachedTest</span> <span class="o">{</span>
+    <span class="kd">static</span> <span class="kt">long</span> <span class="n">startTime</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+
+        <span class="cm">/**
+         * 手动创建线程池，效果会更好哦。 (rule: AlibabaJavaConcurrent-ThreadPoolCreationRule)Java P3C
+         * CheckerThreadPoolCreationRule
+         */</span>
+
+        <span class="nc">ExecutorService</span> <span class="n">cachedThreadPool</span> <span class="o">=</span> <span class="nc">Executors</span><span class="o">.</span><span class="na">newCachedThreadPool</span><span class="o">();</span>
+        <span class="nc">Executors</span><span class="o">.</span><span class="na">newSingleThreadExecutor</span><span class="o">();</span>
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+            <span class="k">try</span> <span class="o">{</span>
+                <span class="nc">Thread</span><span class="o">.</span><span class="na">sleep</span><span class="o">(</span><span class="mi">1000</span><span class="o">);</span>
+            <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">InterruptedException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+            <span class="o">}</span>
+            <span class="n">cachedThreadPool</span><span class="o">.</span><span class="na">execute</span><span class="o">(</span><span class="k">new</span> <span class="nc">Runnable</span><span class="o">()</span> <span class="o">{</span>
+                <span class="nd">@Override</span>
+                <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
+                    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="nc">Thread</span><span class="o">.</span><span class="na">currentThread</span><span class="o">().</span><span class="na">getName</span><span class="o">()</span> <span class="o">+</span> <span class="s">"-正在执行..."</span><span class="o">);</span>
+                    <span class="k">try</span> <span class="o">{</span>
+                        <span class="nc">Thread</span><span class="o">.</span><span class="na">sleep</span><span class="o">(</span><span class="mi">1000</span><span class="o">);</span>
+                    <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">InterruptedException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+                        <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+                    <span class="o">}</span>
+                <span class="o">}</span>
+            <span class="o">});</span>
+        <span class="o">}</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"New cached thread test finished!"</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+<span class="c1">// 输出：</span>
+<span class="cm">/*
+pool-1-thread-1-正在执行...
+pool-1-thread-2-正在执行...
+pool-1-thread-1-正在执行...
+pool-1-thread-2-正在执行...
+pool-1-thread-1-正在执行...
+pool-1-thread-2-正在执行...
+pool-1-thread-2-正在执行...
+pool-1-thread-1-正在执行...
+pool-1-thread-2-正在执行...
+New cached thread test finished!
+pool-1-thread-1-正在执行...
+// 此时程序还没退出，因为线程池还没有terminated
+*/</span>
+</code></pre></div></div> <p>通过上述代码测试结果发现，该线程池一共只启动两个线程，<code class="language-plaintext highlighter-rouge">pool-1-thread-1</code>与<code class="language-plaintext highlighter-rouge">pool-1-thread-2</code>。</p> <blockquote> <p>可缓存线程池为无限大，当执行当前任务时上一个任务已经完成，会复用执行上一个任务的线程，而不用每次新建线程。</p> </blockquote> <h4 id="可缓存线程池实践-2">可缓存线程池实践 2</h4> <p>可以发现之前可缓存线程池测试结束之后，整个main程序还没有退出，估计是和缓存线程池还没有退出的原因。下面进一步实践，探究该线程池。</p> <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">ExecutorService</span> <span class="n">cachedThreadPool</span> <span class="o">=</span> <span class="nc">Executors</span><span class="o">.</span><span class="na">newCachedThreadPool</span><span class="o">();</span>
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+
+            <span class="k">try</span> <span class="o">{</span>
+                <span class="nc">Thread</span><span class="o">.</span><span class="na">sleep</span><span class="o">(</span><span class="mi">1000</span><span class="o">);</span>
+            <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">InterruptedException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+                <span class="c1">// TODO Auto-generated catch block</span>
+                <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+            <span class="o">}</span>
+            <span class="n">cachedThreadPool</span><span class="o">.</span><span class="na">execute</span><span class="o">(</span><span class="k">new</span> <span class="nc">Runnable</span><span class="o">()</span> <span class="o">{</span>
+                <span class="nd">@Override</span>
+                <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
+                    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="nc">Thread</span><span class="o">.</span><span class="na">currentThread</span><span class="o">().</span><span class="na">getName</span><span class="o">()</span> <span class="o">+</span> <span class="s">"-正在执行..."</span><span class="o">);</span>
+                    <span class="k">try</span> <span class="o">{</span>
+                        <span class="nc">Thread</span><span class="o">.</span><span class="na">sleep</span><span class="o">(</span><span class="mi">1000</span><span class="o">);</span>
+                    <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">InterruptedException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+                        <span class="c1">// TODO Auto-generated catch block</span>
+                        <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+                    <span class="o">}</span>
+                <span class="o">}</span>
+            <span class="o">});</span>
+        <span class="o">}</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"New cached thread test finished!"</span><span class="o">);</span>
+        <span class="n">startTime</span> <span class="o">=</span> <span class="nc">System</span><span class="o">.</span><span class="na">currentTimeMillis</span><span class="o">();</span>
+        <span class="kt">long</span> <span class="n">endTime</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+        <span class="k">while</span> <span class="o">(</span><span class="n">cachedThreadPool</span><span class="o">.</span><span class="na">isShutdown</span><span class="o">())</span> <span class="o">{</span>
+            <span class="k">try</span> <span class="o">{</span>
+                <span class="nc">Thread</span><span class="o">.</span><span class="na">sleep</span><span class="o">(</span><span class="mi">1000</span><span class="o">);</span>
+            <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">InterruptedException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+                <span class="c1">// TODO Auto-generated catch block</span>
+                <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+            <span class="o">}</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"cachedThreadPool is not shutdown!"</span><span class="o">);</span>
+        <span class="o">}</span>
+        <span class="k">while</span> <span class="o">(</span><span class="n">cachedThreadPool</span><span class="o">.</span><span class="na">isTerminated</span><span class="o">())</span> <span class="o">{</span>
+            <span class="k">try</span> <span class="o">{</span>
+                <span class="nc">Thread</span><span class="o">.</span><span class="na">sleep</span><span class="o">(</span><span class="mi">1000</span><span class="o">);</span>
+            <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">InterruptedException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+                <span class="c1">// TODO Auto-generated catch block</span>
+                <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+            <span class="o">}</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"cachedThreadPool is not terminated!"</span><span class="o">);</span>
+        <span class="o">}</span>
+        <span class="n">endTime</span> <span class="o">=</span> <span class="nc">System</span><span class="o">.</span><span class="na">currentTimeMillis</span><span class="o">();</span>
+        <span class="n">endTime</span> <span class="o">=</span> <span class="n">endTime</span> <span class="o">-</span> <span class="n">startTime</span><span class="o">;</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"上个线程执行完的时间到程序退出时间："</span> <span class="o">+</span> <span class="n">endTime</span> <span class="o">+</span> <span class="s">" ms"</span><span class="o">);</span>
+    <span class="o">}</span>
+
+<span class="c1">// 输出</span>
+<span class="cm">/*
+pool-1-thread-1-正在执行...
+pool-1-thread-2-正在执行...
+pool-1-thread-1-正在执行...
+pool-1-thread-2-正在执行...
+pool-1-thread-1-正在执行...
+pool-1-thread-2-正在执行...
+pool-1-thread-1-正在执行...
+pool-1-thread-2-正在执行...
+pool-1-thread-1-正在执行...
+New cached thread test finished!
+pool-1-thread-2-正在执行...
+上个线程执行完的时间到程序退出时间：0 ms
+*/</span>
+</code></pre></div></div> <p>通过上述代码测试发现，缓存线程在执行完线程之后并没有直接退出。<code class="language-plaintext highlighter-rouge">while (cachedThreadPool.isShutdown())</code>、 <code class="language-plaintext highlighter-rouge">while (cachedThreadPool.isTerminated()) </code>两个循环都没有进入。通过手动计时，线程执行结束到整个程序退出的时间正好是<code class="language-plaintext highlighter-rouge">60L, TimeUnit.SECONDS,</code> 60秒。</p> <blockquote> <p>Java中没法在finalize中获取currentTimeMillis，从而获得线程池退出需要用的时间。</p> <p>等想到办法用代码计时之后再回来补充。</p> </blockquote> <h4 id="可缓存线程池实践-3">可缓存线程池实践 3</h4> <p>上个实践中提到，线程退出时间是60秒，这个时间有办法调整么？带着这个问题，我看了<code class="language-plaintext highlighter-rouge">newCachedThreadPool</code> 调用的源码。</p> <p><img src="https://blog.maplestory.work/images/post_image/2020-07-27-线程池.assets/1597547961589.png" alt="1597547961589" /></p> <p>通过这个源码，实现自己的可缓存线程池，修改60s这个参数。</p> <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 替换上面代码实例化线程池的方式</span>
+<span class="c1">//ExecutorService cachedThreadPool = Executors.newCachedThreadPool();</span>
+<span class="nc">ThreadPoolExecutor</span> <span class="n">cachedThreadPool</span> <span class="o">=</span> 
+    <span class="k">new</span> <span class="nf">ThreadPoolExecutor</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="nc">Integer</span><span class="o">.</span><span class="na">MAX_VALUE</span><span class="o">,</span><span class="mi">10L</span><span class="o">,</span> 
+                           <span class="nc">TimeUnit</span><span class="o">.</span><span class="na">SECONDS</span><span class="o">,</span>
+                           <span class="k">new</span> <span class="nc">SynchronousQueue</span><span class="o">&lt;</span><span class="nc">Runnable</span><span class="o">&gt;());</span>
+<span class="cm">/*
+pool-1-thread-1-正在执行...
+pool-1-thread-2-正在执行...
+pool-1-thread-1-正在执行...
+pool-1-thread-2-正在执行...
+pool-1-thread-2-正在执行...
+pool-1-thread-2-正在执行...
+pool-1-thread-1-正在执行...
+pool-1-thread-2-正在执行...
+pool-1-thread-1-正在执行...
+New cached thread test finished!
+pool-1-thread-2-正在执行...
+上个线程执行完的时间到程序退出时间：0 ms
+*/</span>
+</code></pre></div></div> <p>输出结果一样，但是通过手动计时，线程执行结束到整个程序退出的时间差不多<code class="language-plaintext highlighter-rouge">10L, TimeUnit.SECONDS,</code> 60秒。</p> <blockquote> <p>同时，如果采用<code class="language-plaintext highlighter-rouge">Executors</code>实例化线程池的，并且使用ali的代码规范的话会提示：</p> <p><code class="language-plaintext highlighter-rouge">手动创建线程池，效果会更好哦。 (rule: AlibabaJavaConcurrent-ThreadPoolCreationRule)Java P3C</code></p> <p>因此，可以多尝试自定义的方式实例化线程池。</p> </blockquote> <h3 id="2-newfixedthreadpool">2. newFixedThreadPool：</h3> <p>​ 线程的数量是固定的，线程并不会随着任务的多少而变化。<code class="language-plaintext highlighter-rouge">Executors.newFixedThreadPool(nThreads);</code>传入参数nThreads，固定线程池的线程个数，包括核心线程数、最大线程数。当线程池满了，就会放入阻塞队列。</p> <p><strong>流程：</strong></p> <p>​ FixedThreadPool中最多只有固定数目线程存在，一个线程实例请求加入FixedThreadPool时，如果该实例不存在，且没有达到线程池数目上线，则会创建一个实例，否则，会先加入等待序列，当FixedThreadPool中有一个线程停止并移出线程池后，线程实例才能加入线程池。</p> <p>​ FixedThreadPool没有超时机制,适用于稳定且并发线程任务。</p> <h4 id="固定线程池实现"><strong>固定线程池实现</strong></h4> <p><img src="https://blog.maplestory.work/images/post_image/2020-07-27-线程池.assets/1597548944599.png" alt="1597548944599" /></p> <h4 id="固定线程池实践">固定线程池实践</h4> <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">javatest.threadpool</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">java.util.concurrent.ExecutorService</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.concurrent.Executors</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">FixedThreadPoolTest</span> <span class="o">{</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">ExecutorService</span> <span class="n">fixedThreadPool</span> <span class="o">=</span> <span class="nc">Executors</span><span class="o">.</span><span class="na">newFixedThreadPool</span><span class="o">(</span><span class="mi">3</span><span class="o">);</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"实例化固定线程池"</span><span class="o">);</span>
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+            <span class="n">fixedThreadPool</span><span class="o">.</span><span class="na">execute</span><span class="o">(</span><span class="k">new</span> <span class="nc">Runnable</span><span class="o">()</span> <span class="o">{</span>
+                <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
+                    <span class="k">try</span> <span class="o">{</span>
+                        <span class="c1">// 打印正在执行的缓存线程信息</span>
+                        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="nc">Thread</span><span class="o">.</span><span class="na">currentThread</span><span class="o">().</span><span class="na">getName</span><span class="o">()</span> <span class="o">+</span> <span class="s">"正在被执行"</span><span class="o">);</span>
+                        <span class="nc">Thread</span><span class="o">.</span><span class="na">sleep</span><span class="o">(</span><span class="mi">2000</span><span class="o">);</span>
+                    <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">InterruptedException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+                        <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+                    <span class="o">}</span>
+                <span class="o">}</span>
+            <span class="o">});</span>
+        <span class="o">}</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"线程任务分配完毕！"</span><span class="o">);</span>
+        <span class="n">fixedThreadPool</span><span class="o">.</span><span class="na">shutdown</span><span class="o">();</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+<span class="c1">//输出</span>
+<span class="cm">/*
+实例化固定线程池
+线程任务分配完毕！
+pool-1-thread-3正在被执行
+pool-1-thread-2正在被执行
+pool-1-thread-1正在被执行
+pool-1-thread-3正在被执行
+pool-1-thread-2正在被执行
+pool-1-thread-1正在被执行
+pool-1-thread-3正在被执行
+pool-1-thread-2正在被执行
+pool-1-thread-1正在被执行
+pool-1-thread-2正在被执行
+*/</span>
+</code></pre></div></div> <p>通过上述代码可以发现，线程池中可以调用的有三个线程。本例中的循环没有sleep等待，很快就执行完毕。把线程任务提交给了线程池，但是依旧是三个三个完成整个线程池中的任务。</p> <p>同时发现，如果不调用<code class="language-plaintext highlighter-rouge">fixedThreadPool.shutdown();</code>则程序一直不会退出，而<code class="language-plaintext highlighter-rouge">newCachedThreadPool</code>在超过<code class="language-plaintext highlighter-rouge">keepAliveTime</code>之后Main方法还是能退出的，也就是线程池关闭。</p> <p><strong>官方说明</strong></p> <p><img src="https://blog.maplestory.work/images/post_image/2020-07-27-线程池.assets/1597551474438.png" alt="1597551474438" /></p> <blockquote> <p>引用：</p> <p><a href="https://blog.51cto.com/13981400/2346714">JAVA线程池原理源码解析—为什么启动一个线程池，提交一个任务后，Main方法不会退出？</a></p> </blockquote> <blockquote> <p>1.线程池的创建的时候，第一次submit操作会创建Worker线程（负责去拿任务处理），该线程里写了一个死循环，所以这个Worker线程不会死。 2.Worker线程在创建的时候，被设置成了非守护线程，thread.setDaemon(false)。 3.早在JDK1.5的时候，就规定了当所有非守护线程退出时，JVM才会退出，Main方法主线程和Worker线程都是非守护线程，所以不会死。</p> </blockquote> <h3 id="3-newsinglethreadexecutor">3. newSingleThreadExecutor：</h3> <p>​ 只有一个线程的线程池。</p> <p>​ 核心线程=最大线程=1，创建一个单线程化的线程池，它只会用唯一的工作线程来执行任务，保证所有任务按照指定顺序(FIFO, LIFO, 优先级)执行。这个比较适合需要保证队列中任务顺序执行的场景。</p> <h4 id="单一线程池实现">单一线程池实现</h4> <p><img src="https://blog.maplestory.work/images/post_image/2020-07-27-线程池.assets/1597557115501.png" alt="1597557115501" /></p> <h4 id="单一线程池实践">单一线程池实践</h4> <p>这个实践中，我们把单线程的休眠时间拉长，保证10个线程都被实例化之后，第一个线程还没执行完。</p> <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">javatest.threadpool</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.concurrent.ExecutorService</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.concurrent.Executors</span><span class="o">;</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">SingleThreadPoolTest</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">ExecutorService</span> <span class="n">singleExecutorService</span> <span class="o">=</span> <span class="nc">Executors</span><span class="o">.</span><span class="na">newSingleThreadExecutor</span><span class="o">();</span>
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+            <span class="kd">final</span> <span class="kt">int</span> <span class="n">index</span> <span class="o">=</span> <span class="n">i</span><span class="o">;</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"实例化第"</span> <span class="o">+</span> <span class="n">i</span> <span class="o">+</span> <span class="s">"个线程"</span><span class="o">);</span>
+            <span class="n">singleExecutorService</span><span class="o">.</span><span class="na">execute</span><span class="o">(</span><span class="k">new</span> <span class="nc">Runnable</span><span class="o">()</span> <span class="o">{</span>
+                <span class="nd">@Override</span>
+                <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
+                    <span class="c1">// TODO Auto-generated method stub</span>
+                    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="nc">Thread</span><span class="o">.</span><span class="na">currentThread</span><span class="o">().</span><span class="na">getName</span><span class="o">()</span> <span class="o">+</span> <span class="s">"正在被执行,打印的值是:"</span> <span class="o">+</span> <span class="n">index</span><span class="o">);</span>
+                    <span class="k">try</span> <span class="o">{</span>
+                        <span class="nc">Thread</span><span class="o">.</span><span class="na">sleep</span><span class="o">(</span><span class="mi">5000</span><span class="o">);</span>
+                    <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">InterruptedException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+                        <span class="c1">// TODO Auto-generated catch block</span>
+                        <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+                    <span class="o">}</span>
+                <span class="o">}</span>
+            <span class="o">});</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="c1">//输出</span>
+<span class="cm">/*
+实例化第0个线程
+实例化第1个线程
+实例化第2个线程
+pool-1-thread-1正在被执行,打印的值是:0
+实例化第3个线程
+实例化第4个线程
+实例化第5个线程
+实例化第6个线程
+实例化第7个线程
+实例化第8个线程
+实例化第9个线程
+pool-1-thread-1正在被执行,打印的值是:1
+pool-1-thread-1正在被执行,打印的值是:2
+pool-1-thread-1正在被执行,打印的值是:3
+pool-1-thread-1正在被执行,打印的值是:4
+pool-1-thread-1正在被执行,打印的值是:5
+pool-1-thread-1正在被执行,打印的值是:6
+pool-1-thread-1正在被执行,打印的值是:7
+pool-1-thread-1正在被执行,打印的值是:8
+pool-1-thread-1正在被执行,打印的值是:9
+
+*/</span>
+</code></pre></div></div> <p>通过上述代码可以发现，我们执行的线程都是按照实例化的顺序加入到无界阻塞队列当中，并且也是按照实例化的顺序执行的。</p> <h3 id="4-newscheduledthreadpool">4. newScheduledThreadPool：</h3> <p>​ 延时线程池。<code class="language-plaintext highlighter-rouge">ScheduledThreadPoolExecutor</code>继承了<code class="language-plaintext highlighter-rouge">ThreadPoolExecutor</code><code class="language-plaintext highlighter-rouge">，所以super最终会调到ThreadPoolExecutor</code>的构造函数，可以看到，最大线程数为int最大值，工作队列为延时队列<code class="language-plaintext highlighter-rouge">DelayedWorkQueue</code>，该线程池适合执行延时任务。</p> <blockquote> <p>参考：</p> <p><a href="https://www.jianshu.com/p/925dba9f5969">深入理解Java线程池：ScheduledThreadPoolExecutor</a></p> </blockquote> <h4 id="延时线程池实现">延时线程池实现</h4> <p><strong>类的关系图如下：</strong></p> <p><img src="https://blog.maplestory.work/images/post_image/2020-07-27-线程池.assets/1597559492056.png" alt="1597559492056" /></p> <p><code class="language-plaintext highlighter-rouge">ScheduledExecutorService</code>调用<code class="language-plaintext highlighter-rouge">newScheduleThreadPool</code>返回<code class="language-plaintext highlighter-rouge">ScheduleThreadExecutord</code>实例。</p> <p><img src="2020-07-27-线程池.assets/1597558719375.png" alt="1597558719375" /></p> <p><code class="language-plaintext highlighter-rouge">ScheduleThreadPoolExecutor</code>继承了<code class="language-plaintext highlighter-rouge">ThreadPoolExecutor</code>类，调用是传入的参数也相同。核心线程数，最大线程数，线程超时时间，单位，阻塞队列。</p> <p><strong>实现如下：</strong></p> <p><img src="https://blog.maplestory.work/images/post_image/2020-07-27-线程池.assets/1597558734472.png" alt="1597558734472" /></p> <h4 id="延时线程池实践1">延时线程池实践1</h4> <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ScheduledThreadPoolTest</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kt">int</span> <span class="n">corePoolSize</span> <span class="o">=</span> <span class="mi">4</span><span class="o">;</span>
+        <span class="c1">// 创建一个定长线程池，支持定时及周期性任务执行——延迟执行</span>
+        <span class="nc">ScheduledExecutorService</span> <span class="n">scheduledThreadPool</span> <span class="o">=</span> <span class="nc">Executors</span><span class="o">.</span><span class="na">newScheduledThreadPool</span><span class="o">(</span><span class="n">corePoolSize</span><span class="o">);</span>
+        <span class="c1">// 延迟1秒执行</span>
+        <span class="c1">// scheduledThreadPool.schedule(new Runnable() {</span>
+        <span class="c1">// public void run() {</span>
+        <span class="c1">// System.out.println("延迟1秒执行");</span>
+        <span class="c1">// }</span>
+        <span class="c1">// }, 1, TimeUnit.SECONDS);</span>
+
+        <span class="c1">// 延迟1秒后每3秒执行一次</span>
+        <span class="n">scheduledThreadPool</span><span class="o">.</span><span class="na">scheduleAtFixedRate</span><span class="o">(</span><span class="k">new</span> <span class="nc">Runnable</span><span class="o">()</span> <span class="o">{</span>
+            <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
+                <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"延迟1秒后每3秒执行一次"</span><span class="o">);</span>
+            <span class="o">}</span>
+        <span class="o">},</span> <span class="mi">1</span><span class="o">,</span> <span class="mi">3</span><span class="o">,</span> <span class="nc">TimeUnit</span><span class="o">.</span><span class="na">SECONDS</span><span class="o">);</span>
+
+    <span class="o">}</span>
+<span class="o">}</span>
+<span class="c1">//输出，每三秒执行输出一次。</span>
+<span class="cm">/*
+延迟1秒后每3秒执行一次
+延迟1秒后每3秒执行一次
+延迟1秒后每3秒执行一次
+延迟1秒后每3秒执行一次
+...
+...
+*/</span>
+</code></pre></div></div> <h4 id="延时线程池实践2">延时线程池实践2</h4> <p>本例除了使用延时线程池外，还展示了如何正确、优雅的关闭线程线程池（shutdown + awaitTermination）。</p> <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">javatest.threadpool</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.Date</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.concurrent.Executors</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.concurrent.ScheduledExecutorService</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.concurrent.TimeUnit</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">ScheduledThreadPoolTest</span> <span class="o">{</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">InterruptedException</span> <span class="o">{</span>
+        <span class="nc">ScheduledExecutorService</span> <span class="n">scheduledThreadPool</span> <span class="o">=</span> <span class="nc">Executors</span><span class="o">.</span><span class="na">newScheduledThreadPool</span><span class="o">(</span><span class="mi">4</span><span class="o">);</span>
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">4</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+            <span class="n">scheduledThreadPool</span><span class="o">.</span><span class="na">scheduleAtFixedRate</span><span class="o">(</span><span class="k">new</span> <span class="nc">Runnable</span><span class="o">()</span> <span class="o">{</span>
+                <span class="nd">@Override</span>
+                <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
+                    <span class="c1">// TODO Auto-generated method stub</span>
+                    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="nc">Thread</span><span class="o">.</span><span class="na">currentThread</span><span class="o">().</span><span class="na">getName</span><span class="o">()</span> <span class="o">+</span> <span class="s">"Start running! Time:"</span> <span class="o">+</span> <span class="k">new</span> <span class="nc">Date</span><span class="o">());</span>
+                    <span class="k">try</span> <span class="o">{</span>
+                        <span class="nc">Thread</span><span class="o">.</span><span class="na">sleep</span><span class="o">(</span><span class="mi">1000</span><span class="o">);</span>
+                    <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">InterruptedException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+                        <span class="c1">// TODO Auto-generated catch block</span>
+                        <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+                    <span class="o">}</span>
+                    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="nc">Thread</span><span class="o">.</span><span class="na">currentThread</span><span class="o">().</span><span class="na">getName</span><span class="o">()</span> <span class="o">+</span> <span class="s">"End running! Time:"</span> <span class="o">+</span> <span class="k">new</span> <span class="nc">Date</span><span class="o">());</span>
+                <span class="o">}</span>
+
+            <span class="o">},</span> <span class="mi">1</span><span class="o">,</span> <span class="mi">5</span><span class="o">,</span> <span class="nc">TimeUnit</span><span class="o">.</span><span class="na">SECONDS</span><span class="o">);</span>
+        <span class="o">}</span>
+        <span class="nc">Thread</span><span class="o">.</span><span class="na">sleep</span><span class="o">(</span><span class="mi">10000</span><span class="o">);</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Shutting down executor..."</span><span class="o">);</span>
+        <span class="c1">// 关闭线程池</span>
+        <span class="n">scheduledThreadPool</span><span class="o">.</span><span class="na">shutdown</span><span class="o">();</span>
+        <span class="kt">boolean</span> <span class="n">isDone</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
+        <span class="c1">// 等待线程池终止</span>
+        <span class="k">do</span> <span class="o">{</span>
+            <span class="n">isDone</span> <span class="o">=</span> <span class="n">scheduledThreadPool</span><span class="o">.</span><span class="na">awaitTermination</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="nc">TimeUnit</span><span class="o">.</span><span class="na">DAYS</span><span class="o">);</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"awaitTermination..."</span><span class="o">);</span>
+        <span class="o">}</span> <span class="k">while</span> <span class="o">(!</span><span class="n">isDone</span><span class="o">);</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Finished all threads"</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+
+<span class="cm">/*
+pool-1-thread-1Start running! Time:Sun Aug 16 14:47:49 CST 2020
+pool-1-thread-2Start running! Time:Sun Aug 16 14:47:49 CST 2020
+pool-1-thread-4Start running! Time:Sun Aug 16 14:47:49 CST 2020
+pool-1-thread-3Start running! Time:Sun Aug 16 14:47:49 CST 2020
+pool-1-thread-4End running! Time:Sun Aug 16 14:47:50 CST 2020
+pool-1-thread-3End running! Time:Sun Aug 16 14:47:50 CST 2020
+pool-1-thread-2End running! Time:Sun Aug 16 14:47:50 CST 2020
+pool-1-thread-1End running! Time:Sun Aug 16 14:47:50 CST 2020
+pool-1-thread-1Start running! Time:Sun Aug 16 14:47:54 CST 2020
+pool-1-thread-4Start running! Time:Sun Aug 16 14:47:54 CST 2020
+pool-1-thread-3Start running! Time:Sun Aug 16 14:47:54 CST 2020
+pool-1-thread-2Start running! Time:Sun Aug 16 14:47:54 CST 2020
+pool-1-thread-1End running! Time:Sun Aug 16 14:47:55 CST 2020
+pool-1-thread-3End running! Time:Sun Aug 16 14:47:55 CST 2020
+pool-1-thread-4End running! Time:Sun Aug 16 14:47:55 CST 2020
+pool-1-thread-2End running! Time:Sun Aug 16 14:47:55 CST 2020
+Shutting down executor...
+awaitTermination...
+Finished all threads
+*/</span>
+</code></pre></div></div> <h3 id="5-newworkstealingpool">5. newWorkStealingPool：</h3> <p>1.8新加的线程池,forkJoinPool 可以根据CPU的核数并行的执行，适合使用在很耗时的操作，可以充分的利用CPU执行任务，任务窃取线程池，不保证执行顺序，适合任务耗时差异较大。</p> <h2 id="线程池使用">线程池使用</h2> <p><a href="https://liuzho.github.io/2017/04/17/线程池，这一篇或许就够了/">线程池，这一篇或许就够了</a></p> <p><a href="https://www.cnblogs.com/slankka/p/11609615.html">Java线程池的正确关闭方法，awaitTermination还不够</a></p> <p><a href="https://www.cnblogs.com/windpoplar/p/10545803.html">ThreadPoolExecutor 中的 shutdown() 、awaitTermination() 、 shutdownNow() 的用法</a></p> <p><strong>awaitTermination使用：</strong></p> <p>传入时间和单位，在这个时间结束之前，将会阻塞直到所有任务完成。正常完成返回true</p> <p>如果超过设置的时间，则结束阻塞，返回false</p> <p>如果阻塞被中断，则抛出中断异常。</p> <p><img src="https://blog.maplestory.work/images/post_image/2020-07-27-线程池.assets/1597560605066.png" alt="1597560605066" /></p> <h3 id="线程名字">线程名字</h3> <p>线程都有自己的默认名称，也可以自己设置。</p> <p>Thread-编号（默认从0开始）。</p> <h3 id="sleep方法">Sleep方法</h3> <blockquote> <p>sleep方法，暂停当前线程，把cpu片段让出给其他线程，减缓当前线程的执行。</p> <p>但是如果当前线程占有了锁，线程不会释放锁。</p> <p>sleep过后，不是直接到了运行状态，而是到就绪（可运行）状态。</p> </blockquote> <br> <nav class="pagination"> <a href="http://localhost:4000/Socket/" class="pagination_pager" title="Socket通信 ">previous</a> <a href="http://localhost:4000/%E8%AE%B0%E5%BD%95Markdown%E9%A1%B5%E5%86%85%E8%B7%B3%E8%BD%AC%E6%96%B9%E6%B3%95/" class="pagination_pager" title="记录Markdown页内跳转方法 ">next</a> </nav> </div> </div> <!-- JS --> <script src="http://localhost:4000/assets/js/main.min.js"></script> <div class="overlay"> <ul class="projects-menu"> <li style="background:url(http://localhost:4000/images/benjamin-deyoung-unsplash.jpg) center center no-repeat;"> <a href="https://github.com/Maple-Chan" target="_blank" rel="nofollow external"> <span> GitHub Home </span> </a> </li> </ul> </div> </body> </html>

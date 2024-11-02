@@ -1,0 +1,94 @@
+<!DOCTYPE html> <html> <head> <meta charset="utf-8"> <meta http-equiv="X-UA-Compatible" content="IE=edge"> <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"> <title>Builder模式 &#8211; Maple Story</title> <meta name="description" content="不断强化自己的开发技能"> <meta name="keywords" content="设计模式"> <!-- Twitter Cards --> <meta name="twitter:card" content="summary"> <meta name="twitter:image" content="halve.png"> <meta name="twitter:title" content="Builder模式"> <meta name="twitter:description" content="不断强化自己的开发技能"> <!-- Open Graph --> <meta property="og:locale" content="en_US"> <meta property="og:type" content="article"> <meta property="og:title" content="Builder模式"> <meta property="og:description" content="不断强化自己的开发技能"> <meta property="og:url" content="http://localhost:4000/Builder%E6%A8%A1%E5%BC%8F/"> <meta property="og:site_name" content="Maple Story"> <meta property="og:image" content="http://localhost:4000/images/halve.png"> <link rel="canonical" href="http://localhost:4000/Builder%E6%A8%A1%E5%BC%8F/"> <!-- Handheld --> <meta name="HandheldFriendly" content="True"> <meta name="MobileOptimized" content="320"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Feed --> <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="" /> <!-- Favicons --> <link rel="shortcut icon" type="image/png" href="http://localhost:4000/favicon.png" /> <link rel="shortcut icon" href="http://localhost:4000/favicon.ico" /> <!-- CSS --> <link rel="stylesheet" type="text/css" href="http://localhost:4000/assets/css/main.css"> <!-- Left Block Image for Posts --> <style type="text/css"> #posts.inner-post-page .block-left {background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(http://localhost:4000/images/unsplash-gallery-image-3.jpg) no-repeat;background-size: cover;} </style> <!-- Left Block Images for Home and Pages --> <style type="text/css"> #posts .block-left {background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(http://localhost:4000/images/unsplash-image-10.jpg) no-repeat;background-size: cover, cover;} .block-left {background: linear-gradient(rgba(44,45,51,0.9), rgba(44,45,51,0.9)), url(http://localhost:4000/images/home.jpg) no-repeat;background-size: cover;} </style> </head> <body id="posts" class="inner-post-page"> <div class="block-left"> <div class="content"> <a href="http://localhost:4000" class="logo"><img src="http://localhost:4000/images/halve.png"></a> <div class="post-title-section"> <div class="section-line">Posts <em>/</em></div> <h1 class="section-title">Builder模式 </h1> <ul class="tags"> <li><a href="http://localhost:4000/tags#设计模式">设计模式</a></li> </ul> <div class="section-line reverse"><a href="http://localhost:4000/posts">Back to posts</a> <em>/</em></div> </div> </div> </div> <div class="block-right"> <a href="../posts.html" title="posts" class="posts-menu-icon"></a> <a title="projects" class="projects-menu-icon"> <span></span> </a> <div class="inner-post content"> <div class="date-highlight">23 Nov 2020</div> <center><h2><b> Builder模式 </b></h2></center> <p><br /></p> <h3 id="介绍">介绍</h3> <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">UserBuilder</span> <span class="n">builder</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">UserBuilder</span><span class="o">();</span>
+<span class="n">builder</span><span class="o">.</span><span class="na">addName</span><span class="o">().</span><span class="na">addEmail</span><span class="o">().</span><span class="na">addPhone</span><span class="o">().</span><span class="na">addAge</span><span class="o">();</span>
+
+<span class="nc">User</span> <span class="n">user</span> <span class="o">=</span> <span class="n">builder</span><span class="o">.</span><span class="na">builder</span><span class="o">();</span>
+</code></pre></div></div> <p>可以通过上述代码完成一个对象的构建就是利用了构造器（Builder）模式，使用多个简单的调用一步一步的构建出一个复杂的对象。</p> <p><strong>主要解决：</strong>这种方法通常对象的子对象需要由一定的算法构成，由于需求的变化，这个复杂对象的子对象的属性经常面临着剧烈的变化，但是将它们组合在一起的算法却相对稳定，而组合体对象个体属性是不稳定的。通过这种方式，如果一个子对象的实例过程需要变动，仅需变动对应模块的代码即可。</p> <p>使用实例如下：</p> <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Users</span> <span class="o">{</span>
+ 
+	<span class="kd">private</span> <span class="kd">final</span> <span class="nc">String</span> <span class="n">name</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="kd">final</span> <span class="nc">String</span> <span class="n">gender</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="kd">final</span> <span class="kt">int</span> <span class="n">age</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="kd">final</span> <span class="nc">String</span> <span class="n">email</span><span class="o">;</span>
+	
+	<span class="kd">private</span> <span class="nf">Users</span><span class="o">(</span><span class="nc">UsersBuilder</span> <span class="n">ub</span><span class="o">)</span> <span class="o">{</span>
+		<span class="kd">super</span><span class="o">();</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">ub</span><span class="o">.</span><span class="na">name</span><span class="o">;</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">gender</span> <span class="o">=</span> <span class="n">ub</span><span class="o">.</span><span class="na">gender</span><span class="o">;</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">age</span> <span class="o">=</span> <span class="n">ub</span><span class="o">.</span><span class="na">age</span><span class="o">;</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">email</span> <span class="o">=</span> <span class="n">ub</span><span class="o">.</span><span class="na">email</span><span class="o">;</span>
+	<span class="o">}</span>
+	<span class="kd">public</span> <span class="nc">String</span> <span class="nf">getName</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">name</span><span class="o">;</span>
+	<span class="o">}</span>
+	<span class="kd">public</span> <span class="nc">String</span> <span class="nf">getGender</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">gender</span><span class="o">;</span>
+	<span class="o">}</span>
+	<span class="kd">public</span> <span class="kt">int</span> <span class="nf">getAge</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">age</span><span class="o">;</span>
+	<span class="o">}</span>
+	<span class="kd">public</span> <span class="nc">String</span> <span class="nf">getEmail</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">email</span><span class="o">;</span>
+	<span class="o">}</span>
+ 
+<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="nc">String</span> <span class="nf">toString</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="s">"Users [name="</span> <span class="o">+</span> <span class="n">name</span> <span class="o">+</span> <span class="s">", gender="</span> <span class="o">+</span> <span class="n">gender</span> <span class="o">+</span> <span class="s">", age="</span> <span class="o">+</span> <span class="n">age</span> <span class="o">+</span> <span class="s">", email="</span> <span class="o">+</span> <span class="n">email</span> <span class="o">+</span> <span class="s">"]"</span><span class="o">;</span>
+	<span class="o">}</span>
+ 
+ 
+ 
+<span class="kd">public</span> <span class="kd">static</span> <span class="kd">class</span> <span class="nc">UsersBuilder</span> <span class="o">{</span>
+		<span class="kd">final</span> <span class="nc">String</span> <span class="n">name</span><span class="o">;</span>
+		<span class="kd">final</span> <span class="nc">String</span> <span class="n">gender</span><span class="o">;</span>
+		<span class="nc">String</span> <span class="n">email</span><span class="o">;</span>
+		<span class="kt">int</span> <span class="n">age</span><span class="o">;</span>
+		<span class="kd">public</span> <span class="nf">UsersBuilder</span><span class="o">(</span><span class="nc">String</span> <span class="n">name</span><span class="o">,</span> <span class="nc">String</span> <span class="n">gender</span><span class="o">)</span> <span class="o">{</span>
+			<span class="kd">super</span><span class="o">();</span>
+			<span class="k">this</span><span class="o">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">;</span>
+			<span class="k">this</span><span class="o">.</span><span class="na">gender</span> <span class="o">=</span> <span class="n">gender</span><span class="o">;</span>
+		<span class="o">}</span>
+		<span class="kd">public</span> <span class="nc">UsersBuilder</span> <span class="nf">setAge</span><span class="o">(</span><span class="kt">int</span> <span class="n">age</span><span class="o">)</span> <span class="o">{</span>
+			<span class="k">this</span><span class="o">.</span><span class="na">age</span> <span class="o">=</span> <span class="n">age</span><span class="o">;</span>
+			<span class="k">return</span> <span class="k">this</span><span class="o">;</span>
+		<span class="o">}</span>
+		<span class="kd">public</span> <span class="nc">UsersBuilder</span> <span class="nf">setEmail</span><span class="o">(</span><span class="nc">String</span> <span class="n">email</span><span class="o">)</span> <span class="o">{</span>
+			<span class="k">this</span><span class="o">.</span><span class="na">email</span> <span class="o">=</span> <span class="n">email</span><span class="o">;</span>
+			<span class="k">return</span> <span class="k">this</span><span class="o">;</span>
+		<span class="o">}</span>
+		<span class="kd">public</span> <span class="nc">String</span> <span class="nf">getEmail</span><span class="o">()</span> <span class="o">{</span>
+			<span class="k">return</span> <span class="n">email</span><span class="o">;</span>
+		<span class="o">}</span>
+		<span class="kd">public</span> <span class="kt">int</span> <span class="nf">getAge</span><span class="o">()</span> <span class="o">{</span>
+			<span class="k">return</span> <span class="n">age</span><span class="o">;</span>
+		<span class="o">}</span>
+		<span class="kd">public</span> <span class="nc">String</span> <span class="nf">getName</span><span class="o">()</span> <span class="o">{</span>
+			<span class="k">return</span> <span class="n">name</span><span class="o">;</span>
+		<span class="o">}</span>
+		<span class="kd">public</span> <span class="nc">String</span> <span class="nf">getGender</span><span class="o">()</span> <span class="o">{</span>
+			<span class="k">return</span> <span class="n">gender</span><span class="o">;</span>
+		<span class="o">}</span>
+		
+		<span class="kd">public</span> <span class="nc">Users</span> <span class="nf">build</span><span class="o">()</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
+			<span class="nc">Users</span> <span class="n">user</span><span class="o">=</span><span class="k">new</span> <span class="nc">Users</span><span class="o">(</span><span class="k">this</span><span class="o">);</span>
+			<span class="k">if</span><span class="o">(</span><span class="n">user</span><span class="o">.</span><span class="na">getAge</span><span class="o">()&gt;</span><span class="mi">200</span><span class="o">)</span> <span class="o">{</span>
+				<span class="k">throw</span> <span class="k">new</span> <span class="nf">Exception</span><span class="o">(</span><span class="s">"参数格式不正确"</span><span class="o">);</span>
+			<span class="o">}</span>
+			<span class="k">return</span> <span class="n">user</span><span class="o">;</span>
+		<span class="o">}</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">TestClass</span> <span class="o">{</span>
+ 
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+		<span class="nc">UsersBuilder</span> <span class="n">ub</span><span class="o">=</span><span class="k">new</span> <span class="nc">UsersBuilder</span><span class="o">(</span><span class="s">"张三"</span><span class="o">,</span><span class="s">"男"</span><span class="o">);</span>
+		<span class="nc">Users</span> <span class="n">user</span><span class="o">=</span><span class="kc">null</span><span class="o">;</span>
+		<span class="k">try</span> <span class="o">{</span>
+			<span class="n">user</span><span class="o">=</span><span class="n">ub</span><span class="o">.</span><span class="na">setAge</span><span class="o">(</span><span class="mi">13</span><span class="o">).</span><span class="na">build</span><span class="o">();</span>
+		<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+			<span class="c1">// TODO Auto-generated catch block</span>
+			<span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+		<span class="o">}</span>
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">user</span><span class="o">.</span><span class="na">getEmail</span><span class="o">());</span>
+	<span class="o">}</span>
+ 
+<span class="o">}</span>
+</code></pre></div></div> <h3 id="uml类图">UML类图</h3> <p><img src="https://blog.maplestory.work/images/post_image/2020-11-23-Builder模式.assets/1606111487030.png" alt="1606111487030" /></p> <br> <nav class="pagination"> <a href="http://localhost:4000/git%E5%91%BD%E4%BB%A4/" class="pagination_pager" title="git命令 ">previous</a> <a href="http://localhost:4000/ProGit%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/" class="pagination_pager" title="Pro Git 读书笔记 ">next</a> </nav> </div> </div> <!-- JS --> <script src="http://localhost:4000/assets/js/main.min.js"></script> <div class="overlay"> <ul class="projects-menu"> <li style="background:url(http://localhost:4000/images/benjamin-deyoung-unsplash.jpg) center center no-repeat;"> <a href="https://github.com/Maple-Chan" target="_blank" rel="nofollow external"> <span> GitHub Home </span> </a> </li> </ul> </div> </body> </html>

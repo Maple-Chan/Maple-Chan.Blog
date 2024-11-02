@@ -1,0 +1,54 @@
+<!DOCTYPE html> <html> <head> <meta charset="utf-8"> <meta http-equiv="X-UA-Compatible" content="IE=edge"> <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"> <title>Redis学习（二） &#8211; Maple Story</title> <meta name="description" content="Stick to note down what I’v learnt"> <meta name="keywords" content="Java, Back End"> <!-- Twitter Cards --> <meta name="twitter:card" content="summary"> <meta name="twitter:image" content="halve.png"> <meta name="twitter:title" content="Redis学习（二）"> <meta name="twitter:description" content="Stick to note down what I’v learnt"> <!-- Open Graph --> <meta property="og:locale" content="en_US"> <meta property="og:type" content="article"> <meta property="og:title" content="Redis学习（二）"> <meta property="og:description" content="Stick to note down what I’v learnt"> <meta property="og:url" content="http://localhost:4000/Redis%E5%AD%A6%E4%B9%A0-%E4%BA%8C/"> <meta property="og:site_name" content="Maple Story"> <meta property="og:image" content="http://localhost:4000/images/halve.png"> <link rel="canonical" href="http://localhost:4000/Redis%E5%AD%A6%E4%B9%A0-%E4%BA%8C/"> <!-- Handheld --> <meta name="HandheldFriendly" content="True"> <meta name="MobileOptimized" content="320"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Feed --> <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="" /> <!-- Favicons --> <link rel="shortcut icon" type="image/png" href="http://localhost:4000/favicon.png" /> <link rel="shortcut icon" href="http://localhost:4000/favicon.ico" /> <!-- CSS --> <link rel="stylesheet" type="text/css" href="http://localhost:4000/assets/css/main.css"> <!-- Left Block Image for Posts --> <style type="text/css"> #posts.inner-post-page .block-left {background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(http://localhost:4000/images/unsplash-gallery-image-3.jpg) no-repeat;background-size: cover;} </style> <!-- Left Block Images for Home and Pages --> <style type="text/css"> #posts .block-left {background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(http://localhost:4000/images/unsplash-image-10.jpg) no-repeat;background-size: cover, cover;} .block-left {background: linear-gradient(rgba(44,45,51,0.9), rgba(44,45,51,0.9)), url(http://localhost:4000/images/home.jpg) no-repeat;background-size: cover;} </style> </head> <body id="posts" class="inner-post-page"> <div class="block-left"> <div class="content"> <a href="http://localhost:4000" class="logo"><img src="http://localhost:4000/images/halve.png"></a> <div class="post-title-section"> <div class="section-line">Posts <em>/</em></div> <h1 class="section-title">Redis学习（二） </h1> <ul class="tags"> <li><a href="http://localhost:4000/tags#Java">Java</a></li> <li><a href="http://localhost:4000/tags#Back End">Back End</a></li> </ul> <div class="section-line reverse"><a href="http://localhost:4000/posts">Back to posts</a> <em>/</em></div> </div> </div> </div> <div class="block-right"> <a href="../posts.html" title="posts" class="posts-menu-icon"></a> <a title="projects" class="projects-menu-icon"> <span></span> </a> <div class="inner-post content"> <div class="date-highlight">18 Jul 2020</div> <center><h2><b>Redis学习（二）</b></h2></center> <p><br /></p> <h3 id="实战一">实战（一）</h3> <p>参考</p> <blockquote> <p><a href="https://www.runoob.com/redis/redis-tutorial.html">Redis 教程</a></p> </blockquote> <h4 id="命令">命令</h4> <p>详细命令请参考 <a href="https://www.runoob.com/redis/redis-commands.html">Redis 命令</a></p> <p>数据类型：String、hash、list、set、sorted set。</p> <h5 id="string">String</h5> <blockquote> <p>GET 获取键的值</p> <p>SET 设置键的值</p> <p>DEL 删除键的值 （可用于所有类型）</p> </blockquote> <h5 id="hash">Hash</h5> <p>需要有一个filed参数（相当于key？）</p> <blockquote> <p>HSET 关联起给定键值对</p> <p>HGET 获取散列键的值</p> <p>HGETALL 获取所有键值对</p> </blockquote> <h5 id="list">List</h5> <blockquote> <p>RPUSH 将值推入列表右端 <code class="language-plaintext highlighter-rouge">rpush list item</code></p> <p>LRANGE 获取给定范围的所有值 <code class="language-plaintext highlighter-rouge">lrange list 0 -1 </code> (-1代表列表结束)</p> <p>LINDEX 给定指定位置上的单个元素</p> <p>LPOP 左端弹出一个值，并返回弹出的值</p> </blockquote> <h5 id="set">Set</h5> <blockquote> <p>SADD : 添加元素</p> <p>SMEMBERS 返回所有元素</p> <p>SISMEMBER 检查元素是否在集合中</p> <p>SREM 如果元素在集合中，那么移除元素</p> </blockquote> <h5 id="sorted-set">Sorted Set</h5> <p>需要有一个分值参数</p> <blockquote> <p>ZADD</p> <p>ZRANGE</p> <p>ZRANGEBYSCORE 获取有序集合在给定分值范围内的所有元素</p> <p>ZREM</p> </blockquote> <h4 id="redis-hyperloglog">Redis HyperLogLog</h4> <p><a href="https://www.runoob.com/redis/redis-hyperloglog.html">Redis HyperLogLog</a></p> <blockquote> <p>Redis 在 2.8.9 版本添加了 HyperLogLog 结构。</p> <p>Redis HyperLogLog 是用来做基数统计的算法，HyperLogLog 的优点是，在输入元素的数量或者体积非常非常大时，计算基数所需的空间总是固定 的、并且是很小的。</p> <p>在 Redis 里面，每个 HyperLogLog 键只需要花费 12 KB 内存，就可以计算接近 2^64 个不同元素的基 数。这和计算基数时，元素越多耗费内存就越多的集合形成鲜明对比。</p> <p>但是，因为 HyperLogLog 只会根据输入元素来计算基数，而不会储存输入元素本身，所以 HyperLogLog 不能像集合那样，返回输入的各个元素。</p> </blockquote> <p><strong>命令</strong></p> <p><code class="language-plaintext highlighter-rouge">PFADD key element [element ...]</code> 添加指定元素到HyperLogLog中</p> <p><code class="language-plaintext highlighter-rouge">PFCOUNT key [key ...]</code> 返回给定HyperLogLog的基数估计值</p> <p><code class="language-plaintext highlighter-rouge">PFMERGE destkey sourcekey [sourcekey ...]</code> 将多个 HyperLogLog 合并为一个 HyperLogLog</p> <h4 id="发布订阅">发布订阅</h4> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>redis 127.0.0.1:6379&gt; SUBSCRIBE redisChat <span class="c">#订阅redisChat消息</span>
+
+Reading messages... <span class="o">(</span>press Ctrl-C to quit<span class="o">)</span>
+1<span class="o">)</span> <span class="s2">"subscribe"</span>
+2<span class="o">)</span> <span class="s2">"redisChat"</span>
+3<span class="o">)</span> <span class="o">(</span>integer<span class="o">)</span> 1
+</code></pre></div></div> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>redis 127.0.0.1:6379&gt; PUBLISH redisChat <span class="s2">"Redis is a great caching technique"</span>
+
+<span class="o">(</span>integer<span class="o">)</span> 1
+
+redis 127.0.0.1:6379&gt; PUBLISH redisChat <span class="s2">"Learn redis by runoob.com"</span>
+
+<span class="o">(</span>integer<span class="o">)</span> 1
+
+<span class="c"># 订阅者的客户端会显示如下消息</span>
+1<span class="o">)</span> <span class="s2">"message"</span>
+2<span class="o">)</span> <span class="s2">"redisChat"</span>
+3<span class="o">)</span> <span class="s2">"Redis is a great caching technique"</span>
+1<span class="o">)</span> <span class="s2">"message"</span>
+2<span class="o">)</span> <span class="s2">"redisChat"</span>
+3<span class="o">)</span> <span class="s2">"Learn redis by runoob.com"</span>
+</code></pre></div></div> <h4 id="redis事务">Redis事务</h4> <p>Redis 事务可以一次执行多个命令， 并且带有以下三个重要的保证：</p> <ul> <li>批量操作在发送 EXEC 命令前被放入队列缓存。</li> <li>收到 EXEC 命令后进入事务执行，事务中<strong>任意命令执行失败，其余的命令依然被执行。</strong></li> <li>在事务执行过程，其他客户端提交的命令请求不会插入到事务执行命令序列中。</li> </ul> <p>一个事务从开始到执行会经历以下三个阶段：</p> <ul> <li>开始事务。</li> <li>命令入队。</li> <li>执行事务。</li> </ul> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#以 MULTI 开始一个事务， 然后将多个命令入队到事务中， 最后由 EXEC 命令触发事务， 一并执行事务中的所有命令：</span>
+redis 127.0.0.1:6379&gt; MULTI
+OK
+
+redis 127.0.0.1:6379&gt; SET book-name <span class="s2">"Mastering C++ in 21 days"</span>
+QUEUED
+
+redis 127.0.0.1:6379&gt; GET book-name <span class="c"># 获取数据命令入列</span>
+QUEUED
+
+<span class="c"># 向集合中添加一个成员</span>
+redis 127.0.0.1:6379&gt; SADD tag <span class="s2">"C++"</span> <span class="s2">"Programming"</span> <span class="s2">"Mastering Series"</span>
+QUEUED 
+
+<span class="c"># 获取集合中的所有成员</span>
+redis 127.0.0.1:6379&gt; SMEMBERS tag 
+QUEUED
+
+redis 127.0.0.1:6379&gt; EXEC 
+1<span class="o">)</span> OK
+2<span class="o">)</span> <span class="s2">"Mastering C++ in 21 days"</span>
+3<span class="o">)</span> <span class="o">(</span>integer<span class="o">)</span> 3
+4<span class="o">)</span> 1<span class="o">)</span> <span class="s2">"Mastering Series"</span>
+   2<span class="o">)</span> <span class="s2">"C++"</span>
+   3<span class="o">)</span> <span class="s2">"Programming"</span>
+</code></pre></div></div> <blockquote> <p>事务是打包的批量脚本，但批量指令并非原子化操作，中间某条指令的失败不会导致前面已做指令回滚，也不会导致后面指令不执行。</p> <p><em>It’s important to note that even when a command fails, all the other commands in the queue are processed – Redis will not stop the processing of commands.</em></p> </blockquote> <h4 id="redis-脚本">Redis 脚本</h4> <p>执行脚本的常用命令为 <strong>EVAL</strong></p> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>redis 127.0.0.1:6379&gt; EVAL script numkeys key <span class="o">[</span>key ...] arg <span class="o">[</span>arg ...]
+</code></pre></div></div> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>redis 127.0.0.1:6379&gt; EVAL <span class="s2">"return {KEYS[1],KEYS[2],ARGV[1],ARGV[2]}"</span> 2 key1 key2 first second
+
+1<span class="o">)</span> <span class="s2">"key1"</span>
+2<span class="o">)</span> <span class="s2">"key2"</span>
+3<span class="o">)</span> <span class="s2">"first"</span>
+4<span class="o">)</span> <span class="s2">"second"</span>
+</code></pre></div></div> <h3 id="总结">总结：</h3> <p><strong>Redis数据结构</strong></p> <p><a href="https://www.cnblogs.com/haoprogrammer/p/11065461.html">Redis五种数据结构</a></p> <p>String是最基本的数据类型，K-V的结构</p> <p>五种数据结构：String、Hash表、Linked List、Set、Sorted Set</p> <br> <nav class="pagination"> <a href="http://localhost:4000/Fabric-lscc/" class="pagination_pager" title="Fabric-LSCC生命周期系统合约 ">previous</a> <a href="http://localhost:4000/%E9%87%8D%E5%86%99equals%E8%BF%98%E8%A6%81%E9%87%8D%E5%86%99hashcode/" class="pagination_pager" title="重写equals还要重写hashcode ">next</a> </nav> </div> </div> <!-- JS --> <script src="http://localhost:4000/assets/js/main.min.js"></script> <div class="overlay"> <ul class="projects-menu"> <li style="background:url(http://localhost:4000/images/benjamin-deyoung-unsplash.jpg) center center no-repeat;"> <a href="https://github.com/Maple-Chan" target="_blank" rel="nofollow external"> <span> GitHub Home </span> </a> </li> </ul> </div> </body> </html>

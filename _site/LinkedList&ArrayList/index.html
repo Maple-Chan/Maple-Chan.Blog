@@ -1,0 +1,111 @@
+<!DOCTYPE html> <html> <head> <meta charset="utf-8"> <meta http-equiv="X-UA-Compatible" content="IE=edge"> <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"> <title>LinkedList&amp;ArrayList &#8211; Maple Story</title> <meta name="description" content="Stick to note down what I’v learnt"> <meta name="keywords" content="Java, Coding"> <!-- Twitter Cards --> <meta name="twitter:card" content="summary"> <meta name="twitter:image" content="halve.png"> <meta name="twitter:title" content="LinkedList&ArrayList"> <meta name="twitter:description" content="Stick to note down what I’v learnt"> <!-- Open Graph --> <meta property="og:locale" content="en_US"> <meta property="og:type" content="article"> <meta property="og:title" content="LinkedList&ArrayList"> <meta property="og:description" content="Stick to note down what I’v learnt"> <meta property="og:url" content="http://localhost:4000/LinkedList&ArrayList/"> <meta property="og:site_name" content="Maple Story"> <meta property="og:image" content="http://localhost:4000/images/halve.png"> <link rel="canonical" href="http://localhost:4000/LinkedList&ArrayList/"> <!-- Handheld --> <meta name="HandheldFriendly" content="True"> <meta name="MobileOptimized" content="320"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Feed --> <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="" /> <!-- Favicons --> <link rel="shortcut icon" type="image/png" href="http://localhost:4000/favicon.png" /> <link rel="shortcut icon" href="http://localhost:4000/favicon.ico" /> <!-- CSS --> <link rel="stylesheet" type="text/css" href="http://localhost:4000/assets/css/main.css"> <!-- Left Block Image for Posts --> <style type="text/css"> #posts.inner-post-page .block-left {background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(http://localhost:4000/images/unsplash-gallery-image-3.jpg) no-repeat;background-size: cover;} </style> <!-- Left Block Images for Home and Pages --> <style type="text/css"> #posts .block-left {background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(http://localhost:4000/images/unsplash-image-10.jpg) no-repeat;background-size: cover, cover;} .block-left {background: linear-gradient(rgba(44,45,51,0.9), rgba(44,45,51,0.9)), url(http://localhost:4000/images/home.jpg) no-repeat;background-size: cover;} </style> </head> <body id="posts" class="inner-post-page"> <div class="block-left"> <div class="content"> <a href="http://localhost:4000" class="logo"><img src="http://localhost:4000/images/halve.png"></a> <div class="post-title-section"> <div class="section-line">Posts <em>/</em></div> <h1 class="section-title">LinkedList&amp;ArrayList </h1> <ul class="tags"> <li><a href="http://localhost:4000/tags#Java">Java</a></li> <li><a href="http://localhost:4000/tags#Coding">Coding</a></li> </ul> <div class="section-line reverse"><a href="http://localhost:4000/posts">Back to posts</a> <em>/</em></div> </div> </div> </div> <div class="block-right"> <a href="../posts.html" title="posts" class="posts-menu-icon"></a> <a title="projects" class="projects-menu-icon"> <span></span> </a> <div class="inner-post content"> <div class="date-highlight">21 Jul 2020</div> <center><h2><b>LinkedList&amp;ArrayList</b></h2></center> <p><br /></p> <h3 id="arraylist">ArrayList</h3> <p>基于动态数组的数据结构，对于随机访问get和set方法，会优于LinkedList。当查询业务比较多的时候用ArrayList会更加合适。</p> <p>ArrayList实现是基于动态数据，但是在Add的时候也会导致数组下标越界。</p> <blockquote> <p>当ArrayList的size为14的时候，一个线程1执行add()的方法，在执行ensureCapacityInternal( size + 1)时，发现还可以添加一个元素，故数组没有扩容，此时线程1被阻塞。线程2进入，由于线程1没有添加元素，所以Capacity还是15，此时线程2的数据add成功，size==15。然后线程1被释放，可以执行add操作，线程1就在尝试往index ==15存数据，而size就只有 == 15，就导致了越界的情况。</p> </blockquote> <p>当然，如果在你get的时候传入了&gt;=list.size()的数值也会导致数据下标越界。</p> <h3 id="linkedlist">LinkedList</h3> <p>基于链表的数据结构，随机访问较ArrayList慢，因为不能同数组一样直接获取下标数据，需要遍历指针。当时增删比较快，可以在需要频繁增删数据的情况下用LinkedList。尽可能不用get的方式获取数据，用迭代器或者foreach</p> <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">LinkedList</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">&gt;</span> <span class="n">linkedList</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">LinkedList</span><span class="o">&lt;&gt;();</span>
+<span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="no">EIGHT</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+    <span class="n">linkedList</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">i</span><span class="o">);</span>
+<span class="o">}</span>
+<span class="c1">// forEach</span>
+<span class="n">linkedList</span><span class="o">.</span><span class="na">forEach</span><span class="o">(</span><span class="n">i</span> <span class="o">-&gt;</span> <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="s">" "</span> <span class="o">+</span> <span class="n">i</span><span class="o">));</span>
+<span class="c1">// 迭代器</span>
+<span class="nc">Iterator</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">&gt;</span> <span class="n">iterator</span> <span class="o">=</span> <span class="n">linkedList</span><span class="o">.</span><span class="na">iterator</span><span class="o">();</span>
+<span class="k">while</span> <span class="o">(</span><span class="n">iterator</span><span class="o">.</span><span class="na">hasNext</span><span class="o">())</span> <span class="o">{</span>
+    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="n">iterator</span><span class="o">.</span><span class="na">next</span><span class="o">()</span> <span class="o">+</span> <span class="s">" "</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></div></div> <h3 id="效率比较">效率比较</h3> <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// LinkedList用get获取元素</span>
+<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+    <span class="c1">// add elements</span>
+    <span class="kt">int</span> <span class="n">size</span> <span class="o">=</span> <span class="mi">2000000</span><span class="o">;</span>
+    <span class="nc">List</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">list</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">LinkedList</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;();</span>
+    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">size</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+        <span class="n">list</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">"Just some test data"</span><span class="o">);</span>
+    <span class="o">}</span>
+ 
+    <span class="kt">long</span> <span class="n">startTime</span> <span class="o">=</span> <span class="nc">System</span><span class="o">.</span><span class="na">currentTimeMillis</span><span class="o">();</span>
+    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">size</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+        <span class="n">list</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">i</span><span class="o">);</span>
+ 
+        <span class="k">if</span> <span class="o">(</span><span class="n">i</span> <span class="o">%</span> <span class="mi">10000</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"query 10000 elements spend: "</span>
+                    <span class="o">+</span> <span class="o">(</span><span class="nc">System</span><span class="o">.</span><span class="na">currentTimeMillis</span><span class="o">()</span> <span class="o">-</span> <span class="n">startTime</span><span class="o">));</span>
+            <span class="n">startTime</span> <span class="o">=</span> <span class="nc">System</span><span class="o">.</span><span class="na">currentTimeMillis</span><span class="o">();</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+<span class="cm">/*
+query 10000 elements spend: 0
+query 10000 elements spend: 91
+query 10000 elements spend: 244
+query 10000 elements spend: 392
+query 10000 elements spend: 562
+query 10000 elements spend: 714
+query 10000 elements spend: 1238
+query 10000 elements spend: 1077
+query 10000 elements spend: 1147
+query 10000 elements spend: 1298
+query 10000 elements spend: 1456
+query 10000 elements spend: 1652
+query 10000 elements spend: 1926
+query 10000 elements spend: 2907
+query 10000 elements spend: 2966
+query 10000 elements spend: 2777
+query 10000 elements spend: 3072
+query 10000 elements spend: 3308
+query 10000 elements spend: 3618
+query 10000 elements spend: 4055
+query 10000 elements spend: 4481
+query 10000 elements spend: 6130
+query 10000 elements spend: 5167
+.
+.
+.
+*/</span>
+</code></pre></div></div> <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+    <span class="c1">// add elements</span>
+    <span class="kt">int</span> <span class="n">size</span> <span class="o">=</span> <span class="mi">2000000</span><span class="o">;</span>
+    <span class="nc">List</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">list</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;();</span>
+    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">size</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+        <span class="n">list</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">"Just some test data"</span><span class="o">);</span>
+    <span class="o">}</span>
+ 
+    <span class="kt">long</span> <span class="n">startTime</span> <span class="o">=</span> <span class="nc">System</span><span class="o">.</span><span class="na">currentTimeMillis</span><span class="o">();</span>
+    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">size</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+        <span class="n">list</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">i</span><span class="o">);</span>
+ 
+        <span class="k">if</span> <span class="o">(</span><span class="n">i</span> <span class="o">%</span> <span class="mi">10000</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"query 10000 elements spend: "</span>
+                    <span class="o">+</span> <span class="o">(</span><span class="nc">System</span><span class="o">.</span><span class="na">currentTimeMillis</span><span class="o">()</span> <span class="o">-</span> <span class="n">startTime</span><span class="o">));</span>
+            <span class="n">startTime</span> <span class="o">=</span> <span class="nc">System</span><span class="o">.</span><span class="na">currentTimeMillis</span><span class="o">();</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+<span class="cm">/*
+query 10000 elements spend: 0
+query 10000 elements spend: 1
+query 10000 elements spend: 1
+query 10000 elements spend: 0
+query 10000 elements spend: 0
+query 10000 elements spend: 0
+query 10000 elements spend: 0
+query 10000 elements spend: 0
+query 10000 elements spend: 0
+query 10000 elements spend: 0
+query 10000 elements spend: 1
+query 10000 elements spend: 0
+query 10000 elements spend: 0
+query 10000 elements spend: 0
+query 10000 elements spend: 0
+query 10000 elements spend: 0
+query 10000 elements spend: 0
+query 10000 elements spend: 0
+query 10000 elements spend: 0
+query 10000 elements spend: 0
+query 10000 elements spend: 0
+query 10000 elements spend: 0
+query 10000 elements spend: 0
+query 10000 elements spend: 0
+query 10000 elements spend: 0
+query 10000 elements spend: 0
+query 10000 elements spend: 0
+.
+.
+.
+*/</span>
+</code></pre></div></div> <br> <nav class="pagination"> <a href="http://localhost:4000/CouchDB/" class="pagination_pager" title="CouchDB ">previous</a> <a href="http://localhost:4000/Comparable%E5%92%8CComparator%E6%8E%A5%E5%8F%A3%E7%9A%84%E5%8C%BA%E5%88%AB/" class="pagination_pager" title="Comparable和Comparator接口的区别 ">next</a> </nav> </div> </div> <!-- JS --> <script src="http://localhost:4000/assets/js/main.min.js"></script> <div class="overlay"> <ul class="projects-menu"> <li style="background:url(http://localhost:4000/images/benjamin-deyoung-unsplash.jpg) center center no-repeat;"> <a href="https://github.com/Maple-Chan" target="_blank" rel="nofollow external"> <span> GitHub Home </span> </a> </li> </ul> </div> </body> </html>

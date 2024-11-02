@@ -1,0 +1,46 @@
+<!DOCTYPE html> <html> <head> <meta charset="utf-8"> <meta http-equiv="X-UA-Compatible" content="IE=edge"> <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"> <title>移位运算 &#8211; Maple Story</title> <meta name="description" content="Stick to note down what I’v learnt"> <meta name="keywords" content="Java, Coding"> <!-- Twitter Cards --> <meta name="twitter:card" content="summary"> <meta name="twitter:image" content="halve.png"> <meta name="twitter:title" content="移位运算"> <meta name="twitter:description" content="Stick to note down what I’v learnt"> <!-- Open Graph --> <meta property="og:locale" content="en_US"> <meta property="og:type" content="article"> <meta property="og:title" content="移位运算"> <meta property="og:description" content="Stick to note down what I’v learnt"> <meta property="og:url" content="http://localhost:4000/%E7%A7%BB%E4%BD%8D%E8%BF%90%E7%AE%97/"> <meta property="og:site_name" content="Maple Story"> <meta property="og:image" content="http://localhost:4000/images/halve.png"> <link rel="canonical" href="http://localhost:4000/%E7%A7%BB%E4%BD%8D%E8%BF%90%E7%AE%97/"> <!-- Handheld --> <meta name="HandheldFriendly" content="True"> <meta name="MobileOptimized" content="320"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Feed --> <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="" /> <!-- Favicons --> <link rel="shortcut icon" type="image/png" href="http://localhost:4000/favicon.png" /> <link rel="shortcut icon" href="http://localhost:4000/favicon.ico" /> <!-- CSS --> <link rel="stylesheet" type="text/css" href="http://localhost:4000/assets/css/main.css"> <!-- Left Block Image for Posts --> <style type="text/css"> #posts.inner-post-page .block-left {background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(http://localhost:4000/images/unsplash-gallery-image-3.jpg) no-repeat;background-size: cover;} </style> <!-- Left Block Images for Home and Pages --> <style type="text/css"> #posts .block-left {background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(http://localhost:4000/images/unsplash-image-10.jpg) no-repeat;background-size: cover, cover;} .block-left {background: linear-gradient(rgba(44,45,51,0.9), rgba(44,45,51,0.9)), url(http://localhost:4000/images/home.jpg) no-repeat;background-size: cover;} </style> </head> <body id="posts" class="inner-post-page"> <div class="block-left"> <div class="content"> <a href="http://localhost:4000" class="logo"><img src="http://localhost:4000/images/halve.png"></a> <div class="post-title-section"> <div class="section-line">Posts <em>/</em></div> <h1 class="section-title">移位运算 </h1> <ul class="tags"> <li><a href="http://localhost:4000/tags#Java">Java</a></li> <li><a href="http://localhost:4000/tags#Coding">Coding</a></li> </ul> <div class="section-line reverse"><a href="http://localhost:4000/posts">Back to posts</a> <em>/</em></div> </div> </div> </div> <div class="block-right"> <a href="../posts.html" title="posts" class="posts-menu-icon"></a> <a title="projects" class="projects-menu-icon"> <span></span> </a> <div class="inner-post content"> <div class="date-highlight">03 Apr 2020</div> <center><h2><b>移位运算</b></h2></center> <p><br /></p> <h3 id="--">»&gt; 、» 、«</h3> <h4 id="带符号右移高位根据数据正负正补0负补1"><code class="language-plaintext highlighter-rouge">&gt;&gt;</code>带符号右移，高位根据数据正负，正补0，负补1</h4> <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/**
+ * 带符号右移
+ **/</span>
+<span class="c1">//  num =  5 = 00000000 00000000 00000000 00000101 </span>
+<span class="c1">//  num &gt;&gt; 1 = 00000000 00000000 00000000 00000010</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">num</span> <span class="o">&gt;&gt;</span> <span class="mi">1</span><span class="o">);</span>
+<span class="c1">//  num2 = -5 = 原码 10000000 00000000 00000000 00000101 </span>
+<span class="c1">//              反码 11111111 11111111 11111111 11111010</span>
+<span class="c1">//              补码 11111111 11111111 11111111 11111011</span>
+<span class="c1">//  num2 &gt;&gt; 1 = 补码 11111111 11111111 11111111 11111101</span>
+<span class="c1">//              原码 10000000 00000000 00000000 00000011 （非符号位取反+1）</span>
+<span class="c1">//  因此：num2 &gt;&gt; 1 = -3</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">num2</span> <span class="o">&gt;&gt;</span> <span class="mi">1</span> <span class="o">);</span>
+</code></pre></div></div> <h4 id="无符号右移高位补0"><code class="language-plaintext highlighter-rouge">&gt;&gt;&gt;</code>无符号右移，高位补0</h4> <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/**
+ * 无符号右移
+ **/</span>
+<span class="c1">// num =  5 =  00000000 00000000 00000000 00000101 </span>
+<span class="c1">// num &gt;&gt; 1 =  00000000 00000000 00000000 00000010 </span>
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">num</span> <span class="o">&gt;&gt;&gt;</span> <span class="mi">1</span><span class="o">);</span>
+
+<span class="c1">//  num2 = -5 = 原码 10000000 00000000 00000000 00000101 </span>
+<span class="c1">//              反码 11111111 11111111 11111111 11111010</span>
+<span class="c1">//              补码 11111111 11111111 11111111 11111011</span>
+<span class="c1">//  num2 &gt;&gt; 1 = 补码 01111111 11111111 11111111 11111101</span>
+<span class="c1">//  num2 = 2147483645</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">num2</span> <span class="o">&gt;&gt;&gt;</span> <span class="mi">1</span><span class="o">);</span>
+</code></pre></div></div> <h4 id="左移运算符">« 左移运算符。</h4> <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="n">num</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span> 
+<span class="n">num</span> <span class="o">&lt;&lt;</span> <span class="mi">1</span><span class="o">;</span> <span class="c1">// 相当于1 * 2，可以用于提高乘法效率</span>
+
+<span class="cm">/**
+ *   左移
+ */</span>
+<span class="c1">//  num2 = 5 = 00000000 00000000 00000000 00000101 </span>
+<span class="c1">//  num2 &lt;&lt; 1 = 00000000 00000000 00000000 00001010</span>
+<span class="c1">//  num2 = 10 </span>
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">num2</span> <span class="o">&lt;&lt;</span> <span class="mi">1</span><span class="o">);</span>
+
+
+<span class="c1">//  num2 = -5 = 原码 10000000 00000000 00000000 00000101 </span>
+<span class="c1">//              反码 11111111 11111111 11111111 11111010</span>
+<span class="c1">//              补码 11111111 11111111 11111111 11111001</span>
+<span class="c1">// num2 =       补码 11111111 11111111 11111111 11110110</span>
+<span class="c1">// num2 =       原码 10000000 00000000 00000000 00001010 = -10</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">num</span> <span class="o">&lt;&lt;</span> <span class="mi">1</span><span class="o">);</span>
+
+</code></pre></div></div> <br> <nav class="pagination"> <a href="http://localhost:4000/%E6%95%B0%E6%8D%AE%E5%BA%93/" class="pagination_pager" title="数据库 ">previous</a> <a href="http://localhost:4000/HashMap%E4%B8%8EConcurrentHashMap/" class="pagination_pager" title="HashMap与ConcurrentHashMap ">next</a> </nav> </div> </div> <!-- JS --> <script src="http://localhost:4000/assets/js/main.min.js"></script> <div class="overlay"> <ul class="projects-menu"> <li style="background:url(http://localhost:4000/images/benjamin-deyoung-unsplash.jpg) center center no-repeat;"> <a href="https://github.com/Maple-Chan" target="_blank" rel="nofollow external"> <span> GitHub Home </span> </a> </li> </ul> </div> </body> </html>

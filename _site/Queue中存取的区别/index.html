@@ -1,0 +1,70 @@
+<!DOCTYPE html> <html> <head> <meta charset="utf-8"> <meta http-equiv="X-UA-Compatible" content="IE=edge"> <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"> <title>Java Queue中存取方法的区别 &#8211; Maple Story</title> <meta name="description" content="Stick to note down what I’v learnt"> <meta name="keywords" content="Java, Coding"> <!-- Twitter Cards --> <meta name="twitter:card" content="summary"> <meta name="twitter:image" content="halve.png"> <meta name="twitter:title" content="Java Queue中存取方法的区别"> <meta name="twitter:description" content="Stick to note down what I’v learnt"> <!-- Open Graph --> <meta property="og:locale" content="en_US"> <meta property="og:type" content="article"> <meta property="og:title" content="Java Queue中存取方法的区别"> <meta property="og:description" content="Stick to note down what I’v learnt"> <meta property="og:url" content="http://localhost:4000/Queue%E4%B8%AD%E5%AD%98%E5%8F%96%E7%9A%84%E5%8C%BA%E5%88%AB/"> <meta property="og:site_name" content="Maple Story"> <meta property="og:image" content="http://localhost:4000/images/halve.png"> <link rel="canonical" href="http://localhost:4000/Queue%E4%B8%AD%E5%AD%98%E5%8F%96%E7%9A%84%E5%8C%BA%E5%88%AB/"> <!-- Handheld --> <meta name="HandheldFriendly" content="True"> <meta name="MobileOptimized" content="320"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Feed --> <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="" /> <!-- Favicons --> <link rel="shortcut icon" type="image/png" href="http://localhost:4000/favicon.png" /> <link rel="shortcut icon" href="http://localhost:4000/favicon.ico" /> <!-- CSS --> <link rel="stylesheet" type="text/css" href="http://localhost:4000/assets/css/main.css"> <!-- Left Block Image for Posts --> <style type="text/css"> #posts.inner-post-page .block-left {background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(http://localhost:4000/images/unsplash-gallery-image-3.jpg) no-repeat;background-size: cover;} </style> <!-- Left Block Images for Home and Pages --> <style type="text/css"> #posts .block-left {background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(http://localhost:4000/images/unsplash-image-10.jpg) no-repeat;background-size: cover, cover;} .block-left {background: linear-gradient(rgba(44,45,51,0.9), rgba(44,45,51,0.9)), url(http://localhost:4000/images/home.jpg) no-repeat;background-size: cover;} </style> </head> <body id="posts" class="inner-post-page"> <div class="block-left"> <div class="content"> <a href="http://localhost:4000" class="logo"><img src="http://localhost:4000/images/halve.png"></a> <div class="post-title-section"> <div class="section-line">Posts <em>/</em></div> <h1 class="section-title">Java Queue中存取方法的区别 </h1> <ul class="tags"> <li><a href="http://localhost:4000/tags#Java">Java</a></li> <li><a href="http://localhost:4000/tags#Coding">Coding</a></li> </ul> <div class="section-line reverse"><a href="http://localhost:4000/posts">Back to posts</a> <em>/</em></div> </div> </div> </div> <div class="block-right"> <a href="../posts.html" title="posts" class="posts-menu-icon"></a> <a title="projects" class="projects-menu-icon"> <span></span> </a> <div class="inner-post content"> <div class="date-highlight">14 Jul 2020</div> <center><h2><b>Java Queue中存取方法的区别</b></h2></center> <p><br /></p> <h4 id="offeradd">offer、add</h4> <p>add()和offer()都是向队列中添加一个元素，一些队列有大小限制，因此如果想在一个满的队列中加入一个新项，调用 add() 方法就会抛出一个 unchecked 异常，而调用 offer() 方法会返回 false。因此就可以在程序中进行有效的判断！</p> <blockquote> <p>offer()在队列满时返回false</p> <p>add()在队列满时抛出异常</p> </blockquote> <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/**
+ * @description:
+ * @modifyContent:
+ * @author: Maple Chan
+ * @date: 2020-07-14 20:22:37
+ * @version: 0.0.1
+ */</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">JavaQueue</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">Queue</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">&gt;</span> <span class="n">queue</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">LinkedBlockingQueue</span><span class="o">&lt;&gt;(</span><span class="mi">3</span><span class="o">);</span>
+        <span class="n">queue</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="mi">1</span><span class="o">);</span>
+        <span class="n">queue</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="mi">2</span><span class="o">);</span>
+        <span class="n">queue</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="mi">3</span><span class="o">);</span>
+        <span class="c1">// queue.add(3); </span>
+        <span class="c1">// Exception in thread "main" java.lang.IllegalStateException: Queue full</span>
+        <span class="c1">//      at java.util.AbstractQueue.add(AbstractQueue.java:98)</span>
+        <span class="c1">//      at Java_test.JavaQueue.main(JavaQueue.java:22)</span>
+
+        <span class="kt">boolean</span> <span class="n">isSucceed</span> <span class="o">=</span> <span class="n">queue</span><span class="o">.</span><span class="na">offer</span><span class="o">(</span><span class="mi">3</span><span class="o">);</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">isSucceed</span><span class="o">);</span>
+        <span class="c1">// false</span>
+    <span class="o">}</span>
+    
+<span class="o">}</span>
+</code></pre></div></div> <h4 id="pollremove">poll、remove</h4> <p>remove()和poll()方法都是从队列中删除第一个元素，如果队列为空，调用remove() 的行为与 Collection 接口的版本相似会抛出异常。但是 poll() 方法在用空集合调用时只是返回 null。因此新的方法更适合容易出现异常条件的情况。</p> <blockquote> <p>poll()在空队列返回null</p> <p>add()在空队列抛出异常</p> </blockquote> <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="cm">/**
+ * @description:
+ * @modifyContent:
+ * @author: Maple Chan
+ * @date: 2020-07-14 20:22:37
+ * @version: 0.0.1
+ */</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">JavaQueue</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">Queue</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">&gt;</span> <span class="n">queue2</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">LinkedBlockingQueue</span><span class="o">&lt;&gt;(</span><span class="mi">3</span><span class="o">);</span>
+        <span class="c1">// Integer integer = queue2.remove();</span>
+        <span class="c1">// Exception in thread "main" java.util.NoSuchElementException</span>
+        <span class="c1">//      at java.util.AbstractQueue.remove(AbstractQueue.java:117)</span>
+        <span class="c1">//      at Java_test.JavaQueue.main(JavaQueue.java:31)</span>
+
+        <span class="nc">Integer</span> <span class="n">integer</span> <span class="o">=</span> <span class="n">qeue2</span><span class="o">.</span><span class="na">poll</span><span class="o">();</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">integer</span><span class="o">);</span>
+        <span class="c1">//null</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div> <h4 id="elementpeek">element、peek</h4> <p>element() 和 peek() 用于在队列的头部查询元素。与 remove() 方法类似，在队列为空时， element() 抛出一个异常，而 peek() 返回 null。</p> <blockquote> <p>peek()在空队列返回null</p> <p>element()在空队列抛出异常</p> </blockquote> <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/**
+ * @description:
+ * @modifyContent:
+ * @author: Maple Chan
+ * @date: 2020-07-14 20:22:37
+ * @version: 0.0.1
+ */</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">JavaQueue</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">Queue</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">&gt;</span> <span class="n">queue3</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">LinkedBlockingQueue</span><span class="o">&lt;&gt;(</span><span class="mi">3</span><span class="o">);</span>
+
+        <span class="c1">// Integer integer2 = queue3.element();</span>
+        <span class="c1">// Exception in thread "main" java.util.NoSuchElementException</span>
+        <span class="c1">//      at java.util.AbstractQueue.element(AbstractQueue.java:136)</span>
+        <span class="c1">//      at Java_test.JavaQueue.main(JavaQueue.java:43)</span>
+
+        <span class="nc">Integer</span> <span class="n">integer2</span> <span class="o">=</span> <span class="n">queue3</span><span class="o">.</span><span class="na">peek</span><span class="o">();</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">integer2</span><span class="o">);</span>
+        <span class="c1">// null</span>
+
+    <span class="o">}</span>
+    
+<span class="o">}</span>
+
+</code></pre></div></div> <br> <nav class="pagination"> <a href="http://localhost:4000/No-Such-Provider/" class="pagination_pager" title="No Such Provider ">previous</a> <a href="http://localhost:4000/Fabric%E7%9A%84%E5%8C%BA%E5%9D%97%E4%BF%A1%E6%81%AF/" class="pagination_pager" title="Fabric的区块信息（结合SDK-java） ">next</a> </nav> </div> </div> <!-- JS --> <script src="http://localhost:4000/assets/js/main.min.js"></script> <div class="overlay"> <ul class="projects-menu"> <li style="background:url(http://localhost:4000/images/benjamin-deyoung-unsplash.jpg) center center no-repeat;"> <a href="https://github.com/Maple-Chan" target="_blank" rel="nofollow external"> <span> GitHub Home </span> </a> </li> </ul> </div> </body> </html>

@@ -1,0 +1,119 @@
+<!DOCTYPE html> <html> <head> <meta charset="utf-8"> <meta http-equiv="X-UA-Compatible" content="IE=edge"> <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"> <title>Comparable和Comparator接口的区别 &#8211; Maple Story</title> <meta name="description" content="Stick to note down what I’v learnt"> <meta name="keywords" content="Java"> <!-- Twitter Cards --> <meta name="twitter:card" content="summary"> <meta name="twitter:image" content="halve.png"> <meta name="twitter:title" content="Comparable和Comparator接口的区别"> <meta name="twitter:description" content="Stick to note down what I’v learnt"> <!-- Open Graph --> <meta property="og:locale" content="en_US"> <meta property="og:type" content="article"> <meta property="og:title" content="Comparable和Comparator接口的区别"> <meta property="og:description" content="Stick to note down what I’v learnt"> <meta property="og:url" content="http://localhost:4000/Comparable%E5%92%8CComparator%E6%8E%A5%E5%8F%A3%E7%9A%84%E5%8C%BA%E5%88%AB/"> <meta property="og:site_name" content="Maple Story"> <meta property="og:image" content="http://localhost:4000/images/halve.png"> <link rel="canonical" href="http://localhost:4000/Comparable%E5%92%8CComparator%E6%8E%A5%E5%8F%A3%E7%9A%84%E5%8C%BA%E5%88%AB/"> <!-- Handheld --> <meta name="HandheldFriendly" content="True"> <meta name="MobileOptimized" content="320"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Feed --> <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="" /> <!-- Favicons --> <link rel="shortcut icon" type="image/png" href="http://localhost:4000/favicon.png" /> <link rel="shortcut icon" href="http://localhost:4000/favicon.ico" /> <!-- CSS --> <link rel="stylesheet" type="text/css" href="http://localhost:4000/assets/css/main.css"> <!-- Left Block Image for Posts --> <style type="text/css"> #posts.inner-post-page .block-left {background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(http://localhost:4000/images/unsplash-gallery-image-3.jpg) no-repeat;background-size: cover;} </style> <!-- Left Block Images for Home and Pages --> <style type="text/css"> #posts .block-left {background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(http://localhost:4000/images/unsplash-image-10.jpg) no-repeat;background-size: cover, cover;} .block-left {background: linear-gradient(rgba(44,45,51,0.9), rgba(44,45,51,0.9)), url(http://localhost:4000/images/home.jpg) no-repeat;background-size: cover;} </style> </head> <body id="posts" class="inner-post-page"> <div class="block-left"> <div class="content"> <a href="http://localhost:4000" class="logo"><img src="http://localhost:4000/images/halve.png"></a> <div class="post-title-section"> <div class="section-line">Posts <em>/</em></div> <h1 class="section-title">Comparable和Comparator接口的区别 </h1> <ul class="tags"> <li><a href="http://localhost:4000/tags#Java">Java</a></li> </ul> <div class="section-line reverse"><a href="http://localhost:4000/posts">Back to posts</a> <em>/</em></div> </div> </div> </div> <div class="block-right"> <a href="../posts.html" title="posts" class="posts-menu-icon"></a> <a title="projects" class="projects-menu-icon"> <span></span> </a> <div class="inner-post content"> <div class="date-highlight">26 Jul 2020</div> <center><h2><b>Comparable和Comparator接口的区别</b></h2></center> <p><br /></p> <h5 id="comparable-接口"><strong>Comparable 接口</strong></h5> <p>该接口只包含一个方法，x.compareTo(y)。实现Comparable接口的类的对象可以用作“有序映射(如TreeMap)”中的键或“有序集合(TreeSet)”中的元素，而不需要指定比较器就可以支持排序。</p> <p>该方法通过返回负数、0、正数，来表示输入的对象小于，等于，大于调用该方法的对象。x.compareTo(y)==0，说明x与y相等。 x.compareTo(y) &lt; 0，说明x&lt;y;</p> <h5 id="comparator接口"><strong>Comparator接口</strong></h5> <p>该接口包含compare(x,y)方法。若需要控制某个类的次序，我们可以建立一个“该类的比较器”来进行排序。这个“比较器”只需要实现Comparator接口即可。也就是说，我们可以通过“实现Comparator类来新建一个比较器”，然后通过该比较器对类进行排序。</p> <h3 id="实践">实践</h3> <p>若一个类实现了Comparable接口，就意味着“该类支持排序”。在调用sorts方法的时候就不需要在指定比较器（Comparator）。</p> <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">javatest</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">java.util.ArrayList</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.Collections</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.Comparator</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.List</span><span class="o">;</span>
+
+<span class="cm">/**
+ * @description:
+ * @modifyContent:
+ * @author: Maple Chan
+ * @date: 2020-07-26 23:24:59
+ * @version: 0.0.1
+ */</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">JavaComparableComparator</span> <span class="o">{</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">List</span><span class="o">&lt;</span><span class="nc">House</span><span class="o">&gt;</span> <span class="n">houses</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;&gt;();</span>
+        <span class="c1">// 报错:No enclosing instance of type JavaComparableComparator is accessible.</span>
+        <span class="c1">// 原因、解决：</span>
+        <span class="c1">// 内部类是动态的（无static关键字修饰），而main方法是静态的，</span>
+        <span class="c1">// 普通的内部类对象隐含地保存了一个引用，指向创建它的外围类对象，</span>
+        <span class="c1">// 所以要在static方法（类加载时已经初始化）调用内部类的必须先创建外部类。</span>
+        <span class="nc">House</span> <span class="n">h1</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">JavaComparableComparator</span><span class="o">().</span><span class="na">new</span> <span class="nc">House</span><span class="o">(</span><span class="mi">95</span><span class="o">);</span>
+        <span class="nc">House</span> <span class="n">h2</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">JavaComparableComparator</span><span class="o">().</span><span class="na">new</span> <span class="nc">House</span><span class="o">(</span><span class="mi">110</span><span class="o">);</span>
+        <span class="nc">House</span> <span class="n">h3</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">JavaComparableComparator</span><span class="o">().</span><span class="na">new</span> <span class="nc">House</span><span class="o">(</span><span class="mi">80</span><span class="o">);</span>
+        <span class="nc">House</span> <span class="n">h4</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">JavaComparableComparator</span><span class="o">().</span><span class="na">new</span> <span class="nc">House</span><span class="o">(</span><span class="mi">150</span><span class="o">);</span>
+        <span class="n">houses</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">h1</span><span class="o">);</span>
+        <span class="n">houses</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">h2</span><span class="o">);</span>
+        <span class="n">houses</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">h3</span><span class="o">);</span>
+        <span class="n">houses</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">h4</span><span class="o">);</span>
+        
+        <span class="c1">// Comparator常见使用</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"before sort"</span><span class="o">);</span>
+        <span class="n">houses</span><span class="o">.</span><span class="na">forEach</span><span class="o">((</span><span class="n">n</span><span class="o">)-&gt;</span> <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="n">n</span><span class="o">.</span><span class="na">price</span> <span class="o">+</span> <span class="s">" "</span><span class="o">));</span>
+        <span class="n">houses</span><span class="o">.</span><span class="na">sort</span><span class="o">(</span><span class="k">new</span> <span class="nc">JavaComparableComparator</span><span class="o">().</span><span class="na">new</span> <span class="nc">HouseComparator</span><span class="o">());</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"\nafter sort"</span><span class="o">);</span>
+        <span class="n">houses</span><span class="o">.</span><span class="na">forEach</span><span class="o">((</span><span class="n">n</span><span class="o">)-&gt;</span> <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="n">n</span><span class="o">.</span><span class="na">price</span> <span class="o">+</span> <span class="s">" "</span><span class="o">));</span>
+        
+        <span class="c1">// Collections.sort(houses) , 不指定Comparator会报错</span>
+        <span class="nc">Collections</span><span class="o">.</span><span class="na">sort</span><span class="o">(</span><span class="n">houses</span><span class="o">,</span><span class="k">new</span> <span class="nc">JavaComparableComparator</span><span class="o">().</span><span class="na">new</span> <span class="nc">HouseComparator</span><span class="o">());</span>
+
+        <span class="c1">// =======================================================================</span>
+        <span class="c1">// Comparable常见使用</span>
+        <span class="nc">List</span><span class="o">&lt;</span><span class="nc">HouseComparable</span><span class="o">&gt;</span> <span class="n">housesComparables</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;&gt;();</span>
+        <span class="nc">HouseComparable</span> <span class="n">hc1</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">JavaComparableComparator</span><span class="o">().</span><span class="na">new</span> <span class="nc">HouseComparable</span><span class="o">(</span><span class="mi">95</span><span class="o">);</span>
+        <span class="nc">HouseComparable</span> <span class="n">hc2</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">JavaComparableComparator</span><span class="o">().</span><span class="na">new</span> <span class="nc">HouseComparable</span><span class="o">(</span><span class="mi">110</span><span class="o">);</span>
+        <span class="nc">HouseComparable</span> <span class="n">hc3</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">JavaComparableComparator</span><span class="o">().</span><span class="na">new</span> <span class="nc">HouseComparable</span><span class="o">(</span><span class="mi">80</span><span class="o">);</span>
+        <span class="nc">HouseComparable</span> <span class="n">hc4</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">JavaComparableComparator</span><span class="o">().</span><span class="na">new</span> <span class="nc">HouseComparable</span><span class="o">(</span><span class="mi">150</span><span class="o">);</span>
+        <span class="n">housesComparables</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">hc1</span><span class="o">);</span>
+        <span class="n">housesComparables</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">hc2</span><span class="o">);</span>
+        <span class="n">housesComparables</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">hc3</span><span class="o">);</span>
+        <span class="n">housesComparables</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">hc4</span><span class="o">);</span>
+
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"\n\n\n\nbefore sort"</span><span class="o">);</span>
+        <span class="n">housesComparables</span><span class="o">.</span><span class="na">forEach</span><span class="o">((</span><span class="n">n</span><span class="o">)-&gt;</span> <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="n">n</span><span class="o">.</span><span class="na">price</span> <span class="o">+</span> <span class="s">" "</span><span class="o">));</span>
+        <span class="c1">// 无需指定 Comparator，他自己就是可以进行比较的类</span>
+        <span class="c1">//Collections sort</span>
+        <span class="nc">Collections</span><span class="o">.</span><span class="na">sort</span><span class="o">(</span><span class="n">housesComparables</span><span class="o">);</span> 
+        
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"\nafter sort"</span><span class="o">);</span>
+        <span class="n">housesComparables</span><span class="o">.</span><span class="na">forEach</span><span class="o">((</span><span class="n">n</span><span class="o">)-&gt;</span> <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="n">n</span><span class="o">.</span><span class="na">price</span> <span class="o">+</span> <span class="s">" "</span><span class="o">));</span>
+
+
+    <span class="o">}</span>
+
+  <span class="cm">/**
+    *普通House
+    */</span>
+    <span class="kd">class</span> <span class="nc">House</span> <span class="o">{</span>
+        <span class="kt">int</span> <span class="n">price</span><span class="o">;</span>
+        <span class="kd">public</span> <span class="nf">House</span><span class="o">(</span><span class="kt">int</span> <span class="n">price</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">this</span><span class="o">.</span><span class="na">price</span> <span class="o">=</span> <span class="n">price</span><span class="o">;</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+    <span class="cm">/**
+    * House比较器
+    */</span>
+    <span class="kd">class</span> <span class="nc">HouseComparator</span> <span class="kd">implements</span> <span class="nc">Comparator</span><span class="o">&lt;</span><span class="nc">House</span><span class="o">&gt;</span> <span class="o">{</span>
+        <span class="nd">@Override</span>
+        <span class="kd">public</span> <span class="kt">int</span> <span class="nf">compare</span><span class="o">(</span><span class="nc">House</span> <span class="n">o1</span><span class="o">,</span> <span class="nc">House</span> <span class="n">o2</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">o1</span><span class="o">.</span><span class="na">price</span> <span class="o">&gt;</span> <span class="n">o2</span><span class="o">.</span><span class="na">price</span><span class="o">)</span> <span class="o">{</span>
+                <span class="k">return</span> <span class="mi">1</span><span class="o">;</span>
+            <span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">o1</span><span class="o">.</span><span class="na">price</span> <span class="o">&lt;</span> <span class="n">o2</span><span class="o">.</span><span class="na">price</span><span class="o">)</span> <span class="o">{</span>
+                <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="o">;</span>
+            <span class="o">}</span>
+            <span class="k">return</span> <span class="mi">0</span><span class="o">;</span>
+        <span class="o">}</span>
+
+    <span class="o">}</span>
+
+    <span class="cm">/**
+    * 可排序的House
+    */</span>
+    <span class="kd">class</span> <span class="nc">HouseComparable</span> <span class="kd">implements</span> <span class="nc">Comparable</span><span class="o">&lt;</span><span class="nc">HouseComparable</span><span class="o">&gt;</span> <span class="o">{</span>
+        <span class="kt">int</span> <span class="n">price</span><span class="o">;</span>
+
+        <span class="kd">public</span> <span class="nf">HouseComparable</span><span class="o">(</span><span class="kt">int</span> <span class="n">price</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">this</span><span class="o">.</span><span class="na">price</span> <span class="o">=</span> <span class="n">price</span><span class="o">;</span>
+        <span class="o">}</span>
+
+        <span class="nd">@Override</span>
+        <span class="kd">public</span> <span class="kt">int</span> <span class="nf">compareTo</span><span class="o">(</span><span class="nc">HouseComparable</span> <span class="n">o</span><span class="o">)</span> <span class="o">{</span>
+
+            <span class="k">if</span> <span class="o">(</span><span class="n">price</span> <span class="o">&lt;</span> <span class="n">o</span><span class="o">.</span><span class="na">price</span><span class="o">)</span> <span class="o">{</span>
+                <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="o">;</span>
+            <span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">price</span> <span class="o">&gt;</span> <span class="n">o</span><span class="o">.</span><span class="na">price</span><span class="o">)</span> <span class="o">{</span>
+                <span class="k">return</span> <span class="mi">1</span><span class="o">;</span>
+            <span class="o">}</span>
+
+            <span class="k">return</span> <span class="mi">0</span><span class="o">;</span>
+        <span class="o">}</span>
+
+    <span class="o">}</span>
+
+<span class="o">}</span>
+</code></pre></div></div> <h3 id="collections调用重写的compareto">Collections调用重写的compareTo</h3> <p>Collections如何调用重写的compareTo方法的</p> <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Collections</span><span class="o">.</span><span class="na">sort</span><span class="o">(</span><span class="nc">List</span><span class="o">&lt;</span><span class="no">T</span><span class="o">&gt;</span> <span class="n">list</span><span class="o">);</span> 
+<span class="nc">Collections</span><span class="o">.</span><span class="na">sort</span><span class="o">(</span><span class="nc">List</span><span class="o">&lt;</span><span class="no">T</span><span class="o">&gt;</span> <span class="n">list</span><span class="o">,</span> <span class="nc">Comparator</span><span class="o">&lt;?</span> <span class="kd">super</span> <span class="no">T</span><span class="o">&gt;</span> <span class="n">c</span><span class="o">)</span>
+</code></pre></div></div> <p>如果待排序的列表中是数字或者字符，可以直接使用Collections.sort(list);当需要排序的集合或数组不是单纯的数字型时，需要自己定义排序规则，实现一个Comparator比较器。</p> <p>参考：</p> <blockquote> <p><a href="https://blog.csdn.net/u010859650/article/details/85009595">详解Java中Comparable和Comparator接口的区别</a></p> </blockquote> <br> <nav class="pagination"> <a href="http://localhost:4000/LinkedList&ArrayList/" class="pagination_pager" title="LinkedList&amp;ArrayList ">previous</a> <a href="http://localhost:4000/synchronized/" class="pagination_pager" title="synchronized ">next</a> </nav> </div> </div> <!-- JS --> <script src="http://localhost:4000/assets/js/main.min.js"></script> <div class="overlay"> <ul class="projects-menu"> <li style="background:url(http://localhost:4000/images/benjamin-deyoung-unsplash.jpg) center center no-repeat;"> <a href="https://github.com/Maple-Chan" target="_blank" rel="nofollow external"> <span> GitHub Home </span> </a> </li> </ul> </div> </body> </html>

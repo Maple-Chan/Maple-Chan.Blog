@@ -1,0 +1,85 @@
+<!DOCTYPE html> <html> <head> <meta charset="utf-8"> <meta http-equiv="X-UA-Compatible" content="IE=edge"> <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"> <title>Fabric: 测试网络环境 &#8211; Maple Story</title> <meta name="description" content="Stick to note down what I’v learnt"> <meta name="keywords" content="Hyperledger Fabric"> <!-- Twitter Cards --> <meta name="twitter:card" content="summary"> <meta name="twitter:image" content="halve.png"> <meta name="twitter:title" content="Fabric: 测试网络环境"> <meta name="twitter:description" content="Stick to note down what I’v learnt"> <!-- Open Graph --> <meta property="og:locale" content="en_US"> <meta property="og:type" content="article"> <meta property="og:title" content="Fabric: 测试网络环境"> <meta property="og:description" content="Stick to note down what I’v learnt"> <meta property="og:url" content="http://localhost:4000/Farbric-%E6%B5%8B%E8%AF%95%E7%BD%91%E7%BB%9C%E7%8E%AF%E5%A2%83/"> <meta property="og:site_name" content="Maple Story"> <meta property="og:image" content="http://localhost:4000/images/halve.png"> <link rel="canonical" href="http://localhost:4000/Farbric-%E6%B5%8B%E8%AF%95%E7%BD%91%E7%BB%9C%E7%8E%AF%E5%A2%83/"> <!-- Handheld --> <meta name="HandheldFriendly" content="True"> <meta name="MobileOptimized" content="320"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Feed --> <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="" /> <!-- Favicons --> <link rel="shortcut icon" type="image/png" href="http://localhost:4000/favicon.png" /> <link rel="shortcut icon" href="http://localhost:4000/favicon.ico" /> <!-- CSS --> <link rel="stylesheet" type="text/css" href="http://localhost:4000/assets/css/main.css"> <!-- Left Block Image for Posts --> <style type="text/css"> #posts.inner-post-page .block-left {background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(http://localhost:4000/images/unsplash-gallery-image-3.jpg) no-repeat;background-size: cover;} </style> <!-- Left Block Images for Home and Pages --> <style type="text/css"> #posts .block-left {background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(http://localhost:4000/images/unsplash-image-10.jpg) no-repeat;background-size: cover, cover;} .block-left {background: linear-gradient(rgba(44,45,51,0.9), rgba(44,45,51,0.9)), url(http://localhost:4000/images/home.jpg) no-repeat;background-size: cover;} </style> </head> <body id="posts" class="inner-post-page"> <div class="block-left"> <div class="content"> <a href="http://localhost:4000" class="logo"><img src="http://localhost:4000/images/halve.png"></a> <div class="post-title-section"> <div class="section-line">Posts <em>/</em></div> <h1 class="section-title">Fabric: 测试网络环境 </h1> <ul class="tags"> <li><a href="http://localhost:4000/tags#Hyperledger Fabric">Hyperledger Fabric</a></li> </ul> <div class="section-line reverse"><a href="http://localhost:4000/posts">Back to posts</a> <em>/</em></div> </div> </div> </div> <div class="block-right"> <a href="../posts.html" title="posts" class="posts-menu-icon"></a> <a title="projects" class="projects-menu-icon"> <span></span> </a> <div class="inner-post content"> <div class="date-highlight">06 May 2020</div> <center><h2><b>Fabric: 测试网络环境</b></h2></center> <p><br /></p> <h3 id="准备">准备</h3> <h4 id="安装docker">安装docker</h4> <h5 id="卸载旧的版本">卸载旧的版本</h5> <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>yum remove docker <span class="se">\</span>
+                  docker-client <span class="se">\</span>
+                  docker-client-latest <span class="se">\</span>
+                  docker-common <span class="se">\</span>
+                  docker-latest <span class="se">\</span>
+                  docker-latest-logrotate <span class="se">\</span>
+                  docker-logrotate <span class="se">\</span>
+                  docker-engine
+</code></pre></div></div> <h5 id="设置yum仓库">设置yum仓库</h5> <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>yum <span class="nb">install</span> <span class="nt">-y</span> yum-utils
+
+<span class="nb">sudo </span>yum-config-manager <span class="se">\</span>
+    <span class="nt">--add-repo</span> <span class="se">\</span>
+    https://download.docker.com/linux/centos/docker-ce.repo
+</code></pre></div></div> <h5 id="安装docker-engine">安装Docker Engine</h5> <blockquote> <p>安装最新版本</p> </blockquote> <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>yum <span class="nb">install </span>docker-ce docker-ce-cli containerd.io <span class="c"># 最新版本</span>
+</code></pre></div></div> <blockquote> <p>安装指定版本</p> </blockquote> <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>yum list docker-ce <span class="nt">--showduplicates</span> | <span class="nb">sort</span> <span class="nt">-r</span>
+
+<span class="c"># docker-ce.x86_64  3:18.09.1-3.el7                     docker-ce-stable</span>
+<span class="c"># docker-ce.x86_64  3:18.09.0-3.el7                     docker-ce-stable</span>
+<span class="c"># docker-ce.x86_64  18.06.1.ce-3.el7                    docker-ce-stable</span>
+<span class="c"># docker-ce.x86_64  18.06.0.ce-3.el7                    docker-ce-stable</span>
+
+<span class="nb">sudo </span>yum <span class="nb">install </span>docker-ce-19.03.8 docker-ce-cli-19.03.8 containerd.io
+
+</code></pre></div></div> <h5 id="启动docker">启动docker</h5> <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>systemctl start docker
+<span class="nb">sudo </span>systemctl <span class="nb">enable </span>docker
+</code></pre></div></div> <h4 id="安装docker-compose">安装docker-compose</h4> <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>curl <span class="nt">-L</span> <span class="s2">"https://github.com/docker/compose/releases/download/1.25.4/docker-compose-</span><span class="si">$(</span><span class="nb">uname</span> <span class="nt">-s</span><span class="si">)</span><span class="s2">-</span><span class="si">$(</span><span class="nb">uname</span> <span class="nt">-m</span><span class="si">)</span><span class="s2">"</span> <span class="nt">-o</span> /usr/local/bin/docker-compose
+</code></pre></div></div> <blockquote> <p>可以直接用提供的 <code class="language-plaintext highlighter-rouge">docker-compose-Linux-x86_64</code></p> <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cp </span>docker-compose-Linux-x86_64 /usr/local/bin/docker-compose
+<span class="nb">chmod</span> +x /usr/local/bin/docker-compose
+</code></pre></div> </div> </blockquote> <h4 id="安装go">安装Go</h4> <blockquote> <p>安装 go1.13.8, 可以直接用go1.13.8.linux-amd64.tar.gz</p> </blockquote> <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">tar </span>xzvf go1.11.linux-amd64.tar.gz <span class="nt">-C</span> /usr/local
+</code></pre></div></div> <blockquote> <p>/etc/profile 中添加</p> </blockquote> <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">export </span><span class="nv">GOROOT</span><span class="o">=</span>/usr/local/go
+<span class="nb">export </span><span class="nv">GOARCH</span><span class="o">=</span>amd64
+<span class="nb">export </span><span class="nv">GOOS</span><span class="o">=</span>linux
+<span class="nb">export </span><span class="nv">GOPATH</span><span class="o">=</span>/opt/gopath
+<span class="nb">export </span><span class="nv">GOBIN</span><span class="o">=</span><span class="nv">$GOPATH</span>/bin
+<span class="nb">export </span><span class="nv">PATH</span><span class="o">=</span><span class="nv">$GOPATH</span>/bin:<span class="nv">$GOROOT</span>/bin:<span class="nv">$PATH</span>
+</code></pre></div></div> <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 使环境变量生效</span>
+<span class="nb">source</span> /etc/profile
+</code></pre></div></div> <h4 id="安装git">安装Git</h4> <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>yum <span class="nb">install </span>git
+</code></pre></div></div> <h4 id="安装fabric">安装Fabric</h4> <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">mkdir</span> <span class="nt">-p</span> <span class="nv">$GOPATH</span>/src/github.com/hyperledger
+<span class="nb">cd</span> <span class="nv">$GOPATH</span>/src/github.com/hyperledger
+<span class="c"># 克隆fabric-samples项目并切换到v1.4tag</span>
+git clone https://github.com/hyperledger/fabric-samples.git
+<span class="nb">cd </span>fabric-samples
+git checkout <span class="nt">-b</span> v2.0.1
+</code></pre></div></div> <blockquote> <p>导入bin、config、fabric-imgaes内容</p> </blockquote> <blockquote> <p>配置bin</p> </blockquote> <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">tar </span>xzvf bin.tar.gz <span class="nt">-C</span> <span class="nv">$GOPATH</span>/src/github.com/hyperledger/fabric-samples/
+<span class="nb">tar </span>xzvf config.tar.gz <span class="nt">-C</span> <span class="nv">$GOPATH</span>/src/github.com/hyperledger/fabric-samples/
+
+<span class="c">#向/etc/profile中写入环境变量</span>
+<span class="nb">sudo echo</span> <span class="s1">'export PATH=$GOPATH/src/github.com/hyperledger/fabric-samples/bin:$PATH'</span> <span class="o">&gt;&gt;</span> /etc/profile
+
+<span class="c">#使环境变量生效</span>
+<span class="nb">source</span> /etc/profile
+</code></pre></div></div> <blockquote> <p>加载镜像</p> </blockquote> <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker load <span class="nt">-i</span> fabric-images
+</code></pre></div></div> <h4 id="测试环境">测试环境</h4> <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd </span>test-network
+
+./network.sh up 
+./network.sh createChannel
+./network.sh deployCC <span class="c"># 第一次过程中会安装go包，如果失败可能需要多试几次</span>
+
+<span class="c"># 最后输出 Fabcar链码的测试运行结果</span>
+</code></pre></div></div> <hr /> <h3 id="手动部署">手动部署</h3> <p>网络结构</p> <blockquote> <p>一个Orderer，两个org，每个org一个peer。</p> </blockquote> <blockquote> <p>一个org一个ca。</p> </blockquote> <h3 id="测试">测试</h3> <h4 id="测试-org1">测试 org1</h4> <blockquote> <p>到目前为止，成功在两台虚拟机上部署了两个Org。</p> <p>在Org1上创建了channel，同时打包并安装了fabcar链码。</p> <p><strong>(想通过运行合约看网络时候启动成功，在approvformyorg的时候存在问题)</strong></p> </blockquote> <p><strong>org1加入通道：</strong></p> <p><img src="https://blog.maplestory.work/images/post_image/测试网络搭建.assets/1587868151622.png" alt="1587868151622" /></p> <p><strong>打包&amp;安装链码：</strong></p> <p><img src="https://blog.maplestory.work/images/post_image/测试网络搭建.assets/1585493752494.png" alt="1585493752494" /></p> <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>peer lifecycle chaincode queryinstalled
+</code></pre></div></div> <blockquote> <p>看到这个说明，chaincode 已经安装成功。</p> </blockquote> <p>还差approveformyorg 、checkcommitreadiness、commit 阶段。</p> <p><strong>approveformyorg：</strong></p> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="nb">export </span><span class="nv">ORDERER_CA</span><span class="o">=</span>/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem
+
+<span class="c"># ORG1的变量</span>
+<span class="nb">export </span><span class="nv">CORE_PEER_LOCALMSPID</span><span class="o">=</span><span class="s2">"Org1MSP"</span>
+<span class="nb">export </span><span class="nv">CORE_PEER_TLS_ROOTCERT_FILE</span><span class="o">=</span>/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/ca.crt
+<span class="nb">export </span><span class="nv">CORE_PEER_MSPCONFIGPATH</span><span class="o">=</span>/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp
+<span class="nb">export </span><span class="nv">CORE_PEER_ADDRESS</span><span class="o">=</span>peer0.org1.example.com:7051
+
+
+peer lifecycle chaincode approveformyorg <span class="nt">-o</span> orderer.example.com:7050 <span class="nt">--tls</span> <span class="nb">true</span> <span class="nt">--cafile</span> /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem  <span class="nt">--channelID</span> succhannel <span class="nt">--name</span> fabcar <span class="nt">--version</span> 1 <span class="nt">--init-required</span> <span class="nt">--package-id</span> fabcar_1:aca5cf806d53b8860e3bc4234af8fe9a017e7082d98108e07ffc7ea36dbc2e07 <span class="nt">--sequence</span> 1 <span class="nt">--signature-policy</span> <span class="s2">"OR('Org1MSP.member','Org2MSP.member')"</span> <span class="o">&gt;</span>&amp;log.txt
+
+</code></pre></div></div> <p><img src="https://blog.maplestory.work/images/post_image/测试网络搭建.assets/1585532710089.png" alt="1585532710089" /></p> <p>checkcommitreadiness</p> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>peer lifecycle chaincode checkcommitreadiness <span class="nt">--channelID</span> succhannel <span class="nt">--name</span> fabcar <span class="nt">--version</span> 1.0 <span class="nt">--sequence</span> 1 <span class="nt">--output</span> json <span class="nt">--init-required</span> <span class="o">&gt;</span>&amp;log.txt
+<span class="c">#</span>
+</code></pre></div></div> <p><img src="https://blog.maplestory.work/images/post_image/测试网络搭建.assets/1587868848165.png" alt="1587868848165" /></p> <blockquote> <p>在此处发现approve for org 失败，没有获得Org1MSP的true</p> </blockquote> <p>commit</p> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 等check完之后再提交</span>
+</code></pre></div></div> <h4 id="测试-org2">测试 org2</h4> <p><strong>org2加入通道：</strong></p> <p><img src="https://blog.maplestory.work/images/post_image/测试网络搭建.assets/1587868198493.png" alt="1587868198493" /></p> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">export </span><span class="nv">ORDERER_CA</span><span class="o">=</span>/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem <span class="o">&amp;&amp;</span> <span class="nb">export </span><span class="nv">CHANNEL_NAME</span><span class="o">=</span>succhannel
+
+获取第0个区块
+peer channel fetch 0 succhannel.block <span class="nt">-o</span> orderer.example.com:7050 <span class="nt">-c</span> <span class="nv">$CHANNEL_NAME</span> <span class="nt">--tls</span> <span class="nt">--cafile</span> <span class="nv">$ORDERER_CA</span>
+
+加入到channel里边
+peer channel <span class="nb">join</span> <span class="nt">-b</span> succhannel.block
+
+</code></pre></div></div> <p>如下图：</p> <p><img src="https://blog.maplestory.work/images/post_image/测试网络搭建.assets/1585534482501.png" alt="1585534482501" /></p> <blockquote> <p>Org2 到目前为止，成功加入channel</p> </blockquote> <p>approveformyorg 的命令一直执行不成功</p> <p><img src="https://blog.maplestory.work/images/post_image/测试网络搭建.assets/1587636633519.png" alt="1587636633519" /></p> <p>checkcommit一直都是两个false</p> <br> <nav class="pagination"> <a href="http://localhost:4000/%E6%AD%BB%E9%94%81/" class="pagination_pager" title="死锁 ">previous</a> <a href="http://localhost:4000/Fabric%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" class="pagination_pager" title="Fabric 常用命令 ">next</a> </nav> </div> </div> <!-- JS --> <script src="http://localhost:4000/assets/js/main.min.js"></script> <div class="overlay"> <ul class="projects-menu"> <li style="background:url(http://localhost:4000/images/benjamin-deyoung-unsplash.jpg) center center no-repeat;"> <a href="https://github.com/Maple-Chan" target="_blank" rel="nofollow external"> <span> GitHub Home </span> </a> </li> </ul> </div> </body> </html>

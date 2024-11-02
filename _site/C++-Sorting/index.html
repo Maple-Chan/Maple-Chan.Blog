@@ -1,1 +1,200 @@
-<!DOCTYPE html> <html> <head> <meta charset="utf-8"> <meta http-equiv="X-UA-Compatible" content="IE=edge"> <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"> <title>Sorting &#8211; Maple Story</title> <meta name="description" content="Sorting is pretty important in Algorithm"> <meta name="keywords" content="C++, Algorithm"> <!-- Twitter Cards --> <meta name="twitter:card" content="summary"> <meta name="twitter:image" content="halve.png"> <meta name="twitter:title" content="Sorting"> <meta name="twitter:description" content="Sorting is pretty important in Algorithm"> <!-- Open Graph --> <meta property="og:locale" content="en_US"> <meta property="og:type" content="article"> <meta property="og:title" content="Sorting"> <meta property="og:description" content="Sorting is pretty important in Algorithm"> <meta property="og:url" content="https://www.maplestory.work/C++-Sorting/"> <meta property="og:site_name" content="Maple Story"> <meta property="og:image" content="https://www.maplestory.work/images/halve.png"> <link rel="canonical" href="https://www.maplestory.work/C++-Sorting/"> <!-- Handheld --> <meta name="HandheldFriendly" content="True"> <meta name="MobileOptimized" content="320"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Feed --> <link type="application/atom+xml" rel="alternate" href="https://www.maplestory.work/feed.xml" title="" /> <!-- Favicons --> <link rel="shortcut icon" type="image/png" href="https://www.maplestory.work/favicon.png" /> <link rel="shortcut icon" href="https://www.maplestory.work/favicon.ico" /> <!-- CSS --> <link rel="stylesheet" type="text/css" href="https://www.maplestory.work/assets/css/main.css"> <!-- Left Block Image for Posts --> <style type="text/css"> #posts.inner-post-page .block-left {background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(https://www.maplestory.work/images/unsplash-gallery-image-3.jpg) no-repeat;background-size: cover;} </style> <!-- Left Block Images for Home and Pages --> <style type="text/css"> #posts .block-left {background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(https://www.maplestory.work/images/unsplash-image-10.jpg) no-repeat;background-size: cover, cover;} .block-left {background: linear-gradient(rgba(44,45,51,0.9), rgba(44,45,51,0.9)), url(https://www.maplestory.work/images/home.jpg) no-repeat;background-size: cover;} </style> </head> <body id="posts" class="inner-post-page"> <div class="block-left"> <div class="content"> <a href="https://www.maplestory.work" class="logo"><img src="https://www.maplestory.work/images/halve.png"></a> <div class="post-title-section"> <div class="section-line">Posts <em>/</em></div> <h1 class="section-title">Sorting </h1> <ul class="tags"> <li><a href="https://www.maplestory.work/tags#C++">C++</a></li> <li><a href="https://www.maplestory.work/tags#Algorithm">Algorithm</a></li> </ul> <div class="section-line reverse"><a href="https://www.maplestory.work/posts">Back to posts</a> <em>/</em></div> </div> </div> </div> <div class="block-right"> <a href="../posts.html" title="posts" class="posts-menu-icon"></a> <a title="projects" class="projects-menu-icon"> <span></span> </a> <div class="inner-post content"> <div class="date-highlight">24 Apr 2019</div> <center><h2><b>Sorting</b></h2></center> <p><br /></p> <h3 id="c-">C++ 排序算法：</h3> <h4 id="section"><strong>归并：</strong></h4> <hr /> <p><strong>原理 ：</strong></p> <p>​ 归并排序：采用归并的思想，分治策略。<br /> 将数据不断的进行二分，直到二分为仅一个数。回溯，两个数进行<em>归并</em> 之后，回溯，进行四个数据的<em>归并</em>。在归并时根据要求按顺序合并。依次回溯至迭代起点，归并排序就已完成。</p> <p>​ 归并的过程：就是将两组顺序的数据，根据数据的大小顺序存入连续内存空间，从而使得数据有序。</p> <p><strong>代码：</strong></p> <p>Please wait the lazy man!</p> <br> <nav class="pagination"> <a href="https://www.maplestory.work/Review-C++(continuing)/" class="pagination_pager" title="Review C++(continuing) ">previous</a> <a href="https://www.maplestory.work/some-words/" class="pagination_pager" title="语情集 ">next</a> </nav> </div> </div> <!-- JS --> <script src="https://www.maplestory.work/assets/js/main.min.js"></script> <div class="overlay"> <ul class="projects-menu"> <li style="background:url(https://www.maplestory.work/images/benjamin-deyoung-unsplash.jpg) center center no-repeat;"> <a href="https://github.com/Maple-Chan" target="_blank" rel="nofollow external"> <span> GitHub Home </span> </a> </li> </ul> </div> </body> </html>
+<!DOCTYPE html> <html> <head> <meta charset="utf-8"> <meta http-equiv="X-UA-Compatible" content="IE=edge"> <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"> <title>Sorting &#8211; Maple Story</title> <meta name="description" content="Sorting is pretty important in Algorithm"> <meta name="keywords" content="Algorithm"> <!-- Twitter Cards --> <meta name="twitter:card" content="summary"> <meta name="twitter:image" content="halve.png"> <meta name="twitter:title" content="Sorting"> <meta name="twitter:description" content="Sorting is pretty important in Algorithm"> <!-- Open Graph --> <meta property="og:locale" content="en_US"> <meta property="og:type" content="article"> <meta property="og:title" content="Sorting"> <meta property="og:description" content="Sorting is pretty important in Algorithm"> <meta property="og:url" content="http://localhost:4000/C++-Sorting/"> <meta property="og:site_name" content="Maple Story"> <meta property="og:image" content="http://localhost:4000/images/halve.png"> <link rel="canonical" href="http://localhost:4000/C++-Sorting/"> <!-- Handheld --> <meta name="HandheldFriendly" content="True"> <meta name="MobileOptimized" content="320"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Feed --> <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="" /> <!-- Favicons --> <link rel="shortcut icon" type="image/png" href="http://localhost:4000/favicon.png" /> <link rel="shortcut icon" href="http://localhost:4000/favicon.ico" /> <!-- CSS --> <link rel="stylesheet" type="text/css" href="http://localhost:4000/assets/css/main.css"> <!-- Left Block Image for Posts --> <style type="text/css"> #posts.inner-post-page .block-left {background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(http://localhost:4000/images/unsplash-gallery-image-3.jpg) no-repeat;background-size: cover;} </style> <!-- Left Block Images for Home and Pages --> <style type="text/css"> #posts .block-left {background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(http://localhost:4000/images/unsplash-image-10.jpg) no-repeat;background-size: cover, cover;} .block-left {background: linear-gradient(rgba(44,45,51,0.9), rgba(44,45,51,0.9)), url(http://localhost:4000/images/home.jpg) no-repeat;background-size: cover;} </style> </head> <body id="posts" class="inner-post-page"> <div class="block-left"> <div class="content"> <a href="http://localhost:4000" class="logo"><img src="http://localhost:4000/images/halve.png"></a> <div class="post-title-section"> <div class="section-line">Posts <em>/</em></div> <h1 class="section-title">Sorting </h1> <ul class="tags"> <li><a href="http://localhost:4000/tags#Algorithm">Algorithm</a></li> </ul> <div class="section-line reverse"><a href="http://localhost:4000/posts">Back to posts</a> <em>/</em></div> </div> </div> </div> <div class="block-right"> <a href="../posts.html" title="posts" class="posts-menu-icon"></a> <a title="projects" class="projects-menu-icon"> <span></span> </a> <div class="inner-post content"> <div class="date-highlight">28 Jul 2020</div> <center><h2><b>Sorting</b></h2></center> <p><br /></p> <h3 id="排序算法">排序算法：</h3> <h4 id="归并"><strong>归并：</strong></h4> <hr /> <p><strong>原理 ：</strong></p> <p>​ 归并排序：采用归并的思想，分治策略。<br /> 将数据不断的进行二分，直到二分为仅一个数。回溯，两个数进行<em>归并</em> 之后，回溯，进行四个数据的<em>归并</em>。在归并时根据要求按顺序合并。依次回溯至迭代起点，归并排序就已完成。</p> <p>​ 归并的过程：就是将两组顺序的数据，根据数据的大小顺序存入连续内存空间，从而使得数据有序。</p> <p><strong>代码：</strong></p> <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">javatest.sort</span><span class="o">;</span>
+
+<span class="cm">/**
+ * @description: 
+ * @modifyContent:
+ * @author: Maple Chan
+ * @date: 2020-08-07 10:30:23
+ * @version: 0.0.1
+ */</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">MergeSort</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">int</span><span class="o">[]</span> <span class="nf">mergeSort</span><span class="o">(</span><span class="kt">int</span> <span class="n">nums</span><span class="o">[])</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="nf">mergeSortCore</span><span class="o">(</span><span class="n">nums</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">nums</span><span class="o">.</span><span class="na">length</span> <span class="o">-</span> <span class="mi">1</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="cm">/**
+     * 对数据进行二分，直到只有一个数据的时候，返回进行合并。
+     * 时间复杂度nlogn,空间复杂度n
+     * (空间可以想办法做到常数么？？)
+     * @param nums
+     * @param left
+     * @param right
+     * @return
+     */</span>
+    <span class="kd">public</span> <span class="kt">int</span><span class="o">[]</span> <span class="nf">mergeSortCore</span><span class="o">(</span><span class="kt">int</span> <span class="n">nums</span><span class="o">[],</span> <span class="kt">int</span> <span class="n">left</span><span class="o">,</span> <span class="kt">int</span> <span class="n">right</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">left</span> <span class="o">==</span> <span class="n">right</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[]</span> <span class="o">{</span> <span class="n">nums</span><span class="o">[</span><span class="n">left</span><span class="o">]</span> <span class="o">};</span>
+        <span class="o">}</span>
+        <span class="kt">int</span> <span class="n">mid</span> <span class="o">=</span> <span class="o">(</span><span class="n">right</span> <span class="o">-</span> <span class="n">left</span><span class="o">)</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">left</span><span class="o">;</span>
+
+        <span class="k">return</span> <span class="nf">merge</span><span class="o">(</span><span class="n">mergeSortCore</span><span class="o">(</span><span class="n">nums</span><span class="o">,</span> <span class="n">left</span><span class="o">,</span> <span class="n">mid</span><span class="o">),</span> <span class="n">mergeSortCore</span><span class="o">(</span><span class="n">nums</span><span class="o">,</span> <span class="n">mid</span> <span class="o">+</span> <span class="mi">1</span><span class="o">,</span> <span class="n">right</span><span class="o">));</span>
+
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">int</span><span class="o">[]</span> <span class="nf">merge</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums1</span><span class="o">,</span> <span class="kt">int</span><span class="o">[]</span> <span class="n">nums2</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kt">int</span><span class="o">[]</span> <span class="n">ret</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">nums1</span><span class="o">.</span><span class="na">length</span> <span class="o">+</span> <span class="n">nums2</span><span class="o">.</span><span class="na">length</span><span class="o">];</span>
+
+        <span class="kt">int</span> <span class="n">index1</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+        <span class="kt">int</span> <span class="n">index2</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+
+        <span class="k">while</span> <span class="o">(</span><span class="n">index1</span> <span class="o">&lt;</span> <span class="n">nums1</span><span class="o">.</span><span class="na">length</span> <span class="o">&amp;&amp;</span> <span class="n">index2</span> <span class="o">&lt;</span> <span class="n">nums2</span><span class="o">.</span><span class="na">length</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">nums1</span><span class="o">[</span><span class="n">index1</span><span class="o">]</span> <span class="o">&lt;</span> <span class="n">nums2</span><span class="o">[</span><span class="n">index2</span><span class="o">])</span> <span class="o">{</span>
+                <span class="n">ret</span><span class="o">[</span><span class="n">index1</span> <span class="o">+</span> <span class="n">index2</span><span class="o">]</span> <span class="o">=</span> <span class="n">nums1</span><span class="o">[</span><span class="n">index1</span><span class="o">];</span>
+                <span class="n">index1</span><span class="o">++;</span>
+            <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+                <span class="n">ret</span><span class="o">[</span><span class="n">index1</span> <span class="o">+</span> <span class="n">index2</span><span class="o">]</span> <span class="o">=</span> <span class="n">nums2</span><span class="o">[</span><span class="n">index2</span><span class="o">];</span>
+                <span class="n">index2</span><span class="o">++;</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+        <span class="k">while</span> <span class="o">(</span><span class="n">index1</span> <span class="o">&lt;</span> <span class="n">nums1</span><span class="o">.</span><span class="na">length</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">ret</span><span class="o">[</span><span class="n">index1</span> <span class="o">+</span> <span class="n">index2</span><span class="o">]</span> <span class="o">=</span> <span class="n">nums1</span><span class="o">[</span><span class="n">index1</span><span class="o">];</span>
+            <span class="n">index1</span><span class="o">++;</span>
+        <span class="o">}</span>
+        <span class="k">while</span> <span class="o">(</span><span class="n">index2</span> <span class="o">&lt;</span> <span class="n">nums2</span><span class="o">.</span><span class="na">length</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">ret</span><span class="o">[</span><span class="n">index1</span> <span class="o">+</span> <span class="n">index2</span><span class="o">]</span> <span class="o">=</span> <span class="n">nums2</span><span class="o">[</span><span class="n">index2</span><span class="o">];</span>
+            <span class="n">index2</span><span class="o">++;</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="n">ret</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="cm">/**
+         * Test
+         */</span>
+        <span class="kt">int</span> <span class="o">[]</span> <span class="n">nums</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[]{</span>
+            <span class="mi">3</span><span class="o">,</span><span class="mi">5</span><span class="o">,</span><span class="mi">6</span><span class="o">,</span><span class="mi">8</span><span class="o">,</span><span class="mi">7</span><span class="o">,</span><span class="mi">2</span>
+        <span class="o">};</span>
+        <span class="nc">MergeSort</span> <span class="n">mergeSort</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">MergeSort</span><span class="o">();</span>
+        <span class="n">nums</span> <span class="o">=</span> <span class="n">mergeSort</span><span class="o">.</span><span class="na">mergeSort</span><span class="o">(</span><span class="n">nums</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div> <h4 id="快速排序">快速排序</h4> <p>参考：</p> <blockquote> <p><a href="https://blog.csdn.net/morewindows/article/details/6684558">白话经典算法系列之六 快速排序 快速搞定</a></p> </blockquote> <p>快速排序用了递归、二分等思想进行实现。</p> <p>思路：</p> <blockquote> <p>定义左右指针。left和right。</p> <p>①选取一个基数。下方代码采用选取第一个的方式，可以随机选择，选取中间的。</p> <p>②left&lt;right的条件下：从后往前，找到第一个比基数小的数（根据升降序定，这里输出升序）。填入left的位置。</p> <p>③left&lt;right的条件下：从前往后，找到第一个比基数大的数，填入right的位置</p> <p>重复②③两步。</p> <p>一次比较完之后（0(n)），从 left位置左侧都是比基数小的数，右侧都是比基数大的数。</p> <p>上述步骤划分出左右两块，分别进行上述过程，及递归（因为二分了，时间复杂度0( n*log(n) )）。</p> </blockquote> <p>快速排序在最坏的情况下，时间复杂度是log(n^2)，平均时间复杂度nlog(n)。</p> <p>快速排序不是稳定排序，在排序过程中相对位置正确的两个数位置依旧可能被替换导致相对位置不是升序（降序）方向。</p> <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">javatest</span><span class="o">;</span>
+
+<span class="cm">/**
+ * @description: 快速排序实现
+ * @modifyContent:
+ * @author: Maple Chan
+ * @date: 2020-07-28 09:22:54
+ * @version: 0.0.1
+ */</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">SortQuickSort</span> <span class="o">{</span>
+    <span class="cm">/**
+     * 对数组进行快速排序,升序
+     */</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span> <span class="o">=</span> <span class="o">{</span> <span class="mi">72</span><span class="o">,</span> <span class="mi">6</span><span class="o">,</span> <span class="mi">57</span><span class="o">,</span> <span class="mi">88</span><span class="o">,</span> <span class="mi">60</span><span class="o">,</span> <span class="mi">42</span><span class="o">,</span> <span class="mi">83</span><span class="o">,</span> <span class="mi">73</span><span class="o">,</span> <span class="mi">48</span><span class="o">,</span> <span class="mi">85</span><span class="o">,</span> <span class="o">};</span>
+
+        <span class="nc">SortQuickSort</span> <span class="n">sort</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">SortQuickSort</span><span class="o">();</span>
+        <span class="n">sort</span><span class="o">.</span><span class="na">quickSort</span><span class="o">(</span><span class="n">nums</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">nums</span><span class="o">.</span><span class="na">length</span> <span class="o">-</span> <span class="mi">1</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">quickSort</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="o">,</span> <span class="kt">int</span> <span class="n">leftSide</span><span class="o">,</span> <span class="kt">int</span> <span class="n">rightSide</span><span class="o">)</span> <span class="o">{</span>
+        <span class="c1">// 思路，二分。</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">leftSide</span> <span class="o">&gt;=</span> <span class="n">rightSide</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">return</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="kt">int</span> <span class="n">left</span> <span class="o">=</span> <span class="n">leftSide</span><span class="o">;</span>
+        <span class="kt">int</span> <span class="n">right</span> <span class="o">=</span> <span class="n">rightSide</span><span class="o">;</span>
+
+        <span class="kt">int</span> <span class="n">pivot</span> <span class="o">=</span> <span class="n">nums</span><span class="o">[</span><span class="n">left</span><span class="o">];</span>
+
+        <span class="k">while</span> <span class="o">(</span><span class="n">left</span> <span class="o">&lt;</span> <span class="n">right</span><span class="o">)</span> <span class="o">{</span>
+
+            <span class="k">while</span> <span class="o">(</span><span class="n">left</span> <span class="o">&lt;</span> <span class="n">right</span> <span class="o">&amp;&amp;</span> <span class="n">nums</span><span class="o">[</span><span class="n">right</span><span class="o">]</span> <span class="o">&gt;</span> <span class="n">pivot</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">right</span><span class="o">--;</span>
+            <span class="o">}</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">left</span> <span class="o">&lt;</span> <span class="n">right</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">nums</span><span class="o">[</span><span class="n">left</span><span class="o">]</span> <span class="o">=</span> <span class="n">nums</span><span class="o">[</span><span class="n">right</span><span class="o">];</span>
+            <span class="o">}</span>
+
+            <span class="k">while</span> <span class="o">(</span><span class="n">left</span> <span class="o">&lt;</span> <span class="n">right</span> <span class="o">&amp;&amp;</span> <span class="n">nums</span><span class="o">[</span><span class="n">left</span><span class="o">]</span> <span class="o">&lt;=</span> <span class="n">pivot</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">left</span><span class="o">++;</span>
+            <span class="o">}</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">left</span> <span class="o">&lt;</span> <span class="n">right</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">nums</span><span class="o">[</span><span class="n">right</span><span class="o">]</span> <span class="o">=</span> <span class="n">nums</span><span class="o">[</span><span class="n">left</span><span class="o">];</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+        <span class="n">nums</span><span class="o">[</span><span class="n">left</span><span class="o">]</span> <span class="o">=</span> <span class="n">pivot</span><span class="o">;</span>
+
+        <span class="n">quickSort</span><span class="o">(</span><span class="n">nums</span><span class="o">,</span> <span class="n">leftSide</span><span class="o">,</span> <span class="n">left</span> <span class="o">-</span> <span class="mi">1</span><span class="o">);</span>
+        <span class="n">quickSort</span><span class="o">(</span><span class="n">nums</span><span class="o">,</span> <span class="n">left</span> <span class="o">+</span> <span class="mi">1</span><span class="o">,</span> <span class="n">rightSide</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div> <h4 id="堆排序">堆排序</h4> <p>参考：</p> <blockquote> <p><a href="https://www.cnblogs.com/onepixel/p/7674659.html">十大经典排序算法（动图演示）</a></p> </blockquote> <p><strong>堆排序的主要思路：</strong></p> <p>如果需要升序，则需要利用最大堆。</p> <ul> <li>首先，为数据构建最大堆。</li> <li>然后，从后往前遍历，将0位置与i位置进行交换</li> <li>再然后， 为len-1长度的数组进行堆排序，将这部分最大的交换到index=0的位置。</li> <li>重复2-3，一直到每个节点遍历结束，就达到了升序的要求。</li> </ul> <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">javatest.sort</span><span class="o">;</span>
+
+<span class="cm">/**
+ * @description:
+ * @modifyContent:
+ * @author: Maple Chan
+ * @date: 2020-08-23 14:13:41
+ * @version: 0.0.1
+ */</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">MaximumHeapTest</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span> <span class="o">=</span> <span class="o">{</span> <span class="mi">5</span><span class="o">,</span> <span class="mi">6</span><span class="o">,</span> <span class="mi">9</span><span class="o">,</span> <span class="mi">8</span><span class="o">,</span> <span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">,</span> <span class="mi">3</span><span class="o">,</span> <span class="mi">4</span><span class="o">,</span> <span class="mi">7</span><span class="o">,</span> <span class="mi">10</span> <span class="o">};</span>
+        <span class="kt">int</span> <span class="n">size</span> <span class="o">=</span> <span class="mi">10</span><span class="o">;</span>
+
+        <span class="nc">MaxHeap</span> <span class="n">heap</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">MaxHeap</span><span class="o">();</span>
+
+        <span class="c1">// heap.buildMaxHeap(nums);</span>
+        <span class="n">heap</span><span class="o">.</span><span class="na">sortMaxHeap</span><span class="o">(</span><span class="n">nums</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="kd">class</span> <span class="nc">MaxHeap</span> <span class="o">{</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">buildMaxHeap</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kt">int</span> <span class="n">len</span> <span class="o">=</span> <span class="n">nums</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
+
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">len</span> <span class="o">/</span> <span class="mi">2</span><span class="o">;</span> <span class="n">i</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">--)</span> <span class="o">{</span>
+            <span class="c1">//构建最堆的时候，需要从len/2位置开始往前遍历，这样能保证，每个子节点都小于其父节点。</span>
+            <span class="n">maxHeapify</span><span class="o">(</span><span class="n">nums</span><span class="o">,</span> <span class="n">i</span><span class="o">,</span> <span class="n">len</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">sortMaxHeap</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kt">int</span> <span class="n">len</span> <span class="o">=</span> <span class="n">nums</span><span class="o">.</span><span class="na">length</span><span class="o">;</span>
+        <span class="n">buildMaxHeap</span><span class="o">(</span><span class="n">nums</span><span class="o">);</span>
+
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">len</span> <span class="o">-</span> <span class="mi">1</span><span class="o">;</span> <span class="n">i</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">--)</span> <span class="o">{</span>
+            <span class="n">swap</span><span class="o">(</span><span class="n">nums</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">i</span><span class="o">);</span>
+            <span class="n">maxHeapify</span><span class="o">(</span><span class="n">nums</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="o">--</span><span class="n">len</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="cm">/**
+     * 从index位置至size-1位置进行大顶堆化。
+     * 
+     * @param nums
+     * @param leftSize
+     */</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">maxHeapify</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="o">,</span> <span class="kt">int</span> <span class="n">index</span><span class="o">,</span> <span class="kt">int</span> <span class="n">size</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kt">int</span> <span class="n">left</span> <span class="o">=</span> <span class="n">index</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">1</span><span class="o">;</span>
+        <span class="kt">int</span> <span class="n">right</span> <span class="o">=</span> <span class="n">index</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">2</span><span class="o">;</span>
+        <span class="kt">int</span> <span class="n">largest</span> <span class="o">=</span> <span class="n">index</span><span class="o">;</span>
+
+        <span class="k">if</span> <span class="o">(</span><span class="n">left</span> <span class="o">&lt;</span> <span class="n">size</span> <span class="o">&amp;&amp;</span> <span class="n">nums</span><span class="o">[</span><span class="n">left</span><span class="o">]</span> <span class="o">&gt;</span> <span class="n">nums</span><span class="o">[</span><span class="n">largest</span><span class="o">])</span> <span class="o">{</span>
+            <span class="n">largest</span> <span class="o">=</span> <span class="n">left</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">right</span> <span class="o">&lt;</span> <span class="n">size</span> <span class="o">&amp;&amp;</span> <span class="n">nums</span><span class="o">[</span><span class="n">right</span><span class="o">]</span> <span class="o">&gt;</span> <span class="n">nums</span><span class="o">[</span><span class="n">largest</span><span class="o">])</span> <span class="o">{</span>
+            <span class="n">largest</span> <span class="o">=</span> <span class="n">right</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">largest</span> <span class="o">!=</span> <span class="n">index</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">swap</span><span class="o">(</span><span class="n">nums</span><span class="o">,</span> <span class="n">largest</span><span class="o">,</span> <span class="n">index</span><span class="o">);</span>
+            <span class="n">maxHeapify</span><span class="o">(</span><span class="n">nums</span><span class="o">,</span> <span class="n">largest</span><span class="o">,</span> <span class="n">size</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">maxHeapifyIterator</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="o">,</span> <span class="kt">int</span> <span class="n">index</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kt">int</span> <span class="n">left</span> <span class="o">=</span> <span class="n">index</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">1</span><span class="o">;</span>
+        <span class="kt">int</span> <span class="n">right</span> <span class="o">=</span> <span class="n">index</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">2</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">swap</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="o">,</span> <span class="kt">int</span> <span class="n">i</span><span class="o">,</span> <span class="kt">int</span> <span class="n">j</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kt">int</span> <span class="n">temp</span> <span class="o">=</span> <span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">];</span>
+        <span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="n">nums</span><span class="o">[</span><span class="n">j</span><span class="o">];</span>
+        <span class="n">nums</span><span class="o">[</span><span class="n">j</span><span class="o">]</span> <span class="o">=</span> <span class="n">temp</span><span class="o">;</span>
+    <span class="o">}</span>
+
+<span class="o">}</span>
+</code></pre></div></div> <br> <nav class="pagination"> <a href="http://localhost:4000/Leetcode/" class="pagination_pager" title="Leetcode ">previous</a> <a href="http://localhost:4000/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" class="pagination_pager" title="设计模式 ">next</a> </nav> </div> </div> <!-- JS --> <script src="http://localhost:4000/assets/js/main.min.js"></script> <div class="overlay"> <ul class="projects-menu"> <li style="background:url(http://localhost:4000/images/benjamin-deyoung-unsplash.jpg) center center no-repeat;"> <a href="https://github.com/Maple-Chan" target="_blank" rel="nofollow external"> <span> GitHub Home </span> </a> </li> </ul> </div> </body> </html>

@@ -1,0 +1,343 @@
+<!DOCTYPE html> <html> <head> <meta charset="utf-8"> <meta http-equiv="X-UA-Compatible" content="IE=edge"> <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"> <title>Fabric的区块信息（结合SDK-java） &#8211; Maple Story</title> <meta name="description" content="Stick to note down what I’v learnt"> <meta name="keywords" content="Hyperledger Fabric"> <!-- Twitter Cards --> <meta name="twitter:card" content="summary"> <meta name="twitter:image" content="halve.png"> <meta name="twitter:title" content="Fabric的区块信息（结合SDK-java）"> <meta name="twitter:description" content="Stick to note down what I’v learnt"> <!-- Open Graph --> <meta property="og:locale" content="en_US"> <meta property="og:type" content="article"> <meta property="og:title" content="Fabric的区块信息（结合SDK-java）"> <meta property="og:description" content="Stick to note down what I’v learnt"> <meta property="og:url" content="http://localhost:4000/Fabric%E7%9A%84%E5%8C%BA%E5%9D%97%E4%BF%A1%E6%81%AF/"> <meta property="og:site_name" content="Maple Story"> <meta property="og:image" content="http://localhost:4000/images/halve.png"> <link rel="canonical" href="http://localhost:4000/Fabric%E7%9A%84%E5%8C%BA%E5%9D%97%E4%BF%A1%E6%81%AF/"> <!-- Handheld --> <meta name="HandheldFriendly" content="True"> <meta name="MobileOptimized" content="320"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Feed --> <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="" /> <!-- Favicons --> <link rel="shortcut icon" type="image/png" href="http://localhost:4000/favicon.png" /> <link rel="shortcut icon" href="http://localhost:4000/favicon.ico" /> <!-- CSS --> <link rel="stylesheet" type="text/css" href="http://localhost:4000/assets/css/main.css"> <!-- Left Block Image for Posts --> <style type="text/css"> #posts.inner-post-page .block-left {background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(http://localhost:4000/images/unsplash-gallery-image-3.jpg) no-repeat;background-size: cover;} </style> <!-- Left Block Images for Home and Pages --> <style type="text/css"> #posts .block-left {background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(http://localhost:4000/images/unsplash-image-10.jpg) no-repeat;background-size: cover, cover;} .block-left {background: linear-gradient(rgba(44,45,51,0.9), rgba(44,45,51,0.9)), url(http://localhost:4000/images/home.jpg) no-repeat;background-size: cover;} </style> </head> <body id="posts" class="inner-post-page"> <div class="block-left"> <div class="content"> <a href="http://localhost:4000" class="logo"><img src="http://localhost:4000/images/halve.png"></a> <div class="post-title-section"> <div class="section-line">Posts <em>/</em></div> <h1 class="section-title">Fabric的区块信息（结合SDK-java） </h1> <ul class="tags"> <li><a href="http://localhost:4000/tags#Hyperledger Fabric">Hyperledger Fabric</a></li> </ul> <div class="section-line reverse"><a href="http://localhost:4000/posts">Back to posts</a> <em>/</em></div> </div> </div> </div> <div class="block-right"> <a href="../posts.html" title="posts" class="posts-menu-icon"></a> <a title="projects" class="projects-menu-icon"> <span></span> </a> <div class="inner-post content"> <div class="date-highlight">15 Jul 2020</div> <center><h2><b>Fabric的区块信息</b></h2></center> <p><br /></p> <blockquote> <p>通过Fabric-sdk-java中的End2EndIT.blockwalker中获取的信息</p> <p>前置条件：知道区块链的Channel。</p> <p>本文没有列全相关类的方法，某些需要的信息可能还需要查看fabric-sdk-java来确定。</p> </blockquote> <ol> <li>获取区块链信息</li> </ol> <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">BlockchainInfo</span> <span class="n">channelInfo</span> <span class="o">=</span> <span class="n">channel</span><span class="o">.</span><span class="na">queryBlockchainInfo</span><span class="o">();</span> 
+</code></pre></div></div> <ol> <li>区块信息</li> </ol> <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 根据区块号获取</span>
+<span class="nc">BlockInfo</span> <span class="n">returnedBlock</span> <span class="o">=</span> <span class="n">channel</span><span class="o">.</span><span class="na">queryBlockByNumber</span><span class="o">(</span><span class="n">blockNumber</span><span class="o">);</span> 
+<span class="c1">// 根据交易ID获得</span>
+<span class="nc">BlockInfo</span> <span class="n">returnedBlock</span> <span class="o">=</span> <span class="n">channel</span><span class="o">.</span><span class="na">queryBlockByTransactionID</span><span class="o">(</span><span class="n">txid</span><span class="o">);</span>
+<span class="c1">// 根据Hash获得</span>
+<span class="nc">BlockInfo</span> <span class="n">returnedBlock</span> <span class="o">=</span> <span class="n">channel</span><span class="o">.</span><span class="na">queryBlockByHash</span><span class="o">(</span><span class="n">hash</span><span class="o">);</span><span class="c1">// 根据Hash获得</span>
+<span class="c1">// 获取Hash</span>
+<span class="c1">// 数据的Hash</span>
+<span class="nc">Hex</span><span class="o">.</span><span class="na">encodeHexString</span><span class="o">(</span><span class="n">returnedBlock</span><span class="o">.</span><span class="na">getDataHash</span><span class="o">())</span><span class="err">；</span>
+<span class="c1">// 前一个区块的Hash</span>
+<span class="nc">Hex</span><span class="o">.</span><span class="na">encodeHexString</span><span class="o">(</span><span class="n">returnedBlock</span><span class="o">.</span><span class="na">getPreviousHash</span><span class="o">())</span><span class="err">；</span> 
+<span class="c1">// 计算出当前区块的Hash</span>
+<span class="c1">// *************BlockHash = cal(blockNumber,block.preHash,DataHash)*****************</span>
+<span class="nc">Hex</span><span class="o">.</span><span class="na">encodeHexString</span><span class="o">(</span><span class="nc">SDKUtils</span><span class="o">.</span><span class="na">calculateBlockHash</span><span class="o">(</span><span class="n">client</span><span class="o">,</span> 
+                        <span class="n">blockNumber</span><span class="o">,</span> <span class="n">returnedBlock</span><span class="o">.</span><span class="na">getPreviousHash</span><span class="o">(),</span> <span class="n">returnedBlock</span><span class="o">.</span><span class="na">getDataHash</span><span class="o">()));</span>
+<span class="c1">// 获取信封的个数</span>
+<span class="n">returnedBlock</span><span class="o">.</span><span class="na">getEnvelopeCount</span><span class="o">();</span>
+</code></pre></div></div> <ol> <li>交易信息</li> </ol> <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 获取信封信息</span>
+<span class="n">returnedBlock</span><span class="o">.</span><span class="na">getEnvelopeInfos</span><span class="o">()</span>
+<span class="k">for</span><span class="o">(</span><span class="n">lockInfo</span><span class="o">.</span><span class="na">EnvelopeInfo</span> <span class="n">envelopeInfo</span> <span class="o">:</span> <span class="n">returnedBlock</span><span class="o">.</span><span class="na">getEnvelopeInfos</span><span class="o">())</span>
+
+<span class="n">envelopeInfo</span> <span class="o">=</span> <span class="n">returnedBlock</span><span class="o">.</span><span class="na">getEnvelopeInfo</span><span class="o">(</span><span class="mi">0</span><span class="o">);</span>
+
+<span class="c1">// 获取当前信封的交易ID</span>
+<span class="nc">String</span> <span class="n">txid</span> <span class="o">=</span> <span class="n">envelopeInfo</span><span class="o">.</span><span class="na">getTransactionID</span><span class="o">();</span>
+<span class="c1">// 获取当前信封所在的通道</span>
+<span class="nc">String</span> <span class="n">channelId</span> <span class="o">=</span> <span class="n">envelopeInfo</span><span class="o">.</span><span class="na">getChannelId</span><span class="o">();</span>
+<span class="c1">// 交易时间戳</span>
+<span class="n">out</span><span class="o">(</span><span class="s">"  Transaction number %d has transaction timestamp: %tB %&lt;te,  %&lt;tY  %&lt;tT %&lt;Tp"</span><span class="o">,</span> <span class="n">i</span><span class="o">,</span> <span class="n">envelopeInfo</span><span class="o">.</span><span class="na">getTimestamp</span><span class="o">());</span>
+<span class="c1">// 随机数[生成特定要求的Hash用的]</span>
+<span class="nc">Hex</span><span class="o">.</span><span class="na">encodeHexString</span><span class="o">(</span><span class="n">envelopeInfo</span><span class="o">.</span><span class="na">getNonce</span><span class="o">());</span>
+<span class="c1">// 交易创建者</span>
+<span class="nc">String</span> <span class="no">MSPID</span> <span class="o">=</span> <span class="n">envelopeInfo</span><span class="o">.</span><span class="na">getCreator</span><span class="o">().</span><span class="na">getMspid</span><span class="o">();</span>
+<span class="c1">// 创建者证书   </span>
+<span class="nc">String</span> <span class="n">cert</span> <span class="o">=</span> <span class="n">envelopeInfo</span><span class="o">.</span><span class="na">getCreator</span><span class="o">().</span><span class="na">getId</span><span class="o">();</span>
+</code></pre></div></div> <ol> <li>如果交易类型是TRANSACTION_ENVELOPE可以有更多的信息</li> </ol> <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 将信封强制转换为(BlockInfo.TransactionEnvelopeInfo)</span>
+<span class="nc">BlockInfo</span><span class="o">.</span><span class="na">TransactionEnvelopeInfo</span> <span class="n">transactionEnvelopeInfo</span> <span class="o">=</span> <span class="o">(</span><span class="nc">BlockInfo</span><span class="o">.</span><span class="na">TransactionEnvelopeInfo</span><span class="o">)</span> <span class="n">envelopeInfo</span><span class="o">;</span>
+<span class="c1">// 获取一个交易中action的个数【目前，每个交易只有一个action】</span>
+<span class="n">transactionEnvelopeInfo</span><span class="o">.</span><span class="na">getTransactionActionInfoCount</span><span class="o">());</span>
+<span class="c1">// 交易是否有效,区块链中所有提交的交易都会被放进区块链，只有有效的才会改状态数据库</span>
+<span class="n">transactionEnvelopeInfo</span><span class="o">.</span><span class="na">isValid</span><span class="o">());</span>
+<span class="c1">// 有效码</span>
+<span class="n">transactionEnvelopeInfo</span><span class="o">.</span><span class="na">getValidationCode</span><span class="o">())</span><span class="err">；</span>
+<span class="c1">// 获取所有交易Action信息</span>
+<span class="n">transactionEnvelopeInfo</span><span class="o">.</span><span class="na">getTransactionActionInfos</span><span class="o">()</span>
+</code></pre></div></div> <ol> <li>交易Action信息(目前区块链1.4.4只支持一个action)</li> </ol> <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 获取交易状态</span>
+<span class="n">transactionActionInfo</span><span class="o">.</span><span class="na">getResponseStatus</span><span class="o">()</span><span class="err">；</span> <span class="c1">// 200</span>
+<span class="c1">// 交易响应信息</span>
+<span class="n">transactionActionInfo</span><span class="o">.</span><span class="na">getResponseMessageBytes</span><span class="o">()</span><span class="err">；</span>
+<span class="c1">// 交易背书者个数</span>
+<span class="n">transactionActionInfo</span><span class="o">.</span><span class="na">getEndorsementsCount</span><span class="o">()</span><span class="err">；</span><span class="c1">// 2</span>
+
+<span class="c1">// 获取背书者信息</span>
+<span class="nc">BlockInfo</span><span class="o">.</span><span class="na">EndorserInfo</span> <span class="n">endorserInfo</span> <span class="o">=</span> <span class="n">transactionActionInfo</span><span class="o">.</span><span class="na">getEndorsementInfo</span><span class="o">(</span><span class="n">n</span><span class="o">);</span>
+<span class="c1">// 背书者签名</span>
+<span class="nc">Hex</span><span class="o">.</span><span class="na">encodeHexString</span><span class="o">(</span><span class="n">endorserInfo</span><span class="o">.</span><span class="na">getSignature</span><span class="o">())</span>
+<span class="c1">// 背书者MspID和证书</span>
+<span class="n">endorserInfo</span><span class="o">.</span><span class="na">getMspid</span><span class="o">()</span><span class="err">；</span> <span class="n">endorserInfo</span><span class="o">.</span><span class="na">getId</span><span class="o">()</span><span class="err">；</span>
+
+<span class="c1">// 调用合约的参数</span>
+<span class="n">transactionActionInfo</span><span class="o">.</span><span class="na">getChaincodeInputArgsCount</span><span class="o">()</span><span class="err">；</span><span class="c1">// 参数个数</span>
+<span class="c1">// 获取第z个参数</span>
+<span class="nc">String</span> <span class="n">arg1</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">String</span><span class="o">(</span><span class="n">transactionActionInfo</span><span class="o">.</span><span class="na">getChaincodeInputArgs</span><span class="o">(</span><span class="n">z</span><span class="o">),</span> <span class="no">UTF_8</span><span class="o">)</span><span class="err">；</span>
+<span class="cm">/*
+   Transaction action 1 has 4 chaincode input arguments // 交易参数
+     Transaction action 1 has chaincode input argument 0 is: invoke
+     Transaction action 1 has chaincode input argument 1 is: a
+     Transaction action 1 has chaincode input argument 2 is: b
+     Transaction action 1 has chaincode input argument 3 is: 10
+*/</span>
+
+<span class="c1">// 合约响应</span>
+<span class="nc">String</span> <span class="n">responce</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">String</span><span class="o">(</span><span class="n">transactionActionInfo</span><span class="o">.</span><span class="na">getProposalResponsePayload</span><span class="o">())));</span>
+<span class="c1">// 合约名字</span>
+<span class="nc">String</span> <span class="n">chaincodeIDName</span> <span class="o">=</span> <span class="n">transactionActionInfo</span><span class="o">.</span><span class="na">getChaincodeIDName</span><span class="o">();</span>
+<span class="c1">// 合约版本</span>
+<span class="nc">String</span> <span class="n">chaincodeIDVersion</span> <span class="o">=</span> <span class="n">transactionActionInfo</span><span class="o">.</span><span class="na">getChaincodeIDVersion</span><span class="o">();</span>
+<span class="c1">// 合约路径</span>
+<span class="nc">String</span> <span class="n">chaincodeIDPath</span> <span class="o">=</span> <span class="n">transactionActionInfo</span><span class="o">.</span><span class="na">getChaincodeIDPath</span><span class="o">();</span>
+
+
+<span class="c1">// 交易读写集</span>
+<span class="nc">TxReadWriteSetInfo</span> <span class="n">rwsetInfo</span> <span class="o">=</span> <span class="n">transactionActionInfo</span><span class="o">.</span><span class="na">getTxReadWriteSet</span><span class="o">();</span>
+<span class="c1">// 迭代获得每个name space read write set</span>
+<span class="n">rwsetInfo</span><span class="o">.</span><span class="na">getNsRwsetInfos</span><span class="o">();</span>
+<span class="c1">// 迭代器获得单个命名空间</span>
+<span class="nc">String</span> <span class="n">namespace</span> <span class="o">=</span> <span class="n">nsRwsetInfo</span><span class="o">.</span><span class="na">getNamespace</span><span class="o">();</span>
+<span class="c1">// 读写集</span>
+<span class="nc">KvRwset</span><span class="o">.</span><span class="na">KVRWSet</span> <span class="n">rws</span> <span class="o">=</span> <span class="n">nsRwsetInfo</span><span class="o">.</span><span class="na">getRwset</span><span class="o">();</span>
+<span class="n">rws</span><span class="o">.</span><span class="na">getReadsList</span><span class="o">()</span>
+<span class="n">rws</span><span class="o">.</span><span class="na">getWritesList</span><span class="o">()</span>
+
+<span class="c1">//out("Namespace %s read set %d key %s  version [%d:%d]", namespace, rs, readList.getKey(),readList.getVersion().getBlockNum(), readList.getVersion().getTxNum());</span>
+<span class="c1">//     Namespace mycc read set 0 key a  version [3:0]</span>
+<span class="nc">KvRwset</span><span class="o">.</span><span class="na">KVRead</span> <span class="n">readList</span><span class="o">.</span> <span class="o">:</span> <span class="n">rws</span><span class="o">.</span><span class="na">getReadsList</span><span class="o">()</span>
+<span class="n">readList</span><span class="o">.</span><span class="na">getVersion</span><span class="o">().</span><span class="na">getBlockNum</span><span class="o">();</span> <span class="c1">//区块号</span>
+<span class="n">readList</span><span class="o">.</span><span class="na">getVersion</span><span class="o">().</span><span class="na">getTxNum</span><span class="o">());</span> <span class="c1">//交易号</span>
+<span class="cm">/*获取某个版本下某个key对应的值，如在启动完byfn：a has value 90 */</span>
+<span class="c1">//out("Namespace %s write set %d key %s has value '%s' ", namespace, rs,writeList.getKey(),valAsString);</span>
+<span class="c1">//     Namespace mycc write set 0 key a has value '90' </span>
+<span class="n">writeList</span><span class="o">.</span><span class="na">getKey</span><span class="o">()</span><span class="err">；</span>
+<span class="k">new</span> <span class="nf">String</span><span class="o">(</span><span class="n">writeList</span><span class="o">.</span><span class="na">getValue</span><span class="o">().</span><span class="na">toByteArray</span><span class="o">(),</span> <span class="no">UTF_8</span><span class="o">)</span><span class="err">；</span>
+
+</code></pre></div></div> <h4 id="byfn启动后的区块信息">byfn启动后的区块信息</h4> <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/**
+*	byfn样例前四个区块信息。
+*/</span>
+<span class="c1">// =======================区块4==================================</span>
+<span class="n">current</span> <span class="n">block</span> <span class="n">number</span> <span class="mi">4</span> <span class="n">has</span> <span class="n">data</span> <span class="nl">hash:</span> 
+<span class="n">af10f896e9ee54513706206ab9aa443c1fa6a067224c8bbe05a01d4df676f785</span>
+
+<span class="n">current</span> <span class="n">block</span> <span class="n">number</span> <span class="mi">4</span> <span class="n">has</span> <span class="n">previous</span> <span class="n">hash</span> <span class="nl">id:</span> 
+<span class="n">d814ede0966b9be0d8e41f9915f34466d5464d07cf2cebd6e54c5945801238ab</span>
+
+<span class="n">current</span> <span class="n">block</span> <span class="n">number</span> <span class="mi">4</span> <span class="n">has</span> <span class="n">calculated</span> <span class="n">block</span> <span class="n">hash</span> <span class="n">is</span> 
+<span class="mi">66</span><span class="n">f98bd234933abba42be6483ca59912f328b46e5e170af9e70479a5e1441ef5</span>
+
+<span class="n">current</span> <span class="n">block</span> <span class="n">number</span> <span class="mi">4</span> <span class="n">has</span> <span class="mi">1</span> <span class="n">envelope</span> <span class="nl">count:</span><span class="c1">// byfn up执行结束只有一个信封</span>
+  <span class="nc">Transaction</span> <span class="n">number</span> <span class="mi">1</span> <span class="n">has</span> <span class="n">transaction</span> <span class="nl">id:</span> 
+<span class="mi">0</span><span class="n">c4931a2cca2f51b466bca9ed8c5d1a554e5364dfe1df71a745a478344746cfa</span>
+  <span class="nc">Transaction</span> <span class="n">number</span> <span class="mi">1</span> <span class="n">has</span> <span class="n">channel</span> <span class="nl">id:</span> <span class="n">mychannel</span>
+  <span class="nc">Transaction</span> <span class="n">number</span> <span class="mi">1</span> <span class="n">has</span> <span class="nl">epoch:</span> <span class="mi">0</span>
+  <span class="nc">Transaction</span> <span class="n">number</span> <span class="mi">1</span> <span class="n">has</span> <span class="n">transaction</span> <span class="nl">timestamp:</span> <span class="n">七月</span> <span class="mi">14</span><span class="o">,</span>  <span class="mi">2020</span>  <span class="mi">20</span><span class="o">:</span><span class="mi">15</span><span class="o">:</span><span class="mi">52</span> <span class="n">下午</span>
+  <span class="nc">Transaction</span> <span class="n">number</span> <span class="mi">1</span> <span class="n">has</span> <span class="n">type</span> <span class="nl">id:</span> <span class="no">TRANSACTION_ENVELOPE</span> <span class="c1">//TRANSACTION_ENVELOPE交易类型</span>
+  <span class="nc">Transaction</span> <span class="n">number</span> <span class="mi">1</span> <span class="n">has</span> <span class="n">nonce</span> <span class="o">:</span> <span class="mi">2554</span><span class="n">c44420c91cf85bc659aa323e28a939ffa1c88ef91d7d</span>
+  <span class="nc">Transaction</span> <span class="n">number</span> <span class="mi">1</span> <span class="n">has</span> <span class="n">submitter</span> <span class="nl">mspid:</span> <span class="nc">Org2MSP</span><span class="o">,</span>  <span class="nl">certificate:</span> 
+<span class="o">-----</span><span class="no">BEGIN</span> <span class="no">CERTIFICATE</span><span class="o">-----</span>
+<span class="nc">MIICKTCCAc</span><span class="o">+</span><span class="n">gAwIBAgIQG8LbJwCh772CL6r0qTkVTzAKBggqhkjOPQQDAjBzMQsw</span>
+<span class="nc">CQYDVQQGEwJVUzETMBEGA1UECBMKQ2FsaWZvcm5pYTEWMBQGA1UEBxMNU2FuIEZy</span>
+<span class="nc">YW5jaXNjbzEZMBcGA1UEChMQb3JnMi5leGFtcGxlLmNvbTEcMBoGA1UEAxMTY2Eu</span>
+<span class="n">b3JnMi5leGFtcGxlLmNvbTAeFw0yMDA3MTQxMjA2MDBaFw0zMDA3MTIxMjA2MDBa</span>
+<span class="nc">MGsxCzAJBgNVBAYTAlVTMRMwEQYDVQQIEwpDYWxpZm9ybmlhMRYwFAYDVQQHEw1T</span>
+<span class="nc">YW4gRnJhbmNpc2NvMQ4wDAYDVQQLEwVhZG1pbjEfMB0GA1UEAwwWQWRtaW5Ab3Jn</span>
+<span class="nc">Mi5leGFtcGxlLmNvbTBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABKbYHtGHVbC</span><span class="o">+</span>
+<span class="nc">EIJaybVLdbK9LZJ1VQOl5ifctBzU</span><span class="o">+</span><span class="nc">OfVG7k6WhT1BCdKA1r55POxKSpe8qTIbsjZ</span>
+<span class="nc">TKX3r5fBmh2jTTBLMA4GA1UdDwEB</span><span class="o">/</span><span class="n">wQEAwIHgDAMBgNVHRMBAf8EAjAAMCsGA1Ud</span>
+<span class="nc">IwQkMCKAICsQDwxFO7VGN3OcTaS7lrN8cG5s</span><span class="o">+</span><span class="n">mgPu95SxlK3cpmnMAoGCCqGSM49</span>
+<span class="nc">BAMCA0gAMEUCIQD</span><span class="o">+</span><span class="nc">KhgZg5INCLxrWptTA7zYHSMI</span><span class="o">+</span><span class="nc">In5XHfbzAoZnRGF3AIgAK00</span>
+<span class="nc">BLFfbgMVnZ48EzKi</span><span class="o">/</span><span class="nc">RySXhP4QjMD64ZxRC9zZlY</span><span class="o">=</span>
+<span class="o">-----</span><span class="no">END</span> <span class="no">CERTIFICATE</span><span class="o">-----</span>
+
+  <span class="nc">Transaction</span> <span class="n">number</span> <span class="mi">1</span> <span class="n">has</span> <span class="mi">1</span> <span class="n">actions</span>
+  <span class="nc">Transaction</span> <span class="n">number</span> <span class="mi">1</span> <span class="n">isValid</span> <span class="kc">true</span>
+  <span class="nc">Transaction</span> <span class="n">number</span> <span class="mi">1</span> <span class="n">validation</span> <span class="n">code</span> <span class="mi">0</span>
+   <span class="nc">Transaction</span> <span class="n">action</span> <span class="mi">1</span> <span class="n">has</span> <span class="n">response</span> <span class="n">status</span> <span class="mi">200</span>
+   <span class="nc">Transaction</span> <span class="n">action</span> <span class="mi">1</span> <span class="n">has</span> <span class="n">response</span> <span class="n">message</span> <span class="n">bytes</span> <span class="n">as</span> <span class="nl">string:</span> 
+   <span class="nc">Transaction</span> <span class="n">action</span> <span class="mi">1</span> <span class="n">has</span> <span class="mi">2</span> <span class="n">endorsements</span>
+<span class="nc">Endorser</span> <span class="mi">0</span> <span class="nl">signature:</span> <span class="mi">3044022002063874</span><span class="n">e37e4fa764ecf7463292acc7f364d0ce87ec1992905c74e0edb9ed8f02206fa680a9d608434b831d9f0aea3d77102c28995060ffa8c1bc141f7655dd4c90</span>
+<span class="nc">Endorser</span> <span class="mi">0</span> <span class="nl">endorser:</span> <span class="n">mspid</span> <span class="nc">Org1MSP</span> 
+ <span class="n">certificate</span> 
+<span class="o">-----</span><span class="no">BEGIN</span> <span class="no">CERTIFICATE</span><span class="o">-----</span>
+<span class="nc">MIICKTCCAc</span><span class="o">+</span><span class="n">gAwIBAgIRAP5JTshqKWwUu</span><span class="o">+</span><span class="n">mBF5xI7bQwCgYIKoZIzj0EAwIwczEL</span>
+<span class="nc">MAkGA1UEBhMCVVMxEzARBgNVBAgTCkNhbGlmb3JuaWExFjAUBgNVBAcTDVNhbiBG</span>
+<span class="n">cmFuY2lzY28xGTAXBgNVBAoTEG9yZzEuZXhhbXBsZS5jb20xHDAaBgNVBAMTE2Nh</span>
+<span class="nc">Lm9yZzEuZXhhbXBsZS5jb20wHhcNMjAwNzE0MTIwNjAwWhcNMzAwNzEyMTIwNjAw</span>
+<span class="nc">WjBqMQswCQYDVQQGEwJVUzETMBEGA1UECBMKQ2FsaWZvcm5pYTEWMBQGA1UEBxMN</span>
+<span class="nc">U2FuIEZyYW5jaXNjbzENMAsGA1UECxMEcGVlcjEfMB0GA1UEAxMWcGVlcjAub3Jn</span>
+<span class="nc">MS5leGFtcGxlLmNvbTBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABJEzPhiApsIe</span>
+<span class="n">soedVM9suKadzLGZKkWaLNq1eDqriXvPsyW</span><span class="o">/</span><span class="nc">QP8Kgtx0r7</span><span class="o">/</span><span class="nc">Xh</span><span class="o">/</span><span class="n">sVSh8kZ0kuL3js</span>
+<span class="n">psiL5RXUkAejTTBLMA4GA1UdDwEB</span><span class="o">/</span><span class="n">wQEAwIHgDAMBgNVHRMBAf8EAjAAMCsGA1Ud</span>
+<span class="nc">IwQkMCKAINLc3Vxwm</span><span class="o">+</span><span class="n">iOCqrJBz</span><span class="o">+</span><span class="n">jzu6Russd5AVg3XJd2AqErAyiMAoGCCqGSM49</span>
+<span class="nc">BAMCA0gAMEUCIQDZmqnudaZpz</span><span class="o">+</span><span class="nc">MU5078Ijou5461moX6BlRUfE2QOP2BSQIgMtw5</span>
+<span class="nc">B44as7PHBmX7b6MPTr4i4mrD</span><span class="o">+</span><span class="n">oGpocEea9BGE1Q</span><span class="o">=</span>
+<span class="o">-----</span><span class="no">END</span> <span class="no">CERTIFICATE</span><span class="o">-----</span>
+
+<span class="nc">Endorser</span> <span class="mi">1</span> <span class="nl">signature:</span> <span class="mi">304402200</span><span class="n">e51aa37ae529311d452bb06402b80fa88af8fe19b65a306a9051888ef37717702200daef3f41cf7ff9dba6725bcde751b3e47f87361814ba8299c1b0405391ce504</span>
+<span class="nc">Endorser</span> <span class="mi">1</span> <span class="nl">endorser:</span> <span class="n">mspid</span> <span class="nc">Org2MSP</span> 
+ <span class="n">certificate</span> <span class="o">-----</span><span class="no">BEGIN</span> <span class="no">CERTIFICATE</span><span class="o">-----</span>
+<span class="nc">MIICJzCCAc6gAwIBAgIQBwPbGtYTeQgMUNLUN29aODAKBggqhkjOPQQDAjBzMQsw</span>
+<span class="nc">CQYDVQQGEwJVUzETMBEGA1UECBMKQ2FsaWZvcm5pYTEWMBQGA1UEBxMNU2FuIEZy</span>
+<span class="nc">YW5jaXNjbzEZMBcGA1UEChMQb3JnMi5leGFtcGxlLmNvbTEcMBoGA1UEAxMTY2Eu</span>
+<span class="n">b3JnMi5leGFtcGxlLmNvbTAeFw0yMDA3MTQxMjA2MDBaFw0zMDA3MTIxMjA2MDBa</span>
+<span class="nc">MGoxCzAJBgNVBAYTAlVTMRMwEQYDVQQIEwpDYWxpZm9ybmlhMRYwFAYDVQQHEw1T</span>
+<span class="nc">YW4gRnJhbmNpc2NvMQ0wCwYDVQQLEwRwZWVyMR8wHQYDVQQDExZwZWVyMC5vcmcy</span>
+<span class="nc">LmV4YW1wbGUuY29tMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEIXy4DLf</span><span class="o">/</span><span class="no">Q1G5</span>
+<span class="n">lP9vu4bo</span><span class="o">/</span><span class="nc">GXpefxM0KALcY5udAjrfX66WjfOvSvQ15J</span><span class="o">+</span><span class="nc">B9i5mE22r4yGz6shJOOM</span>
+<span class="nc">SbKasiLat6NNMEswDgYDVR0PAQH</span><span class="o">/</span><span class="nc">BAQDAgeAMAwGA1UdEwEB</span><span class="o">/</span><span class="n">wQCMAAwKwYDVR0j</span>
+<span class="nc">BCQwIoAgKxAPDEU7tUY3c5xNpLuWs3xwbmz6aA</span><span class="o">+</span><span class="mi">73</span><span class="n">lLGUrdymacwCgYIKoZIzj0E</span>
+<span class="nc">AwIDRwAwRAIgHUv7JJOsLYwvJbNWUAVHew245PtmM7WOp1cVM4MAjI0CIDqBBGnX</span>
+<span class="n">n4kQQgOxiY4WXuFRfxyeeQdPmfyN8eKeO5Bu</span>
+<span class="o">-----</span><span class="no">END</span> <span class="no">CERTIFICATE</span><span class="o">-----</span>
+
+   <span class="nc">Transaction</span> <span class="n">action</span> <span class="mi">1</span> <span class="n">has</span> <span class="mi">4</span> <span class="n">chaincode</span> <span class="n">input</span> <span class="n">arguments</span> <span class="c1">// 交易参数</span>
+     <span class="nc">Transaction</span> <span class="n">action</span> <span class="mi">1</span> <span class="n">has</span> <span class="n">chaincode</span> <span class="n">input</span> <span class="n">argument</span> <span class="mi">0</span> <span class="nl">is:</span> <span class="n">invoke</span>
+     <span class="nc">Transaction</span> <span class="n">action</span> <span class="mi">1</span> <span class="n">has</span> <span class="n">chaincode</span> <span class="n">input</span> <span class="n">argument</span> <span class="mi">1</span> <span class="nl">is:</span> <span class="n">a</span>
+     <span class="nc">Transaction</span> <span class="n">action</span> <span class="mi">1</span> <span class="n">has</span> <span class="n">chaincode</span> <span class="n">input</span> <span class="n">argument</span> <span class="mi">2</span> <span class="nl">is:</span> <span class="n">b</span>
+     <span class="nc">Transaction</span> <span class="n">action</span> <span class="mi">1</span> <span class="n">has</span> <span class="n">chaincode</span> <span class="n">input</span> <span class="n">argument</span> <span class="mi">3</span> <span class="nl">is:</span> <span class="mi">10</span>
+   <span class="nc">Transaction</span> <span class="n">action</span> <span class="mi">1</span> <span class="n">proposal</span> <span class="n">response</span> <span class="nl">status:</span> <span class="mi">200</span>
+   <span class="nc">Transaction</span> <span class="n">action</span> <span class="mi">1</span> <span class="n">proposal</span> <span class="n">response</span> <span class="nl">payload:</span> 
+   <span class="nc">Transaction</span> <span class="n">action</span> <span class="mi">1</span> <span class="n">proposal</span> <span class="nl">chaincodeIDName:</span> <span class="n">mycc</span><span class="o">,</span> <span class="nl">chaincodeIDVersion:</span> <span class="mf">1.0</span><span class="o">,</span>  <span class="nl">chaincodeIDPath:</span>  
+   <span class="nc">Transaction</span> <span class="n">action</span> <span class="mi">1</span> <span class="n">has</span> <span class="mi">2</span> <span class="n">name</span> <span class="n">space</span> <span class="n">read</span> <span class="n">write</span> <span class="n">sets</span>
+     <span class="nc">Namespace</span> <span class="n">lscc</span> <span class="n">read</span> <span class="n">set</span> <span class="mi">0</span> <span class="n">key</span> <span class="n">mycc</span>  <span class="n">version</span> <span class="o">[</span><span class="mi">3</span><span class="o">:</span><span class="mi">0</span><span class="o">]</span>
+     <span class="nc">Namespace</span> <span class="n">mycc</span> <span class="n">read</span> <span class="n">set</span> <span class="mi">0</span> <span class="n">key</span> <span class="n">a</span>  <span class="n">version</span> <span class="o">[</span><span class="mi">3</span><span class="o">:</span><span class="mi">0</span><span class="o">]</span>
+     <span class="nc">Namespace</span> <span class="n">mycc</span> <span class="n">read</span> <span class="n">set</span> <span class="mi">1</span> <span class="n">key</span> <span class="n">b</span>  <span class="n">version</span> <span class="o">[</span><span class="mi">3</span><span class="o">:</span><span class="mi">0</span><span class="o">]</span>
+     <span class="nc">Namespace</span> <span class="n">mycc</span> <span class="n">write</span> <span class="n">set</span> <span class="mi">0</span> <span class="n">key</span> <span class="n">a</span> <span class="n">has</span> <span class="n">value</span> <span class="err">'</span><span class="mi">90</span><span class="err">'</span> 
+     <span class="nc">Namespace</span> <span class="n">mycc</span> <span class="n">write</span> <span class="n">set</span> <span class="mi">1</span> <span class="n">key</span> <span class="n">b</span> <span class="n">has</span> <span class="n">value</span> <span class="err">'</span><span class="mi">210</span><span class="err">'</span> 
+       
+<span class="c1">// =======================区块3==================================</span>
+<span class="n">current</span> <span class="n">block</span> <span class="n">number</span> <span class="mi">3</span> <span class="n">has</span> <span class="n">data</span> <span class="nl">hash:</span> <span class="mi">4</span><span class="n">b556be695f75c53531218e7ee56555e25ff3bfff6c8fb708afe426430f13dee</span>
+
+<span class="n">current</span> <span class="n">block</span> <span class="n">number</span> <span class="mi">3</span> <span class="n">has</span> <span class="n">previous</span> <span class="n">hash</span> <span class="nl">id:</span> <span class="mi">1870</span><span class="n">eabee280e985c3393c6602bb30f6e73b5b8591419d39aa9c986b679f4bb4</span>
+
+<span class="n">current</span> <span class="n">block</span> <span class="n">number</span> <span class="mi">3</span> <span class="n">has</span> <span class="n">calculated</span> <span class="n">block</span> <span class="n">hash</span> <span class="n">is</span> <span class="n">d814ede0966b9be0d8e41f9915f34466d5464d07cf2cebd6e54c5945801238ab</span>
+
+<span class="n">current</span> <span class="n">block</span> <span class="n">number</span> <span class="mi">3</span> <span class="n">has</span> <span class="mi">1</span> <span class="n">envelope</span> <span class="nl">count:</span>
+  <span class="nc">Transaction</span> <span class="n">number</span> <span class="mi">1</span> <span class="n">has</span> <span class="n">transaction</span> <span class="nl">id:</span> <span class="n">da9201d1e7f0a47f88f81c6fdcd5f2d5c9e6268d87eadb57c5142afeee5f1f0c</span>
+  <span class="nc">Transaction</span> <span class="n">number</span> <span class="mi">1</span> <span class="n">has</span> <span class="n">channel</span> <span class="nl">id:</span> <span class="n">mychannel</span>
+  <span class="nc">Transaction</span> <span class="n">number</span> <span class="mi">1</span> <span class="n">has</span> <span class="nl">epoch:</span> <span class="mi">0</span>
+  <span class="nc">Transaction</span> <span class="n">number</span> <span class="mi">1</span> <span class="n">has</span> <span class="n">transaction</span> <span class="nl">timestamp:</span> <span class="n">七月</span> <span class="mi">14</span><span class="o">,</span>  <span class="mi">2020</span>  <span class="mi">20</span><span class="o">:</span><span class="mi">12</span><span class="o">:</span><span class="mo">02</span> <span class="n">下午</span>
+  <span class="nc">Transaction</span> <span class="n">number</span> <span class="mi">1</span> <span class="n">has</span> <span class="n">type</span> <span class="nl">id:</span> <span class="no">TRANSACTION_ENVELOPE</span> <span class="c1">//TRANSACTION_ENVELOPE交易类型</span>
+  <span class="nc">Transaction</span> <span class="n">number</span> <span class="mi">1</span> <span class="n">has</span> <span class="n">nonce</span> <span class="o">:</span> <span class="n">ea18222ff3cc86aea50f8608bcd1e340336f5e00db047040</span>
+  <span class="nc">Transaction</span> <span class="n">number</span> <span class="mi">1</span> <span class="n">has</span> <span class="n">submitter</span> <span class="nl">mspid:</span> <span class="nc">Org2MSP</span><span class="o">,</span>  <span class="nl">certificate:</span> <span class="o">-----</span><span class="no">BEGIN</span> <span class="no">CERTIFICATE</span><span class="o">-----</span>
+<span class="nc">MIICKTCCAc</span><span class="o">+</span><span class="n">gAwIBAgIQG8LbJwCh772CL6r0qTkVTzAKBggqhkjOPQQDAjBzMQsw</span>
+<span class="nc">CQYDVQQGEwJVUzETMBEGA1UECBMKQ2FsaWZvcm5pYTEWMBQGA1UEBxMNU2FuIEZy</span>
+<span class="nc">YW5jaXNjbzEZMBcGA1UEChMQb3JnMi5leGFtcGxlLmNvbTEcMBoGA1UEAxMTY2Eu</span>
+<span class="n">b3JnMi5leGFtcGxlLmNvbTAeFw0yMDA3MTQxMjA2MDBaFw0zMDA3MTIxMjA2MDBa</span>
+<span class="nc">MGsxCzAJBgNVBAYTAlVTMRMwEQYDVQQIEwpDYWxpZm9ybmlhMRYwFAYDVQQHEw1T</span>
+<span class="nc">YW4gRnJhbmNpc2NvMQ4wDAYDVQQLEwVhZG1pbjEfMB0GA1UEAwwWQWRtaW5Ab3Jn</span>
+<span class="nc">Mi5leGFtcGxlLmNvbTBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABKbYHtGHVbC</span><span class="o">+</span>
+<span class="nc">EIJaybVLdbK9LZJ1VQOl5ifctBzU</span><span class="o">+</span><span class="nc">OfVG7k6WhT1BCdKA1r55POxKSpe8qTIbsjZ</span>
+<span class="nc">TKX3r5fBmh2jTTBLMA4GA1UdDwEB</span><span class="o">/</span><span class="n">wQEAwIHgDAMBgNVHRMBAf8EAjAAMCsGA1Ud</span>
+<span class="nc">IwQkMCKAICsQDwxFO7VGN3OcTaS7lrN8cG5s</span><span class="o">+</span><span class="n">mgPu95SxlK3cpmnMAoGCCqGSM49</span>
+<span class="nc">BAMCA0gAMEUCIQD</span><span class="o">+</span><span class="nc">KhgZg5INCLxrWptTA7zYHSMI</span><span class="o">+</span><span class="nc">In5XHfbzAoZnRGF3AIgAK00</span>
+<span class="nc">BLFfbgMVnZ48EzKi</span><span class="o">/</span><span class="nc">RySXhP4QjMD64ZxRC9zZlY</span><span class="o">=</span>
+<span class="o">-----</span><span class="no">END</span> <span class="no">CERTIFICATE</span><span class="o">-----</span>
+
+  <span class="nc">Transaction</span> <span class="n">number</span> <span class="mi">1</span> <span class="n">has</span> <span class="mi">1</span> <span class="n">actions</span>
+  <span class="nc">Transaction</span> <span class="n">number</span> <span class="mi">1</span> <span class="n">isValid</span> <span class="kc">true</span>
+  <span class="nc">Transaction</span> <span class="n">number</span> <span class="mi">1</span> <span class="n">validation</span> <span class="n">code</span> <span class="mi">0</span>
+   <span class="nc">Transaction</span> <span class="n">action</span> <span class="mi">1</span> <span class="n">has</span> <span class="n">response</span> <span class="n">status</span> <span class="mi">200</span>
+   <span class="nc">Transaction</span> <span class="n">action</span> <span class="mi">1</span> <span class="n">has</span> <span class="n">response</span> <span class="n">message</span> <span class="n">bytes</span> <span class="n">as</span> <span class="nl">string:</span> 
+   <span class="nc">Transaction</span> <span class="n">action</span> <span class="mi">1</span> <span class="n">has</span> <span class="mi">1</span> <span class="n">endorsements</span>
+<span class="nc">Endorser</span> <span class="mi">0</span> <span class="nl">signature:</span> <span class="mi">3045022100</span><span class="n">bbb91a90591824df7aa048117746f98b8d7618c8fe940f35d6f67639885404eb022017268078faac34c7049cd797b28d7ee039475f3d5137c884ad67ba4ee812dedf</span>
+<span class="nc">Endorser</span> <span class="mi">0</span> <span class="nl">endorser:</span> <span class="n">mspid</span> <span class="nc">Org2MSP</span> 
+ <span class="n">certificate</span> <span class="o">-----</span><span class="no">BEGIN</span> <span class="no">CERTIFICATE</span><span class="o">-----</span>
+<span class="nc">MIICJzCCAc6gAwIBAgIQBwPbGtYTeQgMUNLUN29aODAKBggqhkjOPQQDAjBzMQsw</span>
+<span class="nc">CQYDVQQGEwJVUzETMBEGA1UECBMKQ2FsaWZvcm5pYTEWMBQGA1UEBxMNU2FuIEZy</span>
+<span class="nc">YW5jaXNjbzEZMBcGA1UEChMQb3JnMi5leGFtcGxlLmNvbTEcMBoGA1UEAxMTY2Eu</span>
+<span class="n">b3JnMi5leGFtcGxlLmNvbTAeFw0yMDA3MTQxMjA2MDBaFw0zMDA3MTIxMjA2MDBa</span>
+<span class="nc">MGoxCzAJBgNVBAYTAlVTMRMwEQYDVQQIEwpDYWxpZm9ybmlhMRYwFAYDVQQHEw1T</span>
+<span class="nc">YW4gRnJhbmNpc2NvMQ0wCwYDVQQLEwRwZWVyMR8wHQYDVQQDExZwZWVyMC5vcmcy</span>
+<span class="nc">LmV4YW1wbGUuY29tMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEIXy4DLf</span><span class="o">/</span><span class="no">Q1G5</span>
+<span class="n">lP9vu4bo</span><span class="o">/</span><span class="nc">GXpefxM0KALcY5udAjrfX66WjfOvSvQ15J</span><span class="o">+</span><span class="nc">B9i5mE22r4yGz6shJOOM</span>
+<span class="nc">SbKasiLat6NNMEswDgYDVR0PAQH</span><span class="o">/</span><span class="nc">BAQDAgeAMAwGA1UdEwEB</span><span class="o">/</span><span class="n">wQCMAAwKwYDVR0j</span>
+<span class="nc">BCQwIoAgKxAPDEU7tUY3c5xNpLuWs3xwbmz6aA</span><span class="o">+</span><span class="mi">73</span><span class="n">lLGUrdymacwCgYIKoZIzj0E</span>
+<span class="nc">AwIDRwAwRAIgHUv7JJOsLYwvJbNWUAVHew245PtmM7WOp1cVM4MAjI0CIDqBBGnX</span>
+<span class="n">n4kQQgOxiY4WXuFRfxyeeQdPmfyN8eKeO5Bu</span>
+<span class="o">-----</span><span class="no">END</span> <span class="no">CERTIFICATE</span><span class="o">-----</span>
+
+   <span class="nc">Transaction</span> <span class="n">action</span> <span class="mi">1</span> <span class="n">has</span> <span class="mi">6</span> <span class="n">chaincode</span> <span class="n">input</span> <span class="n">arguments</span> <span class="c1">// lscc 生命周期合约交易参数</span>
+     <span class="nc">Transaction</span> <span class="n">action</span> <span class="mi">1</span> <span class="n">has</span> <span class="n">chaincode</span> <span class="n">input</span> <span class="n">argument</span> <span class="mi">0</span> <span class="nl">is:</span> <span class="n">deploy</span>
+     <span class="nc">Transaction</span> <span class="n">action</span> <span class="mi">1</span> <span class="n">has</span> <span class="n">chaincode</span> <span class="n">input</span> <span class="n">argument</span> <span class="mi">1</span> <span class="nl">is:</span> <span class="n">mychannel</span>
+     <span class="c1">//初始化参数</span>
+     <span class="nc">Transaction</span> <span class="n">action</span> <span class="mi">1</span> <span class="n">has</span> <span class="n">chaincode</span> <span class="n">input</span> <span class="n">argument</span> <span class="mi">2</span> <span class="nl">is:</span> <span class="o">?</span><span class="err">'</span><span class="o">??????</span><span class="n">mycc</span><span class="o">??</span><span class="mf">1.0</span><span class="o">????</span><span class="n">init</span><span class="o">??</span><span class="n">a</span><span class="o">??</span><span class="mi">100</span><span class="o">??</span><span class="n">b</span><span class="o">??</span><span class="mi">200</span>  
+     <span class="nc">Transaction</span> <span class="n">action</span> <span class="mi">1</span> <span class="n">has</span> <span class="n">chaincode</span> <span class="n">input</span> <span class="n">argument</span> <span class="mi">3</span> <span class="nl">is:</span> <span class="o">????????????????????</span><span class="nc">Org1MSP</span><span class="o">????????</span><span class="nc">Org2MSP</span><span class="o">??</span>
+     <span class="nc">Transaction</span> <span class="n">action</span> <span class="mi">1</span> <span class="n">has</span> <span class="n">chaincode</span> <span class="n">input</span> <span class="n">argument</span> <span class="mi">4</span> <span class="nl">is:</span> <span class="n">escc</span>
+     <span class="nc">Transaction</span> <span class="n">action</span> <span class="mi">1</span> <span class="n">has</span> <span class="n">chaincode</span> <span class="n">input</span> <span class="n">argument</span> <span class="mi">5</span> <span class="nl">is:</span> <span class="n">vscc</span>
+   <span class="nc">Transaction</span> <span class="n">action</span> <span class="mi">1</span> <span class="n">proposal</span> <span class="n">response</span> <span class="nl">status:</span> <span class="mi">200</span>
+   <span class="nc">Transaction</span> <span class="n">action</span> <span class="mi">1</span> <span class="n">proposal</span> <span class="n">response</span> <span class="nl">payload:</span> <span class="o">??</span><span class="n">mycc</span><span class="o">??</span><span class="mf">1.0</span><span class="o">??</span><span class="n">escc</span><span class="s">"?vscc*,????????????????????Org1MSP????????Org2...
+   Transaction action 1 proposal chaincodeIDName: lscc, chaincodeIDVersion: 1.4.4,  chaincodeIDPath:  
+   Transaction action 1 has 2 name space read write sets
+     Namespace lscc read set 0 key mycc  version [0:0]
+     Namespace lscc write set 0 key mycc has value '??mycc??1.0??escc"</span><span class="o">?</span><span class="n">vscc</span><span class="o">*,????????????????????</span><span class="nc">Org1MSP</span><span class="o">????????</span><span class="nc">Org2</span><span class="o">...</span><span class="err">'</span> 
+     <span class="nc">Namespace</span> <span class="n">mycc</span> <span class="n">write</span> <span class="n">set</span> <span class="mi">0</span> <span class="n">key</span> <span class="n">a</span> <span class="n">has</span> <span class="n">value</span> <span class="err">'</span><span class="mi">100</span><span class="err">'</span> 
+     <span class="nc">Namespace</span> <span class="n">mycc</span> <span class="n">write</span> <span class="n">set</span> <span class="mi">1</span> <span class="n">key</span> <span class="n">b</span> <span class="n">has</span> <span class="n">value</span> <span class="err">'</span><span class="mi">200</span><span class="err">'</span> 
+
+<span class="c1">// =======================区块2==================================</span>
+<span class="n">current</span> <span class="n">block</span> <span class="n">number</span> <span class="mi">2</span> <span class="n">has</span> <span class="n">data</span> <span class="nl">hash:</span> <span class="n">bb2e6ef83e9c33229225b9e12c0a2f480f270a25fc511e69abfac49700b0f13d</span>
+<span class="n">current</span> <span class="n">block</span> <span class="n">number</span> <span class="mi">2</span> <span class="n">has</span> <span class="n">previous</span> <span class="n">hash</span> <span class="nl">id:</span> <span class="n">edcbd214efa7047be77dd9876c5b2ae6fbe36f54fdf3726a59ee7fd67ae8984a</span>
+<span class="n">current</span> <span class="n">block</span> <span class="n">number</span> <span class="mi">2</span> <span class="n">has</span> <span class="n">calculated</span> <span class="n">block</span> <span class="n">hash</span> <span class="n">is</span> <span class="mi">1870</span><span class="n">eabee280e985c3393c6602bb30f6e73b5b8591419d39aa9c986b679f4bb4</span>
+<span class="n">current</span> <span class="n">block</span> <span class="n">number</span> <span class="mi">2</span> <span class="n">has</span> <span class="mi">1</span> <span class="n">envelope</span> <span class="nl">count:</span>
+  <span class="nc">Transaction</span> <span class="n">number</span> <span class="mi">1</span> <span class="n">has</span> <span class="n">transaction</span> <span class="nl">id:</span> 
+  <span class="nc">Transaction</span> <span class="n">number</span> <span class="mi">1</span> <span class="n">has</span> <span class="n">channel</span> <span class="nl">id:</span> <span class="n">mychannel</span>
+  <span class="nc">Transaction</span> <span class="n">number</span> <span class="mi">1</span> <span class="n">has</span> <span class="nl">epoch:</span> <span class="mi">0</span>
+  <span class="nc">Transaction</span> <span class="n">number</span> <span class="mi">1</span> <span class="n">has</span> <span class="n">transaction</span> <span class="nl">timestamp:</span> <span class="n">七月</span> <span class="mi">14</span><span class="o">,</span>  <span class="mi">2020</span>  <span class="mi">20</span><span class="o">:</span><span class="mi">11</span><span class="o">:</span><span class="mi">55</span> <span class="n">下午</span>
+  <span class="nc">Transaction</span> <span class="n">number</span> <span class="mi">1</span> <span class="n">has</span> <span class="n">type</span> <span class="nl">id:</span> <span class="no">ENVELOPE</span>
+  <span class="nc">Transaction</span> <span class="n">number</span> <span class="mi">1</span> <span class="n">has</span> <span class="n">nonce</span> <span class="o">:</span> <span class="n">ab3cb626425776c7e9259ca379fe89d12eb04d6792b51d7a</span>
+  <span class="nc">Transaction</span> <span class="n">number</span> <span class="mi">1</span> <span class="n">has</span> <span class="n">submitter</span> <span class="nl">mspid:</span> <span class="nc">OrdererMSP</span><span class="o">,</span>  <span class="nl">certificate:</span> <span class="o">-----</span><span class="no">BEGIN</span> <span class="no">CERTIFICATE</span><span class="o">-----</span>
+<span class="nc">MIICHTCCAcSgAwIBAgIQONEfXTGwJRoNfdBmxfwmhjAKBggqhkjOPQQDAjBpMQsw</span>
+<span class="nc">CQYDVQQGEwJVUzETMBEGA1UECBMKQ2FsaWZvcm5pYTEWMBQGA1UEBxMNU2FuIEZy</span>
+<span class="nc">YW5jaXNjbzEUMBIGA1UEChMLZXhhbXBsZS5jb20xFzAVBgNVBAMTDmNhLmV4YW1w</span>
+<span class="n">bGUuY29tMB4XDTIwMDcxNDEyMDYwMFoXDTMwMDcxMjEyMDYwMFowajELMAkGA1UE</span>
+<span class="nc">BhMCVVMxEzARBgNVBAgTCkNhbGlmb3JuaWExFjAUBgNVBAcTDVNhbiBGcmFuY2lz</span>
+<span class="nc">Y28xEDAOBgNVBAsTB29yZGVyZXIxHDAaBgNVBAMTE29yZGVyZXIuZXhhbXBsZS5j</span>
+<span class="n">b20wWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAATLO5RBDYiauJ</span><span class="o">+</span><span class="nc">TEbYNSgIT65BF</span>
+<span class="n">oZBKX2C0t8NzazE6v0mAtYv3ZnbWi77PVWEcbfObv547SEtHmy9v8BzXyeaXo00w</span>
+<span class="nc">SzAOBgNVHQ8BAf8EBAMCB4AwDAYDVR0TAQH</span><span class="o">/</span><span class="nc">BAIwADArBgNVHSMEJDAigCDjufH5</span>
+<span class="nc">UPc1qkGqOqxxFLULiU5C6uE0r6JcEmxbYPqzyjAKBggqhkjOPQQDAgNHADBEAiBo</span>
+<span class="n">x9A2j6B5AlRwUqgsG1</span><span class="o">+</span><span class="nc">FB9nC63MJl6EJJbKpuWHLHgIgegLQL8BarkSS27</span><span class="o">/</span><span class="nc">Df</span><span class="o">/+</span><span class="no">X</span>
+<span class="n">w1ej0jjFw</span><span class="o">/</span><span class="mi">2</span><span class="n">c9VjXhug</span><span class="o">+</span><span class="n">yK0</span><span class="o">=</span>
+<span class="o">-----</span><span class="no">END</span> <span class="no">CERTIFICATE</span><span class="o">-----</span>
+<span class="c1">// =======================区块1==================================</span>
+<span class="n">current</span> <span class="n">block</span> <span class="n">number</span> <span class="mi">1</span> <span class="n">has</span> <span class="n">data</span> <span class="nl">hash:</span> <span class="mi">35321</span><span class="n">a24ef3af920294de8591f3998ec6d44a41ff2ac5ffeb65d2796b7f934a6</span>
+<span class="n">current</span> <span class="n">block</span> <span class="n">number</span> <span class="mi">1</span> <span class="n">has</span> <span class="n">previous</span> <span class="n">hash</span> <span class="nl">id:</span> <span class="mi">742898</span><span class="n">e692aae23fb40e94ef57030a279f3633989ac73bf8e839d7f26e0e597a</span>
+<span class="n">current</span> <span class="n">block</span> <span class="n">number</span> <span class="mi">1</span> <span class="n">has</span> <span class="n">calculated</span> <span class="n">block</span> <span class="n">hash</span> <span class="n">is</span> <span class="n">edcbd214efa7047be77dd9876c5b2ae6fbe36f54fdf3726a59ee7fd67ae8984a</span>
+<span class="n">current</span> <span class="n">block</span> <span class="n">number</span> <span class="mi">1</span> <span class="n">has</span> <span class="mi">1</span> <span class="n">envelope</span> <span class="nl">count:</span>
+  <span class="nc">Transaction</span> <span class="n">number</span> <span class="mi">1</span> <span class="n">has</span> <span class="n">transaction</span> <span class="nl">id:</span> 
+  <span class="nc">Transaction</span> <span class="n">number</span> <span class="mi">1</span> <span class="n">has</span> <span class="n">channel</span> <span class="nl">id:</span> <span class="n">mychannel</span>
+  <span class="nc">Transaction</span> <span class="n">number</span> <span class="mi">1</span> <span class="n">has</span> <span class="nl">epoch:</span> <span class="mi">0</span>
+  <span class="nc">Transaction</span> <span class="n">number</span> <span class="mi">1</span> <span class="n">has</span> <span class="n">transaction</span> <span class="nl">timestamp:</span> <span class="n">七月</span> <span class="mi">14</span><span class="o">,</span>  <span class="mi">2020</span>  <span class="mi">20</span><span class="o">:</span><span class="mi">11</span><span class="o">:</span><span class="mi">52</span> <span class="n">下午</span>
+  <span class="nc">Transaction</span> <span class="n">number</span> <span class="mi">1</span> <span class="n">has</span> <span class="n">type</span> <span class="nl">id:</span> <span class="no">ENVELOPE</span> <span class="c1">// ENVELOPE交易类型</span>
+  <span class="nc">Transaction</span> <span class="n">number</span> <span class="mi">1</span> <span class="n">has</span> <span class="n">nonce</span> <span class="o">:</span> <span class="mi">42</span><span class="n">eb01613dd8fac79334652894df6a931c83c78d71d31f82</span>
+  <span class="nc">Transaction</span> <span class="n">number</span> <span class="mi">1</span> <span class="n">has</span> <span class="n">submitter</span> <span class="nl">mspid:</span> <span class="nc">OrdererMSP</span><span class="o">,</span>  <span class="nl">certificate:</span> <span class="o">-----</span><span class="no">BEGIN</span> <span class="no">CERTIFICATE</span><span class="o">-----</span>
+<span class="nc">MIICHTCCAcSgAwIBAgIQONEfXTGwJRoNfdBmxfwmhjAKBggqhkjOPQQDAjBpMQsw</span>
+<span class="nc">CQYDVQQGEwJVUzETMBEGA1UECBMKQ2FsaWZvcm5pYTEWMBQGA1UEBxMNU2FuIEZy</span>
+<span class="nc">YW5jaXNjbzEUMBIGA1UEChMLZXhhbXBsZS5jb20xFzAVBgNVBAMTDmNhLmV4YW1w</span>
+<span class="n">bGUuY29tMB4XDTIwMDcxNDEyMDYwMFoXDTMwMDcxMjEyMDYwMFowajELMAkGA1UE</span>
+<span class="nc">BhMCVVMxEzARBgNVBAgTCkNhbGlmb3JuaWExFjAUBgNVBAcTDVNhbiBGcmFuY2lz</span>
+<span class="nc">Y28xEDAOBgNVBAsTB29yZGVyZXIxHDAaBgNVBAMTE29yZGVyZXIuZXhhbXBsZS5j</span>
+<span class="n">b20wWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAATLO5RBDYiauJ</span><span class="o">+</span><span class="nc">TEbYNSgIT65BF</span>
+<span class="n">oZBKX2C0t8NzazE6v0mAtYv3ZnbWi77PVWEcbfObv547SEtHmy9v8BzXyeaXo00w</span>
+<span class="nc">SzAOBgNVHQ8BAf8EBAMCB4AwDAYDVR0TAQH</span><span class="o">/</span><span class="nc">BAIwADArBgNVHSMEJDAigCDjufH5</span>
+<span class="nc">UPc1qkGqOqxxFLULiU5C6uE0r6JcEmxbYPqzyjAKBggqhkjOPQQDAgNHADBEAiBo</span>
+<span class="n">x9A2j6B5AlRwUqgsG1</span><span class="o">+</span><span class="nc">FB9nC63MJl6EJJbKpuWHLHgIgegLQL8BarkSS27</span><span class="o">/</span><span class="nc">Df</span><span class="o">/+</span><span class="no">X</span>
+<span class="n">w1ej0jjFw</span><span class="o">/</span><span class="mi">2</span><span class="n">c9VjXhug</span><span class="o">+</span><span class="n">yK0</span><span class="o">=</span>
+<span class="o">-----</span><span class="no">END</span> <span class="no">CERTIFICATE</span><span class="o">-----</span>
+
+<span class="n">current</span> <span class="n">block</span> <span class="n">number</span> <span class="mi">0</span> <span class="n">has</span> <span class="n">data</span> <span class="nl">hash:</span> <span class="mi">3</span><span class="n">be464bc9d3b26f68996856d5ab4dce1ee766eac70838b7699d5998528452a15</span>
+<span class="n">current</span> <span class="n">block</span> <span class="n">number</span> <span class="mi">0</span> <span class="n">has</span> <span class="n">previous</span> <span class="n">hash</span> <span class="nl">id:</span> 
+<span class="n">current</span> <span class="n">block</span> <span class="n">number</span> <span class="mi">0</span> <span class="n">has</span> <span class="n">calculated</span> <span class="n">block</span> <span class="n">hash</span> <span class="n">is</span> <span class="mi">742898</span><span class="n">e692aae23fb40e94ef57030a279f3633989ac73bf8e839d7f26e0e597a</span>
+<span class="n">current</span> <span class="n">block</span> <span class="n">number</span> <span class="mi">0</span> <span class="n">has</span> <span class="mi">1</span> <span class="n">envelope</span> <span class="nl">count:</span>
+  <span class="nc">Transaction</span> <span class="n">number</span> <span class="mi">1</span> <span class="n">has</span> <span class="n">transaction</span> <span class="nl">id:</span> 
+  <span class="nc">Transaction</span> <span class="n">number</span> <span class="mi">1</span> <span class="n">has</span> <span class="n">channel</span> <span class="nl">id:</span> <span class="n">mychannel</span>
+  <span class="nc">Transaction</span> <span class="n">number</span> <span class="mi">1</span> <span class="n">has</span> <span class="nl">epoch:</span> <span class="mi">0</span>
+  <span class="nc">Transaction</span> <span class="n">number</span> <span class="mi">1</span> <span class="n">has</span> <span class="n">transaction</span> <span class="nl">timestamp:</span> <span class="n">七月</span> <span class="mi">14</span><span class="o">,</span>  <span class="mi">2020</span>  <span class="mi">20</span><span class="o">:</span><span class="mi">11</span><span class="o">:</span><span class="mi">38</span> <span class="n">下午</span>
+  <span class="nc">Transaction</span> <span class="n">number</span> <span class="mi">1</span> <span class="n">has</span> <span class="n">type</span> <span class="nl">id:</span> <span class="no">ENVELOPE</span> <span class="c1">// ENVELOPE交易类型</span>
+  <span class="nc">Transaction</span> <span class="n">number</span> <span class="mi">1</span> <span class="n">has</span> <span class="n">nonce</span> <span class="o">:</span> <span class="mi">4</span><span class="n">d281908aff6c10d2b4e88cc78f31284f9e7f82517568d77</span>
+  <span class="nc">Transaction</span> <span class="n">number</span> <span class="mi">1</span> <span class="n">has</span> <span class="n">submitter</span> <span class="nl">mspid:</span> <span class="nc">OrdererMSP</span><span class="o">,</span>  <span class="nl">certificate:</span> <span class="o">-----</span><span class="no">BEGIN</span> <span class="no">CERTIFICATE</span><span class="o">-----</span>
+<span class="nc">MIICHTCCAcSgAwIBAgIQONEfXTGwJRoNfdBmxfwmhjAKBggqhkjOPQQDAjBpMQsw</span>
+<span class="nc">CQYDVQQGEwJVUzETMBEGA1UECBMKQ2FsaWZvcm5pYTEWMBQGA1UEBxMNU2FuIEZy</span>
+<span class="nc">YW5jaXNjbzEUMBIGA1UEChMLZXhhbXBsZS5jb20xFzAVBgNVBAMTDmNhLmV4YW1w</span>
+<span class="n">bGUuY29tMB4XDTIwMDcxNDEyMDYwMFoXDTMwMDcxMjEyMDYwMFowajELMAkGA1UE</span>
+<span class="nc">BhMCVVMxEzARBgNVBAgTCkNhbGlmb3JuaWExFjAUBgNVBAcTDVNhbiBGcmFuY2lz</span>
+<span class="nc">Y28xEDAOBgNVBAsTB29yZGVyZXIxHDAaBgNVBAMTE29yZGVyZXIuZXhhbXBsZS5j</span>
+<span class="n">b20wWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAATLO5RBDYiauJ</span><span class="o">+</span><span class="nc">TEbYNSgIT65BF</span>
+<span class="n">oZBKX2C0t8NzazE6v0mAtYv3ZnbWi77PVWEcbfObv547SEtHmy9v8BzXyeaXo00w</span>
+<span class="nc">SzAOBgNVHQ8BAf8EBAMCB4AwDAYDVR0TAQH</span><span class="o">/</span><span class="nc">BAIwADArBgNVHSMEJDAigCDjufH5</span>
+<span class="nc">UPc1qkGqOqxxFLULiU5C6uE0r6JcEmxbYPqzyjAKBggqhkjOPQQDAgNHADBEAiBo</span>
+<span class="n">x9A2j6B5AlRwUqgsG1</span><span class="o">+</span><span class="nc">FB9nC63MJl6EJJbKpuWHLHgIgegLQL8BarkSS27</span><span class="o">/</span><span class="nc">Df</span><span class="o">/+</span><span class="no">X</span>
+<span class="n">w1ej0jjFw</span><span class="o">/</span><span class="mi">2</span><span class="n">c9VjXhug</span><span class="o">+</span><span class="n">yK0</span><span class="o">=</span>
+<span class="o">-----</span><span class="no">END</span> <span class="no">CERTIFICATE</span><span class="o">-----</span>
+
+</code></pre></div></div> <br> <nav class="pagination"> <a href="http://localhost:4000/Queue%E4%B8%AD%E5%AD%98%E5%8F%96%E7%9A%84%E5%8C%BA%E5%88%AB/" class="pagination_pager" title="Java Queue中存取方法的区别 ">previous</a> <a href="http://localhost:4000/Redis%E5%AD%A6%E4%B9%A0/" class="pagination_pager" title="Redis学习（一） ">next</a> </nav> </div> </div> <!-- JS --> <script src="http://localhost:4000/assets/js/main.min.js"></script> <div class="overlay"> <ul class="projects-menu"> <li style="background:url(http://localhost:4000/images/benjamin-deyoung-unsplash.jpg) center center no-repeat;"> <a href="https://github.com/Maple-Chan" target="_blank" rel="nofollow external"> <span> GitHub Home </span> </a> </li> </ul> </div> </body> </html>

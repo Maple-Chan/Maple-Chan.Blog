@@ -1,0 +1,142 @@
+<!DOCTYPE html> <html> <head> <meta charset="utf-8"> <meta http-equiv="X-UA-Compatible" content="IE=edge"> <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"> <title>设计模式 &#8211; Maple Story</title> <meta name="description" content="不断强化自己的开发技能"> <meta name="keywords" content="设计模式"> <!-- Twitter Cards --> <meta name="twitter:card" content="summary"> <meta name="twitter:image" content="halve.png"> <meta name="twitter:title" content="设计模式"> <meta name="twitter:description" content="不断强化自己的开发技能"> <!-- Open Graph --> <meta property="og:locale" content="en_US"> <meta property="og:type" content="article"> <meta property="og:title" content="设计模式"> <meta property="og:description" content="不断强化自己的开发技能"> <meta property="og:url" content="http://localhost:4000/%E7%94%9F%E4%BA%A7%E8%80%85%E6%B6%88%E8%B4%B9%E8%80%85%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"> <meta property="og:site_name" content="Maple Story"> <meta property="og:image" content="http://localhost:4000/images/halve.png"> <link rel="canonical" href="http://localhost:4000/%E7%94%9F%E4%BA%A7%E8%80%85%E6%B6%88%E8%B4%B9%E8%80%85%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"> <!-- Handheld --> <meta name="HandheldFriendly" content="True"> <meta name="MobileOptimized" content="320"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Feed --> <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="" /> <!-- Favicons --> <link rel="shortcut icon" type="image/png" href="http://localhost:4000/favicon.png" /> <link rel="shortcut icon" href="http://localhost:4000/favicon.ico" /> <!-- CSS --> <link rel="stylesheet" type="text/css" href="http://localhost:4000/assets/css/main.css"> <!-- Left Block Image for Posts --> <style type="text/css"> #posts.inner-post-page .block-left {background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(http://localhost:4000/images/unsplash-gallery-image-3.jpg) no-repeat;background-size: cover;} </style> <!-- Left Block Images for Home and Pages --> <style type="text/css"> #posts .block-left {background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(http://localhost:4000/images/unsplash-image-10.jpg) no-repeat;background-size: cover, cover;} .block-left {background: linear-gradient(rgba(44,45,51,0.9), rgba(44,45,51,0.9)), url(http://localhost:4000/images/home.jpg) no-repeat;background-size: cover;} </style> </head> <body id="posts" class="inner-post-page"> <div class="block-left"> <div class="content"> <a href="http://localhost:4000" class="logo"><img src="http://localhost:4000/images/halve.png"></a> <div class="post-title-section"> <div class="section-line">Posts <em>/</em></div> <h1 class="section-title">设计模式 </h1> <ul class="tags"> <li><a href="http://localhost:4000/tags#设计模式">设计模式</a></li> </ul> <div class="section-line reverse"><a href="http://localhost:4000/posts">Back to posts</a> <em>/</em></div> </div> </div> </div> <div class="block-right"> <a href="../posts.html" title="posts" class="posts-menu-icon"></a> <a title="projects" class="projects-menu-icon"> <span></span> </a> <div class="inner-post content"> <div class="date-highlight">30 Jul 2020</div> <center><h2><b> 设计模式 </b></h2></center> <p><br /></p> <h3 id="生产者消费者模式">生产者消费者模式</h3> <p>生产者和消费者指的是两个不同的线程类对象，操作同一资源的情况。</p> <ul> <li>生产者负责生产数据，消费者负责取走数据</li> <li>生产者每生产一组数据之后，互斥的放入缓冲区，消费者从缓冲区获取数据。</li> <li>上述同步的过程，需要对互斥数据进行同步处理，本下面的代码中通过synchronized进行代码同步。</li> </ul> <p>结构图：</p> <p><img src="https://blog.maplestory.work/images/post_image/2019-05-19-设计模式.assets/1596028363129.png" alt="1596028363129" /></p> <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">javatest.pattern</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">java.util.LinkedList</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.Random</span><span class="o">;</span>
+
+<span class="cm">/**
+ * @description: 生产者消费者设计模式
+ * @modifyContent:
+ * @author: Maple Chan
+ * @date: 2020-07-29 20:31:06
+ * @version: 0.0.1
+ */</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">ProducerAndConsumer</span> <span class="o">{</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">new</span> <span class="nf">Producer</span><span class="o">().</span><span class="na">start</span><span class="o">();</span>
+        <span class="k">new</span> <span class="nf">ConsumerA</span><span class="o">().</span><span class="na">start</span><span class="o">();</span>
+        <span class="k">new</span> <span class="nf">ConsumerB</span><span class="o">().</span><span class="na">start</span><span class="o">();</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="kd">class</span> <span class="nc">Producer</span> <span class="kd">extends</span> <span class="nc">Thread</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="kt">void</span> <span class="nf">produce</span><span class="o">()</span> <span class="o">{</span>
+        <span class="nc">Goods</span> <span class="n">store</span> <span class="o">=</span> <span class="nc">Goods</span><span class="o">.</span><span class="na">getInstance</span><span class="o">();</span>
+
+        <span class="c1">// do produce</span>
+        <span class="kt">long</span> <span class="n">product</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Random</span><span class="o">().</span><span class="na">nextLong</span><span class="o">();</span>
+        <span class="c1">// put into store</span>
+        <span class="kd">synchronized</span> <span class="o">(</span><span class="n">store</span><span class="o">)</span> <span class="o">{</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"生产产品："</span> <span class="o">+</span> <span class="n">product</span><span class="o">);</span>
+            <span class="nc">Goods</span><span class="o">.</span><span class="na">goodList</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">product</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
+        <span class="kt">int</span> <span class="n">count</span> <span class="o">=</span> <span class="mi">3</span><span class="o">;</span>
+        <span class="k">while</span> <span class="o">(</span><span class="kc">true</span><span class="o">)</span> <span class="o">{</span>
+            <span class="kt">long</span> <span class="n">sleepTime</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Random</span><span class="o">().</span><span class="na">nextInt</span><span class="o">(</span><span class="mi">10</span><span class="o">)</span> <span class="o">*</span> <span class="mi">100</span><span class="o">;</span>
+            <span class="k">try</span> <span class="o">{</span>
+                <span class="nc">Thread</span><span class="o">.</span><span class="na">sleep</span><span class="o">(</span><span class="n">sleepTime</span><span class="o">);</span>
+            <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+                <span class="c1">// TODO: handle exception</span>
+            <span class="o">}</span>
+            <span class="k">this</span><span class="o">.</span><span class="na">produce</span><span class="o">();</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">count</span><span class="o">--</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+                <span class="k">break</span><span class="o">;</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+
+        <span class="k">return</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="kd">class</span> <span class="nc">ConsumerA</span> <span class="kd">extends</span> <span class="nc">Thread</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="kt">void</span> <span class="nf">consumer</span><span class="o">()</span> <span class="o">{</span>
+        <span class="nc">Goods</span> <span class="n">store</span> <span class="o">=</span> <span class="nc">Goods</span><span class="o">.</span><span class="na">getInstance</span><span class="o">();</span>
+
+        <span class="kd">synchronized</span> <span class="o">(</span><span class="n">store</span><span class="o">)</span> <span class="o">{</span>
+            <span class="nc">Long</span> <span class="n">product</span> <span class="o">=</span> <span class="nc">Goods</span><span class="o">.</span><span class="na">goodList</span><span class="o">.</span><span class="na">getFirst</span><span class="o">();</span>
+            <span class="nc">Goods</span><span class="o">.</span><span class="na">goodList</span><span class="o">.</span><span class="na">remove</span><span class="o">(</span><span class="n">product</span><span class="o">);</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"消费产品："</span> <span class="o">+</span> <span class="n">product</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">while</span> <span class="o">(</span><span class="kc">true</span><span class="o">)</span> <span class="o">{</span>
+            <span class="kt">long</span> <span class="n">sleepTime</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Random</span><span class="o">().</span><span class="na">nextInt</span><span class="o">(</span><span class="mi">10</span><span class="o">)</span> <span class="o">*</span> <span class="mi">100</span><span class="o">;</span>
+
+            <span class="k">try</span> <span class="o">{</span>
+                <span class="nc">Thread</span><span class="o">.</span><span class="na">sleep</span><span class="o">(</span><span class="n">sleepTime</span><span class="o">);</span>
+            <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+                <span class="c1">// TODO: handle exception</span>
+            <span class="o">}</span>
+            <span class="k">if</span> <span class="o">(</span><span class="nc">Goods</span><span class="o">.</span><span class="na">goodList</span><span class="o">.</span><span class="na">size</span><span class="o">()</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+                <span class="k">this</span><span class="o">.</span><span class="na">consumer</span><span class="o">();</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="kd">class</span> <span class="nc">ConsumerB</span> <span class="kd">extends</span> <span class="nc">Thread</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="kt">void</span> <span class="nf">consumer</span><span class="o">()</span> <span class="o">{</span>
+        <span class="nc">Goods</span> <span class="n">store</span> <span class="o">=</span> <span class="nc">Goods</span><span class="o">.</span><span class="na">getInstance</span><span class="o">();</span>
+
+        <span class="kd">synchronized</span> <span class="o">(</span><span class="n">store</span><span class="o">)</span> <span class="o">{</span>
+            <span class="nc">Long</span> <span class="n">product</span> <span class="o">=</span> <span class="nc">Goods</span><span class="o">.</span><span class="na">goodList</span><span class="o">.</span><span class="na">getFirst</span><span class="o">();</span>
+            <span class="nc">Goods</span><span class="o">.</span><span class="na">goodList</span><span class="o">.</span><span class="na">remove</span><span class="o">(</span><span class="n">product</span><span class="o">);</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"消费产品："</span> <span class="o">+</span> <span class="n">product</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">while</span> <span class="o">(</span><span class="kc">true</span><span class="o">)</span> <span class="o">{</span>
+            <span class="kt">long</span> <span class="n">sleepTime</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Random</span><span class="o">().</span><span class="na">nextInt</span><span class="o">(</span><span class="mi">10</span><span class="o">)</span> <span class="o">*</span> <span class="mi">120</span><span class="o">;</span>
+
+            <span class="k">try</span> <span class="o">{</span>
+                <span class="nc">Thread</span><span class="o">.</span><span class="na">sleep</span><span class="o">(</span><span class="n">sleepTime</span><span class="o">);</span>
+            <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+                <span class="c1">// TODO: handle exception</span>
+            <span class="o">}</span>
+            <span class="c1">// 库存有东西才会进行消费</span>
+            <span class="k">if</span> <span class="o">(</span><span class="nc">Goods</span><span class="o">.</span><span class="na">goodList</span><span class="o">.</span><span class="na">size</span><span class="o">()</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+                <span class="k">this</span><span class="o">.</span><span class="na">consumer</span><span class="o">();</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+
+    <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="kd">class</span> <span class="nc">Goods</span> <span class="o">{</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="nc">LinkedList</span><span class="o">&lt;</span><span class="nc">Long</span><span class="o">&gt;</span> <span class="n">goodList</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kd">static</span> <span class="nc">Goods</span> <span class="n">singletonGoods</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nf">Goods</span><span class="o">()</span> <span class="o">{</span>
+    <span class="o">}</span>
+    <span class="kd">static</span> <span class="o">{</span>
+        <span class="n">goodList</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">LinkedList</span><span class="o">&lt;&gt;();</span>
+        <span class="n">singletonGoods</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Goods</span><span class="o">();</span>
+    <span class="o">}</span>
+    <span class="cm">/**
+     * 单例
+     */</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="nc">Goods</span> <span class="nf">getInstance</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">singletonGoods</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div> <p>输出如下所示：</p> <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/*
+生产产品：6805117464760743258
+消费产品：6805117464760743258
+生产产品：1599562522443449507
+生产产品：1041166688112309013
+消费产品：1599562522443449507
+生产产品：124370676431480001
+消费产品：1041166688112309013
+生产产品：7414022159762949506
+消费产品：124370676431480001
+消费产品：7414022159762949506
+
+代码中生产5个数据，之后消费将一直等待。
+*/</span>
+</code></pre></div></div> <br> <nav class="pagination"> <a href="http://localhost:4000/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" class="pagination_pager" title="设计模式 ">previous</a> <a href="http://localhost:4000/some-words/" class="pagination_pager" title="语情集 ">next</a> </nav> </div> </div> <!-- JS --> <script src="http://localhost:4000/assets/js/main.min.js"></script> <div class="overlay"> <ul class="projects-menu"> <li style="background:url(http://localhost:4000/images/benjamin-deyoung-unsplash.jpg) center center no-repeat;"> <a href="https://github.com/Maple-Chan" target="_blank" rel="nofollow external"> <span> GitHub Home </span> </a> </li> </ul> </div> </body> </html>

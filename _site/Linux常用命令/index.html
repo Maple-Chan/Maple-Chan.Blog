@@ -1,0 +1,61 @@
+<!DOCTYPE html> <html> <head> <meta charset="utf-8"> <meta http-equiv="X-UA-Compatible" content="IE=edge"> <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"> <title>Linux常用命令 &#8211; Maple Story</title> <meta name="description" content="Stick to note down what I’v learnt"> <meta name="keywords" content="Linux"> <!-- Twitter Cards --> <meta name="twitter:card" content="summary"> <meta name="twitter:image" content="halve.png"> <meta name="twitter:title" content="Linux常用命令"> <meta name="twitter:description" content="Stick to note down what I’v learnt"> <!-- Open Graph --> <meta property="og:locale" content="en_US"> <meta property="og:type" content="article"> <meta property="og:title" content="Linux常用命令"> <meta property="og:description" content="Stick to note down what I’v learnt"> <meta property="og:url" content="http://localhost:4000/Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/"> <meta property="og:site_name" content="Maple Story"> <meta property="og:image" content="http://localhost:4000/images/halve.png"> <link rel="canonical" href="http://localhost:4000/Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/"> <!-- Handheld --> <meta name="HandheldFriendly" content="True"> <meta name="MobileOptimized" content="320"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Feed --> <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="" /> <!-- Favicons --> <link rel="shortcut icon" type="image/png" href="http://localhost:4000/favicon.png" /> <link rel="shortcut icon" href="http://localhost:4000/favicon.ico" /> <!-- CSS --> <link rel="stylesheet" type="text/css" href="http://localhost:4000/assets/css/main.css"> <!-- Left Block Image for Posts --> <style type="text/css"> #posts.inner-post-page .block-left {background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(http://localhost:4000/images/unsplash-gallery-image-3.jpg) no-repeat;background-size: cover;} </style> <!-- Left Block Images for Home and Pages --> <style type="text/css"> #posts .block-left {background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(http://localhost:4000/images/unsplash-image-10.jpg) no-repeat;background-size: cover, cover;} .block-left {background: linear-gradient(rgba(44,45,51,0.9), rgba(44,45,51,0.9)), url(http://localhost:4000/images/home.jpg) no-repeat;background-size: cover;} </style> </head> <body id="posts" class="inner-post-page"> <div class="block-left"> <div class="content"> <a href="http://localhost:4000" class="logo"><img src="http://localhost:4000/images/halve.png"></a> <div class="post-title-section"> <div class="section-line">Posts <em>/</em></div> <h1 class="section-title">Linux常用命令 </h1> <ul class="tags"> <li><a href="http://localhost:4000/tags#Linux">Linux</a></li> </ul> <div class="section-line reverse"><a href="http://localhost:4000/posts">Back to posts</a> <em>/</em></div> </div> </div> </div> <div class="block-right"> <a href="../posts.html" title="posts" class="posts-menu-icon"></a> <a title="projects" class="projects-menu-icon"> <span></span> </a> <div class="inner-post content"> <div class="date-highlight">10 Mar 2020</div> <center><h2><b>Linux常用命令</b></h2></center> <p><br /></p> <h3 id="查看端口是否被占用">查看端口是否被占用</h3> <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>netstat <span class="nt">-anp</span> | prep 3306
+
+<span class="nt">-a</span> 显示全部，默认只显示CONNECTED
+
+<span class="nt">-n</span> 不解析名字，只显示端口号，IP
+
+<span class="nt">-p</span> 显示socket的PID
+<span class="c"># 此处注意，图中显示的LISTENING并不表示端口被占用，不要和LISTEN混淆哦，查看具体端口时候，必须要看到tcp，端口号，LISTEN那一行，才表示端口被占用了</span>
+</code></pre></div></div> <h3 id="踢出出终端pts0">踢出出终端pts/0</h3> <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pkill <span class="nt">-kill</span> <span class="nt">-t</span> pts/0
+</code></pre></div></div> <ul> <li>查看本机终端名</li> </ul> <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">who </span>am i
+</code></pre></div></div> <ul> <li>管道命令</li> </ul> <blockquote> <p><a href="https://www.jianshu.com/p/9c0c2b57cb73">管道、命令顺序执行</a></p> </blockquote> <h3 id="yum">yum</h3> <blockquote> <p>Centos7 yum 出现could not retrieve mirrorlist 的解决办法</p> </blockquote> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1. <span class="nb">sudo </span>vim /etc/sysconfig/network-scripts/ifcfg-ens33 
+
+2. 将ONBOOT改为yes，wq!保存退出
+
+3. 重新启动网络
+<span class="nv">$ </span>service network restart
+
+<span class="c">#一次错误我只进行了service network restart就能解决</span>
+</code></pre></div></div> <p>https://www.cnblogs.com/yanguhung/p/10789129.html</p> <h3 id="tar">tar</h3> <blockquote> <p>解压缩</p> </blockquote> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">tar</span> <span class="nt">-xzvf</span> xxx.tar.gz
+</code></pre></div></div> <blockquote> <p>压缩</p> </blockquote> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">tar</span> <span class="nt">-czvf</span> test.tar.gz ./test/
+</code></pre></div></div> <h3 id="vim">vim</h3> <blockquote> <p>只有vi，安装vim</p> </blockquote> <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>yum <span class="nt">-y</span> <span class="nb">install </span>vim-enhanced
+</code></pre></div></div> <blockquote> <p>复制n行</p> </blockquote> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>vim filename
+：set nu <span class="c">#显示行号</span>
+
+1. v <span class="c">#命令模式，进入字符选择，通过hijk移动光标进行选择</span>
+2. V <span class="c">#进入行选择</span>
+3. p <span class="c">#在指定行，就在指定行粘贴</span>
+4. ctrl + V <span class="c"># 进入块选择</span>
+
+5. 	yy    复制游标所在行整行 
+    2yy或y2y    复制 2 行
+    y^    复制至行首，或y0
+    y<span class="nv">$ </span>   复制至行尾
+    yw    复制一个word
+    y2w    复制两个word 
+    yG    复制至文件尾
+    y1G    复制至文件首
+
+
+</code></pre></div></div> <blockquote> <p>撤销操作</p> </blockquote> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>vim  <span class="c"># 在命令行模式下用 :undo 或 :u 命令可以撤销最近一次操作。</span>
+</code></pre></div></div> <h3 id="系统校时">系统校时</h3> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ntpdate <span class="nt">-u</span> ntp.api.bz
+ntpdate <span class="nt">-u</span> 210.72.145.44
+
+</code></pre></div></div> <h3 id="查看端口">查看端口</h3> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code> netstat <span class="nt">-anp</span> | <span class="nb">grep </span>8080
+ netstat <span class="nt">-anlp</span> | <span class="nb">grep </span>6379
+ <span class="c"># tcp        0      0 127.0.0.1:6379          0.0.0.0:*               LISTEN      8774/./src/redis-se</span>
+ <span class="c"># 8774 进程</span>
+ netstat <span class="nt">-ntulp</span> |grep 1935   //查看所有1935端口使用情况·
+</code></pre></div></div> <h3 id="防火墙">防火墙</h3> <p><a href="https://www.cnblogs.com/sxmny/p/11224842.html">linux开放指定端口命令</a></p> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 开启防火墙 </span>
+systemctl start firewalld
+<span class="c"># 开放指定端口</span>
+firewall-cmd <span class="nt">--zone</span><span class="o">=</span>public <span class="nt">--add-port</span><span class="o">=</span>1935/tcp <span class="nt">--permanent</span>
+<span class="c">#--zone #作用域</span>
+<span class="c">#--add-port=1935/tcp  #添加端口，格式为：端口/通讯协议</span>
+<span class="c">#--permanent  #永久生效，没有此参数重启后失效</span>
+
+firewall-cmd <span class="nt">--reload</span> <span class="c"># 别忘了这步</span>
+
+<span class="c"># 查看端口</span>
+ firewall-cmd <span class="nt">--zone</span><span class="o">=</span>public <span class="nt">--query-port</span><span class="o">=</span>80/tcp
+</code></pre></div></div> <h3 id="touch">touch</h3> <p><strong>touch命令</strong>有两个功能：一是用于把已存在文件的时间标签更新为系统当前的时间（默认方式），它们的数据将原封不动地保留下来；二是用来创建新的空文件。</p> <br> <nav class="pagination"> <a href="http://localhost:4000/Docker%E9%95%9C%E5%83%8F%E5%8A%A0%E9%80%9F/" class="pagination_pager" title="Docker镜像加速 ">previous</a> <a href="http://localhost:4000/%E5%89%91%E6%8C%87offer/" class="pagination_pager" title="剑指Offer的笔记 ">next</a> </nav> </div> </div> <!-- JS --> <script src="http://localhost:4000/assets/js/main.min.js"></script> <div class="overlay"> <ul class="projects-menu"> <li style="background:url(http://localhost:4000/images/benjamin-deyoung-unsplash.jpg) center center no-repeat;"> <a href="https://github.com/Maple-Chan" target="_blank" rel="nofollow external"> <span> GitHub Home </span> </a> </li> </ul> </div> </body> </html>

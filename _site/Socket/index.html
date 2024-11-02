@@ -1,0 +1,140 @@
+<!DOCTYPE html> <html> <head> <meta charset="utf-8"> <meta http-equiv="X-UA-Compatible" content="IE=edge"> <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"> <title>Socket通信 &#8211; Maple Story</title> <meta name="description" content="不断强化自己的开发技能"> <meta name="keywords" content="Linux"> <!-- Twitter Cards --> <meta name="twitter:card" content="summary"> <meta name="twitter:image" content="halve.png"> <meta name="twitter:title" content="Socket通信"> <meta name="twitter:description" content="不断强化自己的开发技能"> <!-- Open Graph --> <meta property="og:locale" content="en_US"> <meta property="og:type" content="article"> <meta property="og:title" content="Socket通信"> <meta property="og:description" content="不断强化自己的开发技能"> <meta property="og:url" content="http://localhost:4000/Socket/"> <meta property="og:site_name" content="Maple Story"> <meta property="og:image" content="http://localhost:4000/images/halve.png"> <link rel="canonical" href="http://localhost:4000/Socket/"> <!-- Handheld --> <meta name="HandheldFriendly" content="True"> <meta name="MobileOptimized" content="320"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Feed --> <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="" /> <!-- Favicons --> <link rel="shortcut icon" type="image/png" href="http://localhost:4000/favicon.png" /> <link rel="shortcut icon" href="http://localhost:4000/favicon.ico" /> <!-- CSS --> <link rel="stylesheet" type="text/css" href="http://localhost:4000/assets/css/main.css"> <!-- Left Block Image for Posts --> <style type="text/css"> #posts.inner-post-page .block-left {background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(http://localhost:4000/images/unsplash-gallery-image-3.jpg) no-repeat;background-size: cover;} </style> <!-- Left Block Images for Home and Pages --> <style type="text/css"> #posts .block-left {background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(http://localhost:4000/images/unsplash-image-10.jpg) no-repeat;background-size: cover, cover;} .block-left {background: linear-gradient(rgba(44,45,51,0.9), rgba(44,45,51,0.9)), url(http://localhost:4000/images/home.jpg) no-repeat;background-size: cover;} </style> </head> <body id="posts" class="inner-post-page"> <div class="block-left"> <div class="content"> <a href="http://localhost:4000" class="logo"><img src="http://localhost:4000/images/halve.png"></a> <div class="post-title-section"> <div class="section-line">Posts <em>/</em></div> <h1 class="section-title">Socket通信 </h1> <ul class="tags"> <li><a href="http://localhost:4000/tags#Linux">Linux</a></li> </ul> <div class="section-line reverse"><a href="http://localhost:4000/posts">Back to posts</a> <em>/</em></div> </div> </div> </div> <div class="block-right"> <a href="../posts.html" title="posts" class="posts-menu-icon"></a> <a title="projects" class="projects-menu-icon"> <span></span> </a> <div class="inner-post content"> <div class="date-highlight">15 Aug 2020</div> <center><h1><b> Socket通信 </b></h1></center> <p><br /></p> <p>参考：</p> <blockquote> <p><a href="https://blog.csdn.net/qq_33750826/article/details/79408703">Linux之本地Socket通信</a></p> <p><a href="https://www.cnblogs.com/cy568searchx/p/4211124.html">Linux Socket过程详细解释（包括三次握手建立连接，四次握手断开连接）</a></p> <p><a href="https://blog.csdn.net/u010073981/article/details/50734484">Linux socket 本地进程间通信</a></p> </blockquote> <p>最近笔试遇到一个选择题，说在Linux进行Socket通信的时候那个阶段不会阻塞。由于没有接触过这方面的内容，通过查找一些资料进行学习。</p> <blockquote> <p>socket起源于Unix，而Unix/Linux基本哲学之一就是“一切皆文件”，都可以用“打开open –&gt; 读写write/read –&gt; 关闭close”模式来操作。Socket就是该模式的一个实现， socket即是一种特殊的文件，一些socket函数就是对其进行的操作（读/写IO、打开、关闭）.</p> </blockquote> <p>Socket是应用层与TCP/IP协议族通信的中间软件抽象层，它是一组接口。它把复杂的TCP/IP协议隐藏在Socket接口后，对用户来说一组简单的接口就是全部，让Socket去组织数据，以符合指定的协议。</p> <h3 id="socket通信流程">Socket通信流程</h3> <p>服务器端需要创建Socket，绑定地址，进行监听。</p> <p>客户端需要创建Socket，建立连接（指定地址），然后进行数据交互。</p> <p>流程图如下：</p> <p><img src="https://blog.maplestory.work/images/post_image/2020-08-15-Linux-Socket.assets/1597478727294.png" alt="1597478727294" /></p> <p>C++的连接用send发送数据，recv接收数据。</p> <h3 id="socket-服务端例子">Socket 服务端例子</h3> <div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Server.cpp</span>
+<span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;winsock2.h&gt;</span><span class="cp">
+</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">WORD</span> <span class="n">sockVersion</span> <span class="o">=</span> <span class="n">MAKEWORD</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span>
+    <span class="n">WSADATA</span> <span class="n">wsaData</span><span class="p">;</span>
+    <span class="c1">// 初始化WSA</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">WSAStartup</span><span class="p">(</span><span class="n">sockVersion</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">wsaData</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="cm">/**
+        AF_INET  Arpa（TCP/IP） 网络通信协议（IPV4）
+        AF_INET6  IPV6
+        AF_UNIX  UNIX 域协议（文件系统套接字）（或称AF_LOCAL   ，Unix域socket）
+        AF_ISO    ISO标准协议
+        AF_NS    施乐网络体统协议
+        AF_IPX  Novell IPX 协议
+        AF_APPLETALK   Appletalk DDS
+        AF_ROUTE 路由套接字
+        AF_KEY 密钥套接字
+    */</span>
+    <span class="c1">//创建套接字</span>
+    <span class="n">SOCKET</span> <span class="n">slisten</span> <span class="o">=</span> <span class="n">socket</span><span class="p">(</span><span class="n">AF_INET</span><span class="p">,</span> <span class="n">SOCK_STREAM</span><span class="p">,</span> <span class="n">IPPROTO_TCP</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">slisten</span> <span class="o">==</span> <span class="n">INVALID_SOCKET</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">"socket error!"</span><span class="p">);</span>
+        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="c1">// 绑定IP和端口</span>
+    <span class="n">sockaddr_in</span> <span class="n">sin</span><span class="p">;</span>
+    <span class="n">sin</span><span class="p">.</span><span class="n">sin_family</span> <span class="o">=</span> <span class="n">AF_INET</span><span class="p">;</span>
+    <span class="n">sin</span><span class="p">.</span><span class="n">sin_port</span> <span class="o">=</span> <span class="n">htons</span><span class="p">(</span><span class="mi">8888</span><span class="p">);</span>
+    <span class="n">sin</span><span class="p">.</span><span class="n">sin_addr</span><span class="p">.</span><span class="n">S_un</span><span class="p">.</span><span class="n">S_addr</span> <span class="o">=</span> <span class="n">INADDR_ANY</span><span class="p">;</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">bind</span><span class="p">(</span><span class="n">slisten</span><span class="p">,</span> <span class="p">(</span><span class="n">LPSOCKADDR</span><span class="p">)</span><span class="o">&amp;</span><span class="n">sin</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">sin</span><span class="p">))</span> <span class="o">==</span> <span class="n">SOCKET_ERROR</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">"bind error!"</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="c1">//开始监听</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">listen</span><span class="p">(</span><span class="n">slisten</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span> <span class="o">==</span> <span class="n">SOCKET_ERROR</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">"listen error!"</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="c1">// 循环接受数据</span>
+    <span class="n">SOCKET</span> <span class="n">sClient</span><span class="p">;</span>
+    <span class="n">sockaddr_in</span> <span class="n">remoteAddr</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">nAddrlen</span> <span class="o">=</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">remoteAddr</span><span class="p">);</span>
+    <span class="kt">char</span> <span class="n">revData</span><span class="p">[</span><span class="mi">255</span><span class="p">];</span>
+    <span class="k">while</span> <span class="p">(</span><span class="nb">true</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s">Waiting for connect...</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+        <span class="n">sClient</span> <span class="o">=</span> <span class="n">accept</span><span class="p">(</span><span class="n">slisten</span><span class="p">,</span> <span class="p">(</span><span class="n">SOCKADDR</span> <span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">remoteAddr</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">nAddrlen</span><span class="p">);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">sClient</span> <span class="o">==</span> <span class="n">INVALID_SOCKET</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">printf</span><span class="p">(</span><span class="s">"accept error !"</span><span class="p">);</span>
+            <span class="k">continue</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s">ACCEPT an connection: %s </span><span class="se">\r\n</span><span class="s">"</span><span class="p">,</span> <span class="n">inet_ntoa</span><span class="p">(</span><span class="n">remoteAddr</span><span class="p">.</span><span class="n">sin_addr</span><span class="p">));</span>
+
+        <span class="c1">//接收数据</span>
+        <span class="kt">int</span> <span class="n">ret</span> <span class="o">=</span> <span class="n">recv</span><span class="p">(</span><span class="n">sClient</span><span class="p">,</span> <span class="n">revData</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">ret</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">revData</span><span class="p">[</span><span class="n">ret</span><span class="p">]</span> <span class="o">=</span> <span class="mh">0x00</span><span class="p">;</span>
+            <span class="n">printf</span><span class="p">(</span><span class="n">revData</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="c1">//发送数据</span>
+        <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">sendData</span> <span class="o">=</span> <span class="s">"</span><span class="se">\n</span><span class="s">Hello，TCP clinet!</span><span class="se">\n</span><span class="s">"</span><span class="p">;</span>
+        <span class="n">send</span><span class="p">(</span><span class="n">sClient</span><span class="p">,</span> <span class="n">sendData</span><span class="p">,</span> <span class="n">strlen</span><span class="p">(</span><span class="n">sendData</span><span class="p">),</span> <span class="mi">0</span><span class="p">);</span>
+        <span class="n">closesocket</span><span class="p">(</span><span class="n">sClient</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="n">closesocket</span><span class="p">(</span><span class="n">slisten</span><span class="p">);</span>
+    <span class="n">WSACleanup</span><span class="p">();</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div> <h3 id="socket-客户端连接例子">Socket 客户端连接例子</h3> <div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Clinet.cpp</span>
+<span class="cp">#include</span> <span class="cpf">&lt;WINSOCK2.H&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;STDIO.H&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;cstring&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;string&gt;</span><span class="cp">
+</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="cp">#pragma comment(lib, "ws2_32.lib")
+</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">WORD</span> <span class="n">sockVersion</span> <span class="o">=</span> <span class="n">MAKEWORD</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span>
+    <span class="n">WSADATA</span> <span class="n">data</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">WSAStartup</span><span class="p">(</span><span class="n">sockVersion</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">data</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">while</span> <span class="p">(</span><span class="nb">true</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">// 创建SOCKET</span>
+        <span class="n">SOCKET</span> <span class="n">sclient</span> <span class="o">=</span> <span class="n">socket</span><span class="p">(</span><span class="n">AF_INET</span><span class="p">,</span> <span class="n">SOCK_STREAM</span><span class="p">,</span> <span class="n">IPPROTO_TCP</span><span class="p">);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">sclient</span> <span class="o">==</span> <span class="n">INVALID_SOCKET</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">printf</span><span class="p">(</span><span class="s">"invalid socket!"</span><span class="p">);</span>
+            <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="n">sockaddr_in</span> <span class="n">serAddr</span><span class="p">;</span>
+        <span class="n">serAddr</span><span class="p">.</span><span class="n">sin_family</span> <span class="o">=</span> <span class="n">AF_INET</span><span class="p">;</span>
+        <span class="n">serAddr</span><span class="p">.</span><span class="n">sin_port</span> <span class="o">=</span> <span class="n">htons</span><span class="p">(</span><span class="mi">8888</span><span class="p">);</span>
+        <span class="n">serAddr</span><span class="p">.</span><span class="n">sin_addr</span><span class="p">.</span><span class="n">S_un</span><span class="p">.</span><span class="n">S_addr</span> <span class="o">=</span> <span class="n">inet_addr</span><span class="p">(</span><span class="s">"127.0.0.1"</span><span class="p">);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">connect</span><span class="p">(</span><span class="n">sclient</span><span class="p">,</span> <span class="p">(</span><span class="n">sockaddr</span> <span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">serAddr</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">serAddr</span><span class="p">))</span> <span class="o">==</span> <span class="n">SOCKET_ERROR</span><span class="p">)</span>
+        <span class="p">{</span> <span class="c1">//连接失败</span>
+            <span class="n">printf</span><span class="p">(</span><span class="s">"connect error !"</span><span class="p">);</span>
+            <span class="n">closesocket</span><span class="p">(</span><span class="n">sclient</span><span class="p">);</span>
+            <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="n">string</span> <span class="n">data</span><span class="p">;</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">data</span><span class="p">;</span>
+        <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">sendData</span><span class="p">;</span>
+        <span class="n">sendData</span> <span class="o">=</span> <span class="n">data</span><span class="p">.</span><span class="n">c_str</span><span class="p">();</span> <span class="c1">//string转const char*</span>
+        <span class="c1">//char * sendData = "你好，TCP服务端，我是客户端\n";</span>
+        <span class="n">send</span><span class="p">(</span><span class="n">sclient</span><span class="p">,</span> <span class="n">sendData</span><span class="p">,</span> <span class="n">strlen</span><span class="p">(</span><span class="n">sendData</span><span class="p">),</span> <span class="mi">0</span><span class="p">);</span>
+        <span class="c1">//send()用来将数据由指定的socket传给对方主机</span>
+        <span class="c1">//int send(int s, const void * msg, int len, unsigned int flags)</span>
+        <span class="c1">//s为已建立好连接的socket，msg指向数据内容，len则为数据长度，参数flags一般设0</span>
+        <span class="c1">//成功则返回实际传送出去的字符数，失败返回-1，错误原因存于error</span>
+
+        <span class="kt">char</span> <span class="n">recData</span><span class="p">[</span><span class="mi">255</span><span class="p">];</span>
+        <span class="kt">int</span> <span class="n">ret</span> <span class="o">=</span> <span class="n">recv</span><span class="p">(</span><span class="n">sclient</span><span class="p">,</span> <span class="n">recData</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">ret</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">recData</span><span class="p">[</span><span class="n">ret</span><span class="p">]</span> <span class="o">=</span> <span class="mh">0x00</span><span class="p">;</span>
+            <span class="n">printf</span><span class="p">(</span><span class="n">recData</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="n">closesocket</span><span class="p">(</span><span class="n">sclient</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="n">WSACleanup</span><span class="p">();</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div> <br> <nav class="pagination"> <a href="http://localhost:4000/CRC/" class="pagination_pager" title="CRC ">previous</a> <a href="http://localhost:4000/%E7%BA%BF%E7%A8%8B%E6%B1%A0/" class="pagination_pager" title="线程池 ">next</a> </nav> </div> </div> <!-- JS --> <script src="http://localhost:4000/assets/js/main.min.js"></script> <div class="overlay"> <ul class="projects-menu"> <li style="background:url(http://localhost:4000/images/benjamin-deyoung-unsplash.jpg) center center no-repeat;"> <a href="https://github.com/Maple-Chan" target="_blank" rel="nofollow external"> <span> GitHub Home </span> </a> </li> </ul> </div> </body> </html>

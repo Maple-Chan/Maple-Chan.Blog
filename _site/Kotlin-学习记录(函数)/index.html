@@ -1,108 +1,108 @@
-<!DOCTYPE html> <html> <head> <meta charset="utf-8"> <meta http-equiv="X-UA-Compatible" content="IE=edge"> <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"> <title>Kotlin 学习记录（函数） &#8211; Maple Story</title> <meta name="description" content="浙大成功软件实习、学习"> <meta name="keywords" content="Kotlin"> <!-- Twitter Cards --> <meta name="twitter:card" content="summary"> <meta name="twitter:image" content="halve.png"> <meta name="twitter:title" content="Kotlin 学习记录（函数）"> <meta name="twitter:description" content="浙大成功软件实习、学习"> <!-- Open Graph --> <meta property="og:locale" content="en_US"> <meta property="og:type" content="article"> <meta property="og:title" content="Kotlin 学习记录（函数）"> <meta property="og:description" content="浙大成功软件实习、学习"> <meta property="og:url" content="https://www.maplestory.work/Kotlin-%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95(%E5%87%BD%E6%95%B0)/"> <meta property="og:site_name" content="Maple Story"> <meta property="og:image" content="https://www.maplestory.work/images/halve.png"> <link rel="canonical" href="https://www.maplestory.work/Kotlin-%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95(%E5%87%BD%E6%95%B0)/"> <!-- Handheld --> <meta name="HandheldFriendly" content="True"> <meta name="MobileOptimized" content="320"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Feed --> <link type="application/atom+xml" rel="alternate" href="https://www.maplestory.work/feed.xml" title="" /> <!-- Favicons --> <link rel="shortcut icon" type="image/png" href="https://www.maplestory.work/favicon.png" /> <link rel="shortcut icon" href="https://www.maplestory.work/favicon.ico" /> <!-- CSS --> <link rel="stylesheet" type="text/css" href="https://www.maplestory.work/assets/css/main.css"> <!-- Left Block Image for Posts --> <style type="text/css"> #posts.inner-post-page .block-left {background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(https://www.maplestory.work/images/unsplash-gallery-image-3.jpg) no-repeat;background-size: cover;} </style> <!-- Left Block Images for Home and Pages --> <style type="text/css"> #posts .block-left {background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(https://www.maplestory.work/images/unsplash-image-10.jpg) no-repeat;background-size: cover, cover;} .block-left {background: linear-gradient(rgba(44,45,51,0.9), rgba(44,45,51,0.9)), url(https://www.maplestory.work/images/home.jpg) no-repeat;background-size: cover;} </style> </head> <body id="posts" class="inner-post-page"> <div class="block-left"> <div class="content"> <a href="https://www.maplestory.work" class="logo"><img src="https://www.maplestory.work/images/halve.png"></a> <div class="post-title-section"> <div class="section-line">Posts <em>/</em></div> <h1 class="section-title">Kotlin 学习记录（函数） </h1> <ul class="tags"> <li><a href="https://www.maplestory.work/tags#Kotlin">Kotlin</a></li> </ul> <div class="section-line reverse"><a href="https://www.maplestory.work/posts">Back to posts</a> <em>/</em></div> </div> </div> </div> <div class="block-right"> <a href="../posts.html" title="posts" class="posts-menu-icon"></a> <a title="projects" class="projects-menu-icon"> <span></span> </a> <div class="inner-post content"> <div class="date-highlight">15 Jul 2019</div> <center><h2><b> Kotlin 学习记录 </b></h2></center> <p><br /></p> <div class="highlighter-rouge"><pre class="highlight"><code>本文只记录重要的或者与C/C++、Java 出入较大的内容
-</code></pre></div> <h2 id="kotlin-">Kotlin 函数</h2> <ol> <li> <p>默认参数</p><pre><code class="language-kotlin">fun defArgs(numA : Int  = 1, numB : Float = 2f, numC : Boolean = false){
-    println("numA  =  $numA \t numB = $numB \t numC = $numC")
-}
+<!DOCTYPE html> <html> <head> <meta charset="utf-8"> <meta http-equiv="X-UA-Compatible" content="IE=edge"> <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"> <title>Kotlin 学习记录（函数） &#8211; Maple Story</title> <meta name="description" content="浙大成功软件实习、学习"> <meta name="keywords" content="Kotlin"> <!-- Twitter Cards --> <meta name="twitter:card" content="summary"> <meta name="twitter:image" content="halve.png"> <meta name="twitter:title" content="Kotlin 学习记录（函数）"> <meta name="twitter:description" content="浙大成功软件实习、学习"> <!-- Open Graph --> <meta property="og:locale" content="en_US"> <meta property="og:type" content="article"> <meta property="og:title" content="Kotlin 学习记录（函数）"> <meta property="og:description" content="浙大成功软件实习、学习"> <meta property="og:url" content="http://localhost:4000/Kotlin-%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95(%E5%87%BD%E6%95%B0)/"> <meta property="og:site_name" content="Maple Story"> <meta property="og:image" content="http://localhost:4000/images/halve.png"> <link rel="canonical" href="http://localhost:4000/Kotlin-%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95(%E5%87%BD%E6%95%B0)/"> <!-- Handheld --> <meta name="HandheldFriendly" content="True"> <meta name="MobileOptimized" content="320"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Feed --> <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="" /> <!-- Favicons --> <link rel="shortcut icon" type="image/png" href="http://localhost:4000/favicon.png" /> <link rel="shortcut icon" href="http://localhost:4000/favicon.ico" /> <!-- CSS --> <link rel="stylesheet" type="text/css" href="http://localhost:4000/assets/css/main.css"> <!-- Left Block Image for Posts --> <style type="text/css"> #posts.inner-post-page .block-left {background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(http://localhost:4000/images/unsplash-gallery-image-3.jpg) no-repeat;background-size: cover;} </style> <!-- Left Block Images for Home and Pages --> <style type="text/css"> #posts .block-left {background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(http://localhost:4000/images/unsplash-image-10.jpg) no-repeat;background-size: cover, cover;} .block-left {background: linear-gradient(rgba(44,45,51,0.9), rgba(44,45,51,0.9)), url(http://localhost:4000/images/home.jpg) no-repeat;background-size: cover;} </style> </head> <body id="posts" class="inner-post-page"> <div class="block-left"> <div class="content"> <a href="http://localhost:4000" class="logo"><img src="http://localhost:4000/images/halve.png"></a> <div class="post-title-section"> <div class="section-line">Posts <em>/</em></div> <h1 class="section-title">Kotlin 学习记录（函数） </h1> <ul class="tags"> <li><a href="http://localhost:4000/tags#Kotlin">Kotlin</a></li> </ul> <div class="section-line reverse"><a href="http://localhost:4000/posts">Back to posts</a> <em>/</em></div> </div> </div> </div> <div class="block-right"> <a href="../posts.html" title="posts" class="posts-menu-icon"></a> <a title="projects" class="projects-menu-icon"> <span></span> </a> <div class="inner-post content"> <div class="date-highlight">15 Jul 2019</div> <center><h2><b> Kotlin 学习记录 </b></h2></center> <p><br /></p> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>本文只记录重要的或者与C/C++、Java 出入较大的内容
+</code></pre></div></div> <h2 id="kotlin-函数">Kotlin 函数</h2> <ol> <li> <p>默认参数</p> <div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">fun</span> <span class="nf">defArgs</span><span class="p">(</span><span class="n">numA</span> <span class="p">:</span> <span class="nc">Int</span>  <span class="p">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">numB</span> <span class="p">:</span> <span class="nc">Float</span> <span class="p">=</span> <span class="mf">2f</span><span class="p">,</span> <span class="n">numC</span> <span class="p">:</span> <span class="nc">Boolean</span> <span class="p">=</span> <span class="k">false</span><span class="p">){</span>
+    <span class="nf">println</span><span class="p">(</span><span class="s">"numA  =  $numA \t numB = $numB \t numC = $numC"</span><span class="p">)</span>
+<span class="p">}</span>
    
-fun main(args: Array&lt;String&gt;) {
+<span class="k">fun</span> <span class="nf">main</span><span class="p">(</span><span class="n">args</span><span class="p">:</span> <span class="nc">Array</span><span class="p">&lt;</span><span class="nc">String</span><span class="p">&gt;)</span> <span class="p">{</span>
        
-    // 默认参数的函数使用
-    defArgs()
-    defArgs(1,10f,true)
-}
-</code></pre></li> <li> <p>命名参数</p><pre><code class="language-kotlin">callFun("str",isTrue = true,numA = 3) //java中不支持这么写
-</code></pre></li> <li> <p>可变参数</p> <p>​ 当一个函数中的参数是不定数量的个数并且是同一个类型，则可是使用<code class="highlighter-rouge">vararg</code>修饰符去修饰这个变量，则被<code class="highlighter-rouge">vararg</code>修饰的参数相当于一个固定类型的数组。</p><pre><code class="language-kotlin">fun varargFun(numA: Int, vararg str : String){
-        // 遍历
-    for (s in str) {
+    <span class="c1">// 默认参数的函数使用</span>
+    <span class="nf">defArgs</span><span class="p">()</span>
+    <span class="nf">defArgs</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mf">10f</span><span class="p">,</span><span class="k">true</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div> </div> </li> <li> <p>命名参数</p> <div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">callFun</span><span class="p">(</span><span class="s">"str"</span><span class="p">,</span><span class="n">isTrue</span> <span class="p">=</span> <span class="k">true</span><span class="p">,</span><span class="n">numA</span> <span class="p">=</span> <span class="mi">3</span><span class="p">)</span> <span class="c1">//java中不支持这么写</span>
+</code></pre></div> </div> </li> <li> <p>可变参数</p> <p>​ 当一个函数中的参数是不定数量的个数并且是同一个类型，则可是使用<code class="language-plaintext highlighter-rouge">vararg</code>修饰符去修饰这个变量，则被<code class="language-plaintext highlighter-rouge">vararg</code>修饰的参数相当于一个固定类型的数组。</p> <div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">fun</span> <span class="nf">varargFun</span><span class="p">(</span><span class="n">numA</span><span class="p">:</span> <span class="nc">Int</span><span class="p">,</span> <span class="k">vararg</span> <span class="n">str</span> <span class="p">:</span> <span class="nc">String</span><span class="p">){</span>
+        <span class="c1">// 遍历</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">s</span> <span class="k">in</span> <span class="n">str</span><span class="p">)</span> <span class="p">{</span>
            
-    }
+    <span class="p">}</span>
    
-// 获取元素
-//    str[index]
-//    str.component1() ... str.component5()
+<span class="c1">// 获取元素</span>
+<span class="c1">//    str[index]</span>
+<span class="c1">//    str.component1() ... str.component5()</span>
    
-// 或者其高阶函数用法
-//    str.map {  }
-//    str.filter {  }
-//    str.sortBy {  }
+<span class="c1">// 或者其高阶函数用法</span>
+<span class="c1">//    str.map {  }</span>
+<span class="c1">//    str.filter {  }</span>
+<span class="c1">//    str.sortBy {  }</span>
    
-}
+<span class="p">}</span>
    
-/*
+<span class="cm">/*
 普通传递 : varargFun(1,"aaa","bbb","ccc","ddd","fff")
 数组传递：
         val strArray = arrayOf("aaa","bbb","ccc","ddd","fff")
         varargFun(1,*strArray) // *叫做伸展操作符
- */
-</code></pre></li> <li> <p>单表达式函数</p> <p>​ 函数具备返回值的时候，可以省略花括号并且在<code class="highlighter-rouge">=</code>赋值符号之后指定代码体，而函数的返回值是有编辑器自动推断的</p><pre><code class="language-kotlin">// 无参数的情况
-fun test1() = 2                     // 自动推断为：返回类型为Int
+ */</span>
+</code></pre></div> </div> </li> <li> <p>单表达式函数</p> <p>​ 函数具备返回值的时候，可以省略花括号并且在<code class="language-plaintext highlighter-rouge">=</code>赋值符号之后指定代码体，而函数的返回值是有编辑器自动推断的</p> <div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 无参数的情况</span>
+<span class="k">fun</span> <span class="nf">test1</span><span class="p">()</span> <span class="p">=</span> <span class="mi">2</span>                     <span class="c1">// 自动推断为：返回类型为Int</span>
    
-// 有参数的情况
-fun test2(num : Int) = num * 2      // 自动推断为：返回类型为Int
+<span class="c1">// 有参数的情况</span>
+<span class="k">fun</span> <span class="nf">test2</span><span class="p">(</span><span class="n">num</span> <span class="p">:</span> <span class="nc">Int</span><span class="p">)</span> <span class="p">=</span> <span class="n">num</span> <span class="p">*</span> <span class="mi">2</span>      <span class="c1">// 自动推断为：返回类型为Int</span>
    
-// 或者
-fun test3(x : Float, y : Int = 2) = x * y  // 和默认参数一起使用，返回值为Float型
-</code></pre></li> </ol> <h2 id="section">高阶函数</h2> <h3 id="section-1">将函数作为参数或者返回值的函数称为高阶函数。</h3> <ol> <li><pre><code class="language-kotlin">///函数作为参数
-private fun resultByOpt(num1 : Int , num2 : Int , result : (Int ,Int) -&gt; Int) : Int{
-    return result(num1,num2)
-}
+<span class="c1">// 或者</span>
+<span class="k">fun</span> <span class="nf">test3</span><span class="p">(</span><span class="n">x</span> <span class="p">:</span> <span class="nc">Float</span><span class="p">,</span> <span class="n">y</span> <span class="p">:</span> <span class="nc">Int</span> <span class="p">=</span> <span class="mi">2</span><span class="p">)</span> <span class="p">=</span> <span class="n">x</span> <span class="p">*</span> <span class="n">y</span>  <span class="c1">// 和默认参数一起使用，返回值为Float型</span>
+</code></pre></div> </div> </li> </ol> <h2 id="高阶函数">高阶函数</h2> <h3 id="将函数作为参数或者返回值的函数称为高阶函数">将函数作为参数或者返回值的函数称为高阶函数。</h3> <ol> <li> <div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">///函数作为参数</span>
+<span class="k">private</span> <span class="k">fun</span> <span class="nf">resultByOpt</span><span class="p">(</span><span class="n">num1</span> <span class="p">:</span> <span class="nc">Int</span> <span class="p">,</span> <span class="n">num2</span> <span class="p">:</span> <span class="nc">Int</span> <span class="p">,</span> <span class="n">result</span> <span class="p">:</span> <span class="p">(</span><span class="nc">Int</span> <span class="p">,</span><span class="nc">Int</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="nc">Int</span><span class="p">)</span> <span class="p">:</span> <span class="nc">Int</span><span class="p">{</span>
+    <span class="k">return</span> <span class="nf">result</span><span class="p">(</span><span class="n">num1</span><span class="p">,</span><span class="n">num2</span><span class="p">)</span>
+<span class="p">}</span>
    
-private fun testDemo() {
-    val result1 = resultByOpt(1,2){
-        num1, num2 -&gt;  num1 + num2
-    }
+<span class="k">private</span> <span class="k">fun</span> <span class="nf">testDemo</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">val</span> <span class="py">result1</span> <span class="p">=</span> <span class="nf">resultByOpt</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">){</span>
+        <span class="n">num1</span><span class="p">,</span> <span class="n">num2</span> <span class="p">-&gt;</span>  <span class="n">num1</span> <span class="p">+</span> <span class="n">num2</span>
+    <span class="p">}</span>
    
-    val result2 = resultByOpt(3,4){
-        num1, num2 -&gt;  num1 - num2
-    }
+    <span class="kd">val</span> <span class="py">result2</span> <span class="p">=</span> <span class="nf">resultByOpt</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">){</span>
+        <span class="n">num1</span><span class="p">,</span> <span class="n">num2</span> <span class="p">-&gt;</span>  <span class="n">num1</span> <span class="p">-</span> <span class="n">num2</span>
+    <span class="p">}</span>
    
-    val result3 = resultByOpt(5,6){
-        num1, num2 -&gt;  num1 * num2
-    }
+    <span class="kd">val</span> <span class="py">result3</span> <span class="p">=</span> <span class="nf">resultByOpt</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">){</span>
+        <span class="n">num1</span><span class="p">,</span> <span class="n">num2</span> <span class="p">-&gt;</span>  <span class="n">num1</span> <span class="p">*</span> <span class="n">num2</span>
+    <span class="p">}</span>
    
-    val result4 = resultByOpt(6,3){
-        num1, num2 -&gt;  num1 / num2
-    }
+    <span class="kd">val</span> <span class="py">result4</span> <span class="p">=</span> <span class="nf">resultByOpt</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">3</span><span class="p">){</span>
+        <span class="n">num1</span><span class="p">,</span> <span class="n">num2</span> <span class="p">-&gt;</span>  <span class="n">num1</span> <span class="p">/</span> <span class="n">num2</span>
+    <span class="p">}</span>
    
-    println("result1 = $result1")
-    println("result2 = $result2")
-    println("result3 = $result3")
-    println("result4 = $result4")
-}
-</code></pre></li> <li><pre><code class="language-kotlin">///返回值为函数
-fun test5(a:Int):()-&gt;Int{
-    println("")
-    var b = 3
-    return fun():Int{
-        println("b=&gt; $b")
-        b++
-        return b + a
-    }
-}
-</code></pre></li> </ol> <h3 id="section-2">常用的标准高阶函数</h3> <ol> <li> <p>TODO函数：将会抛出异常，根据参数的内容输出异常内容</p> </li> <li> <p>run函数：两种用法</p> <p>​ 当我们需要执行一个<code class="highlighter-rouge">代码块</code>的时候就可以用到这个函数,并且这个代码块是独立的。即我可以在<code class="highlighter-rouge">run()</code>函数中写一些和项目无关的代码，因为它不会影响项目的正常运行。</p><pre><code class="language-kotlin">private fun testRun1() {
-    val str = "kotlin"
+    <span class="nf">println</span><span class="p">(</span><span class="s">"result1 = $result1"</span><span class="p">)</span>
+    <span class="nf">println</span><span class="p">(</span><span class="s">"result2 = $result2"</span><span class="p">)</span>
+    <span class="nf">println</span><span class="p">(</span><span class="s">"result3 = $result3"</span><span class="p">)</span>
+    <span class="nf">println</span><span class="p">(</span><span class="s">"result4 = $result4"</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div> </div> </li> <li> <div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">///返回值为函数</span>
+<span class="k">fun</span> <span class="nf">test5</span><span class="p">(</span><span class="n">a</span><span class="p">:</span><span class="nc">Int</span><span class="p">):()-&gt;</span><span class="nc">Int</span><span class="p">{</span>
+    <span class="nf">println</span><span class="p">(</span><span class="s">""</span><span class="p">)</span>
+    <span class="kd">var</span> <span class="py">b</span> <span class="p">=</span> <span class="mi">3</span>
+    <span class="k">return</span> <span class="k">fun</span><span class="p">():</span><span class="nc">Int</span><span class="p">{</span>
+        <span class="nf">println</span><span class="p">(</span><span class="s">"b=&gt; $b"</span><span class="p">)</span>
+        <span class="n">b</span><span class="p">++</span>
+        <span class="k">return</span> <span class="n">b</span> <span class="p">+</span> <span class="n">a</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div> </div> </li> </ol> <h3 id="常用的标准高阶函数">常用的标准高阶函数</h3> <ol> <li> <p>TODO函数：将会抛出异常，根据参数的内容输出异常内容</p> </li> <li> <p>run函数：两种用法</p> <p>​ 当我们需要执行一个<code class="language-plaintext highlighter-rouge">代码块</code>的时候就可以用到这个函数,并且这个代码块是独立的。即我可以在<code class="language-plaintext highlighter-rouge">run()</code>函数中写一些和项目无关的代码，因为它不会影响项目的正常运行。</p> <div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">private</span> <span class="k">fun</span> <span class="nf">testRun1</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">val</span> <span class="py">str</span> <span class="p">=</span> <span class="s">"kotlin"</span>
    
-    run{
-        val str = "java"   // 和上面的变量不会冲突
-        println("str = $str")
-    }
+    <span class="nf">run</span><span class="p">{</span>
+        <span class="kd">val</span> <span class="py">str</span> <span class="p">=</span> <span class="s">"java"</span>   <span class="c1">// 和上面的变量不会冲突</span>
+        <span class="nf">println</span><span class="p">(</span><span class="s">"str = $str"</span><span class="p">)</span>
+    <span class="p">}</span>
    
-    println("str = $str")
-}    
-</code></pre><p>​ 因为<code class="highlighter-rouge">run</code>函数执行了我传进去的<code class="highlighter-rouge">lambda</code>表达式并返回了执行的结果，所以当一个业务逻辑都需要执行同一段代码而根据不同的条件去判断得到不同结果的时候。可以用到<code class="highlighter-rouge">run</code>函数</p><pre><code class="language-kotlin">val index = 3
-val num = run {
-    when(index){
-        0 -&gt; "kotlin"
-        1 -&gt; "java"
-        2 -&gt; "php"
-        3 -&gt; "javaScript"
-        else -&gt; "none"
-    }
-}.length
-println("num = $num")
-</code></pre><p>​ 被一个对象所调用。<strong>当我们传入的lambda表达式想要使用当前对象的上下文的时候，我们可以使用这个函数。</strong></p> <div class="highlighter-rouge"><pre class="highlight"><code>val str = "kotlin"
+    <span class="nf">println</span><span class="p">(</span><span class="s">"str = $str"</span><span class="p">)</span>
+<span class="p">}</span>    
+</code></pre></div> </div> <p>​ 因为<code class="language-plaintext highlighter-rouge">run</code>函数执行了我传进去的<code class="language-plaintext highlighter-rouge">lambda</code>表达式并返回了执行的结果，所以当一个业务逻辑都需要执行同一段代码而根据不同的条件去判断得到不同结果的时候。可以用到<code class="language-plaintext highlighter-rouge">run</code>函数</p> <div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">val</span> <span class="py">index</span> <span class="p">=</span> <span class="mi">3</span>
+<span class="kd">val</span> <span class="py">num</span> <span class="p">=</span> <span class="nf">run</span> <span class="p">{</span>
+    <span class="k">when</span><span class="p">(</span><span class="n">index</span><span class="p">){</span>
+        <span class="mi">0</span> <span class="p">-&gt;</span> <span class="s">"kotlin"</span>
+        <span class="mi">1</span> <span class="p">-&gt;</span> <span class="s">"java"</span>
+        <span class="mi">2</span> <span class="p">-&gt;</span> <span class="s">"php"</span>
+        <span class="mi">3</span> <span class="p">-&gt;</span> <span class="s">"javaScript"</span>
+        <span class="k">else</span> <span class="p">-&gt;</span> <span class="s">"none"</span>
+    <span class="p">}</span>
+<span class="p">}.</span><span class="n">length</span>
+<span class="nf">println</span><span class="p">(</span><span class="s">"num = $num"</span><span class="p">)</span>
+</code></pre></div> </div> <p>​ 被一个对象所调用。<strong>当我们传入的lambda表达式想要使用当前对象的上下文的时候，我们可以使用这个函数。</strong></p> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>val str = "kotlin"
 str.run {
     println( "length = ${this.length}" )
     println( "first = ${first()}")
     println( "last = ${last()}" )
 }
-</code></pre></div> </li> <li> <p>同时还有<code class="highlighter-rouge">with</code> / <code class="highlighter-rouge">let</code> / <code class="highlighter-rouge">apply</code> / <code class="highlighter-rouge">also</code> / <code class="highlighter-rouge">takeIf()</code> / <code class="highlighter-rouge">takeUnless</code> / <code class="highlighter-rouge">repeat()</code> / <code class="highlighter-rouge">lazy()</code> 分别有不同的用法</p> </li> </ol> <br> <nav class="pagination"> <a href="https://www.maplestory.work/Kotlin-%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95(Lambda-&-%E7%A9%BA%E7%B1%BB%E5%9E%8B-%E7%A9%BA%E5%AE%89%E5%85%A8)/" class="pagination_pager" title="Kotlin 学习记录（Lambda &amp; 空类型） ">previous</a> <a href="https://www.maplestory.work/Kotlin-%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95(%E5%B8%B8%E5%8F%98%E9%87%8F)/" class="pagination_pager" title="Kotlin 学习记录（常变量、数据类型） ">next</a> </nav> </div> </div> <!-- JS --> <script src="https://www.maplestory.work/assets/js/main.min.js"></script> <div class="overlay"> <ul class="projects-menu"> <li style="background:url(https://www.maplestory.work/images/benjamin-deyoung-unsplash.jpg) center center no-repeat;"> <a href="https://github.com/Maple-Chan" target="_blank" rel="nofollow external"> <span> GitHub Home </span> </a> </li> </ul> </div> </body> </html>
+</code></pre></div> </div> </li> <li> <p>同时还有<code class="language-plaintext highlighter-rouge">with</code> / <code class="language-plaintext highlighter-rouge">let</code> / <code class="language-plaintext highlighter-rouge">apply</code> / <code class="language-plaintext highlighter-rouge">also</code> / <code class="language-plaintext highlighter-rouge">takeIf()</code> / <code class="language-plaintext highlighter-rouge">takeUnless</code> / <code class="language-plaintext highlighter-rouge">repeat()</code> / <code class="language-plaintext highlighter-rouge">lazy()</code> 分别有不同的用法</p> </li> </ol> <br> <nav class="pagination"> <a href="http://localhost:4000/Kotlin-%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95(Lambda-&-%E7%A9%BA%E7%B1%BB%E5%9E%8B-%E7%A9%BA%E5%AE%89%E5%85%A8)/" class="pagination_pager" title="Kotlin 学习记录（Lambda &amp; 空类型） ">previous</a> <a href="http://localhost:4000/Kotlin-%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95(%E5%B8%B8%E5%8F%98%E9%87%8F)/" class="pagination_pager" title="Kotlin 学习记录（常变量、数据类型） ">next</a> </nav> </div> </div> <!-- JS --> <script src="http://localhost:4000/assets/js/main.min.js"></script> <div class="overlay"> <ul class="projects-menu"> <li style="background:url(http://localhost:4000/images/benjamin-deyoung-unsplash.jpg) center center no-repeat;"> <a href="https://github.com/Maple-Chan" target="_blank" rel="nofollow external"> <span> GitHub Home </span> </a> </li> </ul> </div> </body> </html>
