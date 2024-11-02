@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom"><generator uri="http://jekyllrb.com" version="3.9.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2024-11-02T21:43:23+08:00</updated><id>http://localhost:4000/</id><title>Maple Story</title><subtitle>Personal Blog, since 9102</subtitle><entry><title>Pro Git 读书笔记</title><link href="http://localhost:4000/ProGit%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/" rel="alternate" type="text/html" title="Pro Git 读书笔记" /><published>2020-12-05T00:00:00+08:00</published><updated>2020-12-05T00:00:00+08:00</updated><id>http://localhost:4000/ProGit读书笔记</id><content type="html" xml:base="http://localhost:4000/ProGit%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">&lt;center&gt;&lt;h2&gt;&lt;b&gt;Pro Git 读书笔记&lt;/b&gt;&lt;/h2&gt;&lt;/center&gt;
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;</content><category term="Git" /><summary>Stick to note down what I&apos;v learnt</summary></entry><entry><title>Builder模式</title><link href="http://localhost:4000/Builder%E6%A8%A1%E5%BC%8F/" rel="alternate" type="text/html" title="Builder模式" /><published>2020-11-23T00:00:00+08:00</published><updated>2020-11-23T00:00:00+08:00</updated><id>http://localhost:4000/Builder模式</id><content type="html" xml:base="http://localhost:4000/Builder%E6%A8%A1%E5%BC%8F/">&lt;center&gt;&lt;h2&gt;&lt;b&gt; Builder模式 &lt;/b&gt;&lt;/h2&gt;&lt;/center&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom"><generator uri="http://jekyllrb.com" version="3.9.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2024-11-02T21:51:42+08:00</updated><id>http://localhost:4000/</id><title>Maple Story</title><subtitle>Personal Blog, since 9102</subtitle><entry><title>Builder模式</title><link href="http://localhost:4000/Builder%E6%A8%A1%E5%BC%8F/" rel="alternate" type="text/html" title="Builder模式" /><published>2020-11-23T00:00:00+08:00</published><updated>2020-11-23T00:00:00+08:00</updated><id>http://localhost:4000/Builder模式</id><content type="html" xml:base="http://localhost:4000/Builder%E6%A8%A1%E5%BC%8F/">&lt;center&gt;&lt;h2&gt;&lt;b&gt; Builder模式 &lt;/b&gt;&lt;/h2&gt;&lt;/center&gt;
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
 &lt;h3 id=&quot;介绍&quot;&gt;介绍&lt;/h3&gt;
@@ -683,4 +682,552 @@ git push origin localBranchName:remoteBranchName
 
 &lt;p&gt;在需要跳转处&lt;/p&gt;
 
-&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;a href=&quot;#anchor&quot;&amp;gt;Jump to anchor &amp;lt;/a&amp;gt;&lt;/code&gt;&lt;/p&gt;</content><category term="Markdown" /><summary>Stick to note down what I&apos;v learnt</summary></entry></feed>
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;a href=&quot;#anchor&quot;&amp;gt;Jump to anchor &amp;lt;/a&amp;gt;&lt;/code&gt;&lt;/p&gt;</content><category term="Markdown" /><summary>Stick to note down what I&apos;v learnt</summary></entry><entry><title>线程池</title><link href="http://localhost:4000/%E7%BA%BF%E7%A8%8B%E6%B1%A0/" rel="alternate" type="text/html" title="线程池" /><published>2020-08-16T00:00:00+08:00</published><updated>2020-08-16T00:00:00+08:00</updated><id>http://localhost:4000/线程池</id><content type="html" xml:base="http://localhost:4000/%E7%BA%BF%E7%A8%8B%E6%B1%A0/">&lt;center&gt;&lt;h1&gt;&lt;b&gt;线程池&lt;/b&gt;&lt;/h1&gt;&lt;/center&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;参考：&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;a href=&quot;https://www.cnblogs.com/sachen/p/7401959.html&quot;&gt;线程池的种类，区别和使用场景&lt;/a&gt;&lt;/p&gt;
+
+  &lt;p&gt;&lt;a href=&quot;https://www.jianshu.com/p/d1ba6a871df8&quot;&gt;Java线程池类型介绍&lt;/a&gt;&lt;/p&gt;
+
+  &lt;p&gt;&lt;a href=&quot;https://www.cnblogs.com/dolphin0520/p/3932921.html&quot;&gt;Java并发编程：线程池的使用&lt;/a&gt;&lt;/p&gt;
+
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;为什么要用线程池&quot;&gt;为什么要用线程池&lt;/h2&gt;
+
+&lt;p&gt;当我们需要的并发执行线程数量很多时，且每个线程执行很短的时间就结束了，这样，我们频繁的创建、销毁线程就大大降低了工作效率（创建和销毁线程需要时间、资源）。
+java中的线程池可以达到这样的效果：一个线程执行完任务之后，继续去执行下一个任务，不被销毁，这样线程利用率提高了。&lt;/p&gt;
+
+&lt;h2 id=&quot;线程池种类&quot;&gt;线程池种类&lt;/h2&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;参考：&lt;/p&gt;
+
+  &lt;p&gt;&lt;a href=&quot;https://www.cnblogs.com/jiawen010/p/11855768.html&quot;&gt;4种常用线程池介绍&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;1-newcachedthreadpool&quot;&gt;1. newCachedThreadPool：&lt;/h3&gt;
+
+&lt;p&gt;​		可缓存线程池。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;流程：&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;​		先查看池中有没有以前建立的线程，如果有则直接使用。如果没有则新建一个线程加入线程池。&lt;/p&gt;
+
+&lt;p&gt;​		他根据需要创建线程，corePoolSize为0，当60s内没有任务时（可以通过自己创建线程池来设置该时间），将会回收存活的线程，60s内有任务时，他可以重用已有的线程。注意他的工作队列是SynchronousQueue，他的每一个put操作必须等待take操作，这意味着如果任务生产速度大于消费速度，那么他将不会创建新线程。该线程池适合执行大量小任务的场景。&lt;/p&gt;
+
+&lt;h4 id=&quot;可缓存线程池实现&quot;&gt;可缓存线程池实现&lt;/h4&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://blog.maplestory.work/images/post_image/2020-07-27-线程池.assets/1597546156736.png&quot; alt=&quot;1597546156736&quot; /&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;可缓存线程池实践-1&quot;&gt;可缓存线程池实践 1&lt;/h4&gt;
+
+&lt;p&gt;可缓存线程池的复用情况。&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;package&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;javatest.threadpool&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;java.util.Date&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;java.util.concurrent.ExecutorService&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;java.util.concurrent.Executors&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;java.util.concurrent.SynchronousQueue&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;java.util.concurrent.ThreadPoolExecutor&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;java.util.concurrent.TimeUnit&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;cm&quot;&gt;/**
+ * @description: 缓存线程池测试
+ * @modifyContent:
+ * @author: Maple Chan
+ * @date: 2020-07-28 21:21:29
+ * @version: 0.0.1
+ */&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;NewCachedTest&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;long&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;startTime&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+
+        &lt;span class=&quot;cm&quot;&gt;/**
+         * 手动创建线程池，效果会更好哦。 (rule: AlibabaJavaConcurrent-ThreadPoolCreationRule)Java P3C
+         * CheckerThreadPoolCreationRule
+         */&lt;/span&gt;
+
+        &lt;span class=&quot;nc&quot;&gt;ExecutorService&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cachedThreadPool&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Executors&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;newCachedThreadPool&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+        &lt;span class=&quot;nc&quot;&gt;Executors&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;newSingleThreadExecutor&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;try&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+                &lt;span class=&quot;nc&quot;&gt;Thread&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;sleep&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1000&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+            &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;catch&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;InterruptedException&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+                &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;printStackTrace&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+            &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;cachedThreadPool&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;execute&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Runnable&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+                &lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
+                &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+                    &lt;span class=&quot;nc&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;Thread&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;currentThread&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getName&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;-正在执行...&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+                    &lt;span class=&quot;k&quot;&gt;try&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+                        &lt;span class=&quot;nc&quot;&gt;Thread&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;sleep&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1000&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+                    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;catch&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;InterruptedException&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+                        &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;printStackTrace&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+                    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+                &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+            &lt;span class=&quot;o&quot;&gt;});&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;nc&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;New cached thread test finished!&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;// 输出：&lt;/span&gt;
+&lt;span class=&quot;cm&quot;&gt;/*
+pool-1-thread-1-正在执行...
+pool-1-thread-2-正在执行...
+pool-1-thread-1-正在执行...
+pool-1-thread-2-正在执行...
+pool-1-thread-1-正在执行...
+pool-1-thread-2-正在执行...
+pool-1-thread-2-正在执行...
+pool-1-thread-1-正在执行...
+pool-1-thread-2-正在执行...
+New cached thread test finished!
+pool-1-thread-1-正在执行...
+// 此时程序还没退出，因为线程池还没有terminated
+*/&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;通过上述代码测试结果发现，该线程池一共只启动两个线程，&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;pool-1-thread-1&lt;/code&gt;与&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;pool-1-thread-2&lt;/code&gt;。&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;可缓存线程池为无限大，当执行当前任务时上一个任务已经完成，会复用执行上一个任务的线程，而不用每次新建线程。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h4 id=&quot;可缓存线程池实践-2&quot;&gt;可缓存线程池实践 2&lt;/h4&gt;
+
+&lt;p&gt;可以发现之前可缓存线程池测试结束之后，整个main程序还没有退出，估计是和缓存线程池还没有退出的原因。下面进一步实践，探究该线程池。&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;nc&quot;&gt;ExecutorService&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cachedThreadPool&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Executors&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;newCachedThreadPool&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+
+            &lt;span class=&quot;k&quot;&gt;try&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+                &lt;span class=&quot;nc&quot;&gt;Thread&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;sleep&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1000&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+            &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;catch&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;InterruptedException&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+                &lt;span class=&quot;c1&quot;&gt;// TODO Auto-generated catch block&lt;/span&gt;
+                &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;printStackTrace&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+            &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;cachedThreadPool&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;execute&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Runnable&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+                &lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
+                &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+                    &lt;span class=&quot;nc&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;Thread&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;currentThread&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getName&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;-正在执行...&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+                    &lt;span class=&quot;k&quot;&gt;try&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+                        &lt;span class=&quot;nc&quot;&gt;Thread&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;sleep&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1000&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+                    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;catch&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;InterruptedException&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+                        &lt;span class=&quot;c1&quot;&gt;// TODO Auto-generated catch block&lt;/span&gt;
+                        &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;printStackTrace&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+                    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+                &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+            &lt;span class=&quot;o&quot;&gt;});&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;nc&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;New cached thread test finished!&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;startTime&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;currentTimeMillis&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+        &lt;span class=&quot;kt&quot;&gt;long&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;endTime&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;while&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cachedThreadPool&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;isShutdown&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;())&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;try&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+                &lt;span class=&quot;nc&quot;&gt;Thread&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;sleep&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1000&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+            &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;catch&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;InterruptedException&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+                &lt;span class=&quot;c1&quot;&gt;// TODO Auto-generated catch block&lt;/span&gt;
+                &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;printStackTrace&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+            &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+            &lt;span class=&quot;nc&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;cachedThreadPool is not shutdown!&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;while&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cachedThreadPool&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;isTerminated&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;())&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;try&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+                &lt;span class=&quot;nc&quot;&gt;Thread&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;sleep&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1000&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+            &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;catch&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;InterruptedException&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+                &lt;span class=&quot;c1&quot;&gt;// TODO Auto-generated catch block&lt;/span&gt;
+                &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;printStackTrace&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+            &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+            &lt;span class=&quot;nc&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;cachedThreadPool is not terminated!&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;endTime&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;currentTimeMillis&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;endTime&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;endTime&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;startTime&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;nc&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;上个线程执行完的时间到程序退出时间：&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;endTime&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot; ms&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;// 输出&lt;/span&gt;
+&lt;span class=&quot;cm&quot;&gt;/*
+pool-1-thread-1-正在执行...
+pool-1-thread-2-正在执行...
+pool-1-thread-1-正在执行...
+pool-1-thread-2-正在执行...
+pool-1-thread-1-正在执行...
+pool-1-thread-2-正在执行...
+pool-1-thread-1-正在执行...
+pool-1-thread-2-正在执行...
+pool-1-thread-1-正在执行...
+New cached thread test finished!
+pool-1-thread-2-正在执行...
+上个线程执行完的时间到程序退出时间：0 ms
+*/&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;通过上述代码测试发现，缓存线程在执行完线程之后并没有直接退出。&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;while (cachedThreadPool.isShutdown())&lt;/code&gt;、 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;while (cachedThreadPool.isTerminated()) &lt;/code&gt;两个循环都没有进入。通过手动计时，线程执行结束到整个程序退出的时间正好是&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;60L, TimeUnit.SECONDS,&lt;/code&gt; 60秒。&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Java中没法在finalize中获取currentTimeMillis，从而获得线程池退出需要用的时间。&lt;/p&gt;
+
+  &lt;p&gt;等想到办法用代码计时之后再回来补充。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h4 id=&quot;可缓存线程池实践-3&quot;&gt;可缓存线程池实践 3&lt;/h4&gt;
+
+&lt;p&gt;上个实践中提到，线程退出时间是60秒，这个时间有办法调整么？带着这个问题，我看了&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;newCachedThreadPool&lt;/code&gt; 调用的源码。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://blog.maplestory.work/images/post_image/2020-07-27-线程池.assets/1597547961589.png&quot; alt=&quot;1597547961589&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;通过这个源码，实现自己的可缓存线程池，修改60s这个参数。&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// 替换上面代码实例化线程池的方式&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;//ExecutorService cachedThreadPool = Executors.newCachedThreadPool();&lt;/span&gt;
+&lt;span class=&quot;nc&quot;&gt;ThreadPoolExecutor&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cachedThreadPool&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; 
+    &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;ThreadPoolExecutor&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Integer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;MAX_VALUE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;10L&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; 
+                           &lt;span class=&quot;nc&quot;&gt;TimeUnit&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;SECONDS&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;
+                           &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;SynchronousQueue&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;Runnable&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;());&lt;/span&gt;
+&lt;span class=&quot;cm&quot;&gt;/*
+pool-1-thread-1-正在执行...
+pool-1-thread-2-正在执行...
+pool-1-thread-1-正在执行...
+pool-1-thread-2-正在执行...
+pool-1-thread-2-正在执行...
+pool-1-thread-2-正在执行...
+pool-1-thread-1-正在执行...
+pool-1-thread-2-正在执行...
+pool-1-thread-1-正在执行...
+New cached thread test finished!
+pool-1-thread-2-正在执行...
+上个线程执行完的时间到程序退出时间：0 ms
+*/&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;输出结果一样，但是通过手动计时，线程执行结束到整个程序退出的时间差不多&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;10L, TimeUnit.SECONDS,&lt;/code&gt; 60秒。&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;同时，如果采用&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Executors&lt;/code&gt;实例化线程池的，并且使用ali的代码规范的话会提示：&lt;/p&gt;
+
+  &lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;手动创建线程池，效果会更好哦。 (rule: AlibabaJavaConcurrent-ThreadPoolCreationRule)Java P3C&lt;/code&gt;&lt;/p&gt;
+
+  &lt;p&gt;因此，可以多尝试自定义的方式实例化线程池。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;2-newfixedthreadpool&quot;&gt;2. newFixedThreadPool：&lt;/h3&gt;
+
+&lt;p&gt;​	线程的数量是固定的，线程并不会随着任务的多少而变化。&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Executors.newFixedThreadPool(nThreads);&lt;/code&gt;传入参数nThreads，固定线程池的线程个数，包括核心线程数、最大线程数。当线程池满了，就会放入阻塞队列。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;流程：&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;​	FixedThreadPool中最多只有固定数目线程存在，一个线程实例请求加入FixedThreadPool时，如果该实例不存在，且没有达到线程池数目上线，则会创建一个实例，否则，会先加入等待序列，当FixedThreadPool中有一个线程停止并移出线程池后，线程实例才能加入线程池。&lt;/p&gt;
+
+&lt;p&gt;​	FixedThreadPool没有超时机制,适用于稳定且并发线程任务。&lt;/p&gt;
+
+&lt;h4 id=&quot;固定线程池实现&quot;&gt;&lt;strong&gt;固定线程池实现&lt;/strong&gt;&lt;/h4&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://blog.maplestory.work/images/post_image/2020-07-27-线程池.assets/1597548944599.png&quot; alt=&quot;1597548944599&quot; /&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;固定线程池实践&quot;&gt;固定线程池实践&lt;/h4&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;package&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;javatest.threadpool&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;java.util.concurrent.ExecutorService&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;java.util.concurrent.Executors&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;FixedThreadPoolTest&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;nc&quot;&gt;ExecutorService&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;fixedThreadPool&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Executors&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;newFixedThreadPool&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;nc&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;实例化固定线程池&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;fixedThreadPool&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;execute&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Runnable&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+                &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+                    &lt;span class=&quot;k&quot;&gt;try&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+                        &lt;span class=&quot;c1&quot;&gt;// 打印正在执行的缓存线程信息&lt;/span&gt;
+                        &lt;span class=&quot;nc&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;Thread&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;currentThread&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getName&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;正在被执行&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+                        &lt;span class=&quot;nc&quot;&gt;Thread&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;sleep&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2000&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+                    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;catch&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;InterruptedException&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+                        &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;printStackTrace&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+                    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+                &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+            &lt;span class=&quot;o&quot;&gt;});&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;nc&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;线程任务分配完毕！&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;fixedThreadPool&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;shutdown&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;//输出&lt;/span&gt;
+&lt;span class=&quot;cm&quot;&gt;/*
+实例化固定线程池
+线程任务分配完毕！
+pool-1-thread-3正在被执行
+pool-1-thread-2正在被执行
+pool-1-thread-1正在被执行
+pool-1-thread-3正在被执行
+pool-1-thread-2正在被执行
+pool-1-thread-1正在被执行
+pool-1-thread-3正在被执行
+pool-1-thread-2正在被执行
+pool-1-thread-1正在被执行
+pool-1-thread-2正在被执行
+*/&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;通过上述代码可以发现，线程池中可以调用的有三个线程。本例中的循环没有sleep等待，很快就执行完毕。把线程任务提交给了线程池，但是依旧是三个三个完成整个线程池中的任务。&lt;/p&gt;
+
+&lt;p&gt;同时发现，如果不调用&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;fixedThreadPool.shutdown();&lt;/code&gt;则程序一直不会退出，而&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;newCachedThreadPool&lt;/code&gt;在超过&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;keepAliveTime&lt;/code&gt;之后Main方法还是能退出的，也就是线程池关闭。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;官方说明&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://blog.maplestory.work/images/post_image/2020-07-27-线程池.assets/1597551474438.png&quot; alt=&quot;1597551474438&quot; /&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;引用：&lt;/p&gt;
+
+  &lt;p&gt;&lt;a href=&quot;https://blog.51cto.com/13981400/2346714&quot;&gt;JAVA线程池原理源码解析—为什么启动一个线程池，提交一个任务后，Main方法不会退出？&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;1.线程池的创建的时候，第一次submit操作会创建Worker线程（负责去拿任务处理），该线程里写了一个死循环，所以这个Worker线程不会死。
+2.Worker线程在创建的时候，被设置成了非守护线程，thread.setDaemon(false)。
+3.早在JDK1.5的时候，就规定了当所有非守护线程退出时，JVM才会退出，Main方法主线程和Worker线程都是非守护线程，所以不会死。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;3-newsinglethreadexecutor&quot;&gt;3. newSingleThreadExecutor：&lt;/h3&gt;
+
+&lt;p&gt;​	只有一个线程的线程池。&lt;/p&gt;
+
+&lt;p&gt;​	核心线程=最大线程=1，创建一个单线程化的线程池，它只会用唯一的工作线程来执行任务，保证所有任务按照指定顺序(FIFO, LIFO, 优先级)执行。这个比较适合需要保证队列中任务顺序执行的场景。&lt;/p&gt;
+
+&lt;h4 id=&quot;单一线程池实现&quot;&gt;单一线程池实现&lt;/h4&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://blog.maplestory.work/images/post_image/2020-07-27-线程池.assets/1597557115501.png&quot; alt=&quot;1597557115501&quot; /&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;单一线程池实践&quot;&gt;单一线程池实践&lt;/h4&gt;
+
+&lt;p&gt;这个实践中，我们把单线程的休眠时间拉长，保证10个线程都被实例化之后，第一个线程还没执行完。&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;package&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;javatest.threadpool&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;java.util.concurrent.ExecutorService&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;java.util.concurrent.Executors&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;SingleThreadPoolTest&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;nc&quot;&gt;ExecutorService&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;singleExecutorService&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Executors&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;newSingleThreadExecutor&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;index&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+            &lt;span class=&quot;nc&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;实例化第&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;个线程&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;singleExecutorService&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;execute&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Runnable&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+                &lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
+                &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+                    &lt;span class=&quot;c1&quot;&gt;// TODO Auto-generated method stub&lt;/span&gt;
+                    &lt;span class=&quot;nc&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;Thread&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;currentThread&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getName&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;正在被执行,打印的值是:&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;index&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+                    &lt;span class=&quot;k&quot;&gt;try&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+                        &lt;span class=&quot;nc&quot;&gt;Thread&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;sleep&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;5000&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+                    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;catch&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;InterruptedException&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+                        &lt;span class=&quot;c1&quot;&gt;// TODO Auto-generated catch block&lt;/span&gt;
+                        &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;printStackTrace&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+                    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+                &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+            &lt;span class=&quot;o&quot;&gt;});&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;//输出&lt;/span&gt;
+&lt;span class=&quot;cm&quot;&gt;/*
+实例化第0个线程
+实例化第1个线程
+实例化第2个线程
+pool-1-thread-1正在被执行,打印的值是:0
+实例化第3个线程
+实例化第4个线程
+实例化第5个线程
+实例化第6个线程
+实例化第7个线程
+实例化第8个线程
+实例化第9个线程
+pool-1-thread-1正在被执行,打印的值是:1
+pool-1-thread-1正在被执行,打印的值是:2
+pool-1-thread-1正在被执行,打印的值是:3
+pool-1-thread-1正在被执行,打印的值是:4
+pool-1-thread-1正在被执行,打印的值是:5
+pool-1-thread-1正在被执行,打印的值是:6
+pool-1-thread-1正在被执行,打印的值是:7
+pool-1-thread-1正在被执行,打印的值是:8
+pool-1-thread-1正在被执行,打印的值是:9
+
+*/&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;通过上述代码可以发现，我们执行的线程都是按照实例化的顺序加入到无界阻塞队列当中，并且也是按照实例化的顺序执行的。&lt;/p&gt;
+
+&lt;h3 id=&quot;4-newscheduledthreadpool&quot;&gt;4. newScheduledThreadPool：&lt;/h3&gt;
+
+&lt;p&gt;​	延时线程池。&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ScheduledThreadPoolExecutor&lt;/code&gt;继承了&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ThreadPoolExecutor&lt;/code&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;，所以super最终会调到ThreadPoolExecutor&lt;/code&gt;的构造函数，可以看到，最大线程数为int最大值，工作队列为延时队列&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;DelayedWorkQueue&lt;/code&gt;，该线程池适合执行延时任务。&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;参考：&lt;/p&gt;
+
+  &lt;p&gt;&lt;a href=&quot;https://www.jianshu.com/p/925dba9f5969&quot;&gt;深入理解Java线程池：ScheduledThreadPoolExecutor&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h4 id=&quot;延时线程池实现&quot;&gt;延时线程池实现&lt;/h4&gt;
+
+&lt;p&gt;&lt;strong&gt;类的关系图如下：&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://blog.maplestory.work/images/post_image/2020-07-27-线程池.assets/1597559492056.png&quot; alt=&quot;1597559492056&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ScheduledExecutorService&lt;/code&gt;调用&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;newScheduleThreadPool&lt;/code&gt;返回&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ScheduleThreadExecutord&lt;/code&gt;实例。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;2020-07-27-线程池.assets/1597558719375.png&quot; alt=&quot;1597558719375&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ScheduleThreadPoolExecutor&lt;/code&gt;继承了&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ThreadPoolExecutor&lt;/code&gt;类，调用是传入的参数也相同。核心线程数，最大线程数，线程超时时间，单位，阻塞队列。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;实现如下：&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://blog.maplestory.work/images/post_image/2020-07-27-线程池.assets/1597558734472.png&quot; alt=&quot;1597558734472&quot; /&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;延时线程池实践1&quot;&gt;延时线程池实践1&lt;/h4&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;ScheduledThreadPoolTest&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;corePoolSize&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;// 创建一个定长线程池，支持定时及周期性任务执行——延迟执行&lt;/span&gt;
+        &lt;span class=&quot;nc&quot;&gt;ScheduledExecutorService&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;scheduledThreadPool&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Executors&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;newScheduledThreadPool&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;corePoolSize&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;// 延迟1秒执行&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;// scheduledThreadPool.schedule(new Runnable() {&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;// public void run() {&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;// System.out.println(&quot;延迟1秒执行&quot;);&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;// }&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;// }, 1, TimeUnit.SECONDS);&lt;/span&gt;
+
+        &lt;span class=&quot;c1&quot;&gt;// 延迟1秒后每3秒执行一次&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;scheduledThreadPool&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;scheduleAtFixedRate&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Runnable&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+                &lt;span class=&quot;nc&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;延迟1秒后每3秒执行一次&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+            &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;},&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;TimeUnit&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;SECONDS&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;//输出，每三秒执行输出一次。&lt;/span&gt;
+&lt;span class=&quot;cm&quot;&gt;/*
+延迟1秒后每3秒执行一次
+延迟1秒后每3秒执行一次
+延迟1秒后每3秒执行一次
+延迟1秒后每3秒执行一次
+...
+...
+*/&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;延时线程池实践2&quot;&gt;延时线程池实践2&lt;/h4&gt;
+
+&lt;p&gt;本例除了使用延时线程池外，还展示了如何正确、优雅的关闭线程线程池（shutdown + awaitTermination）。&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;package&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;javatest.threadpool&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;java.util.Date&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;java.util.concurrent.Executors&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;java.util.concurrent.ScheduledExecutorService&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;java.util.concurrent.TimeUnit&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;ScheduledThreadPoolTest&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;throws&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;InterruptedException&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;nc&quot;&gt;ScheduledExecutorService&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;scheduledThreadPool&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Executors&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;newScheduledThreadPool&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;scheduledThreadPool&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;scheduleAtFixedRate&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Runnable&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+                &lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
+                &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+                    &lt;span class=&quot;c1&quot;&gt;// TODO Auto-generated method stub&lt;/span&gt;
+                    &lt;span class=&quot;nc&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;Thread&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;currentThread&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getName&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Start running! Time:&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Date&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;());&lt;/span&gt;
+                    &lt;span class=&quot;k&quot;&gt;try&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+                        &lt;span class=&quot;nc&quot;&gt;Thread&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;sleep&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1000&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+                    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;catch&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;InterruptedException&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+                        &lt;span class=&quot;c1&quot;&gt;// TODO Auto-generated catch block&lt;/span&gt;
+                        &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;printStackTrace&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+                    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+                    &lt;span class=&quot;nc&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;Thread&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;currentThread&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getName&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;End running! Time:&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Date&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;());&lt;/span&gt;
+                &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+            &lt;span class=&quot;o&quot;&gt;},&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;TimeUnit&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;SECONDS&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;nc&quot;&gt;Thread&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;sleep&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;10000&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;nc&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Shutting down executor...&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;// 关闭线程池&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;scheduledThreadPool&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;shutdown&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+        &lt;span class=&quot;kt&quot;&gt;boolean&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;isDone&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;// 等待线程池终止&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;isDone&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;scheduledThreadPool&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;awaitTermination&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;TimeUnit&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;DAYS&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+            &lt;span class=&quot;nc&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;awaitTermination...&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;while&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(!&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;isDone&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;nc&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Finished all threads&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+
+&lt;span class=&quot;cm&quot;&gt;/*
+pool-1-thread-1Start running! Time:Sun Aug 16 14:47:49 CST 2020
+pool-1-thread-2Start running! Time:Sun Aug 16 14:47:49 CST 2020
+pool-1-thread-4Start running! Time:Sun Aug 16 14:47:49 CST 2020
+pool-1-thread-3Start running! Time:Sun Aug 16 14:47:49 CST 2020
+pool-1-thread-4End running! Time:Sun Aug 16 14:47:50 CST 2020
+pool-1-thread-3End running! Time:Sun Aug 16 14:47:50 CST 2020
+pool-1-thread-2End running! Time:Sun Aug 16 14:47:50 CST 2020
+pool-1-thread-1End running! Time:Sun Aug 16 14:47:50 CST 2020
+pool-1-thread-1Start running! Time:Sun Aug 16 14:47:54 CST 2020
+pool-1-thread-4Start running! Time:Sun Aug 16 14:47:54 CST 2020
+pool-1-thread-3Start running! Time:Sun Aug 16 14:47:54 CST 2020
+pool-1-thread-2Start running! Time:Sun Aug 16 14:47:54 CST 2020
+pool-1-thread-1End running! Time:Sun Aug 16 14:47:55 CST 2020
+pool-1-thread-3End running! Time:Sun Aug 16 14:47:55 CST 2020
+pool-1-thread-4End running! Time:Sun Aug 16 14:47:55 CST 2020
+pool-1-thread-2End running! Time:Sun Aug 16 14:47:55 CST 2020
+Shutting down executor...
+awaitTermination...
+Finished all threads
+*/&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;5-newworkstealingpool&quot;&gt;5. newWorkStealingPool：&lt;/h3&gt;
+
+&lt;p&gt;1.8新加的线程池,forkJoinPool 可以根据CPU的核数并行的执行，适合使用在很耗时的操作，可以充分的利用CPU执行任务，任务窃取线程池，不保证执行顺序，适合任务耗时差异较大。&lt;/p&gt;
+
+&lt;h2 id=&quot;线程池使用&quot;&gt;线程池使用&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://liuzho.github.io/2017/04/17/线程池，这一篇或许就够了/&quot;&gt;线程池，这一篇或许就够了&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://www.cnblogs.com/slankka/p/11609615.html&quot;&gt;Java线程池的正确关闭方法，awaitTermination还不够&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://www.cnblogs.com/windpoplar/p/10545803.html&quot;&gt;ThreadPoolExecutor 中的 shutdown() 、awaitTermination() 、 shutdownNow() 的用法&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;awaitTermination使用：&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;传入时间和单位，在这个时间结束之前，将会阻塞直到所有任务完成。正常完成返回true&lt;/p&gt;
+
+&lt;p&gt;如果超过设置的时间，则结束阻塞，返回false&lt;/p&gt;
+
+&lt;p&gt;如果阻塞被中断，则抛出中断异常。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://blog.maplestory.work/images/post_image/2020-07-27-线程池.assets/1597560605066.png&quot; alt=&quot;1597560605066&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;线程名字&quot;&gt;线程名字&lt;/h3&gt;
+
+&lt;p&gt;线程都有自己的默认名称，也可以自己设置。&lt;/p&gt;
+
+&lt;p&gt;Thread-编号（默认从0开始）。&lt;/p&gt;
+
+&lt;h3 id=&quot;sleep方法&quot;&gt;Sleep方法&lt;/h3&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;sleep方法，暂停当前线程，把cpu片段让出给其他线程，减缓当前线程的执行。&lt;/p&gt;
+
+  &lt;p&gt;但是如果当前线程占有了锁，线程不会释放锁。&lt;/p&gt;
+
+  &lt;p&gt;sleep过后，不是直接到了运行状态，而是到就绪（可运行）状态。&lt;/p&gt;
+&lt;/blockquote&gt;</content><category term="Java" /><summary>Stick to note down what I&apos;v learnt</summary></entry></feed>
