@@ -7,11 +7,14 @@ if [ "$#" -lt 1 ]; then
     exit 1
 fi
 
+git pull
 pwd
 cd ../randomCheckIn/
+pwd
 git pull
 echo "git pull 成功..."
 cd ../Maple-Chan.Blog/
+pwd
 # 复制文件
 rm -rf ./page/app/randomCheckIn/*
 cp -r /home/maple/GitWorkspace/randomCheckIn/dist/* /home/maple/GitWorkspace/Maple-Chan.Blog/page/app/randomCheckIn/
