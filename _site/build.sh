@@ -12,3 +12,4 @@ cp -r /home/maple/GitWorkspace/randomCheckIn/dist/* /home/maple/GitWorkspace/Map
 bundle exec jekyll serve -V
 git add .
 git commit -m "[deploy]upload $version"
+git push
